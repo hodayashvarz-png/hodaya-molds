@@ -13,32 +13,31 @@
 </header>
 
 <main>
-  <p class="page-lead">
-    כלי עזר שבונה עבורך את הקטע להעתקה לקובץ <code>js/data.js</code>.
-    האתר סטטי (בלי שרת), כך שכדי שתוכן חדש יופיע לכולם צריך להדביק אותו
-    בקובץ ולעשות commit + push. פירוט מלא ב-README.
-  </p>
-
-  <div class="field">
-    <label for="content-type">סוג התוכן שרוצים להוסיף</label>
-    <select id="content-type">
-      <option value="mold">תבנית ל"התבניות שלי"</option>
-      <option value="combo">תמונה ל"שילובי צבעים"</option>
-      <option value="marble">תמונה ל"אפקט שיש"</option>
-      <option value="terrazzo">תמונה ל"אפקט טרצו"</option>
-      <option value="pattern">תמונה ל"דוגמאות שונות"</option>
-    </select>
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="mold">תבנית חדשה</button>
+    <button class="tab-btn" data-tab="gallery">תמונת השראה</button>
+    <button class="tab-btn" data-tab="sync">סנכרון לכולם</button>
   </div>
 
-  <!-- שדות לתבנית -->
-  <div id="fields-mold">
-    <div class="field">
-      <label for="m-id">מספר סידורי (ייחודי)</label>
-      <input type="text" id="m-id" placeholder="לדוגמה: 104" />
-    </div>
+  <!-- טאב 1: הוספת תבנית -->
+  <div class="tab-panel active" id="panel-mold">
+    <p class="page-lead">
+      הוספה כאן נשמרת מיד בדפדפן הזה, והתבנית תופיע ישר ב"התבניות שלי".
+      כדי שהיא תופיע גם אצל חברים — עברו לטאב "סנכרון לכולם" בהמשך.
+    </p>
+
     <div class="field">
       <label for="m-cat">סיווג</label>
       <select id="m-cat"></select>
+    </div>
+    <div class="field" id="m-new-cat-field" style="display:none;">
+      <label for="m-new-cat">שם סיווג חדש</label>
+      <input type="text" id="m-new-cat" placeholder="לדוגמה: כדים" />
+    </div>
+
+    <div class="field">
+      <label for="m-id">מספר סידורי (ייחודי)</label>
+      <input type="text" id="m-id" placeholder="לדוגמה: 104" />
     </div>
     <div class="field">
       <label for="m-desc">תיאור קצר</label>
@@ -47,11 +46,34 @@
     <div class="field">
       <label for="m-volume">נפח כולל (מ״ל)</label>
       <input type="number" id="m-volume" placeholder="לדוגמה: 480" />
+      <p class="hint">כמות הבטון והמים יחושבו אוטומטית לפי הנפח.</p>
     </div>
+    <div class="field">
+      <label for="m-image-name">שם קובץ התמונה (לא חובה כרגע)</label>
+      <input type="text" id="m-image-name" placeholder="ברירת מחדל: מספר התבנית, לדוגמה 104.jpg" />
+      <p class="hint">את קובץ התמונה עצמו צריך להעלות לתיקייה images/molds/ בנפרד (דרך גיטהאב או ממני).</p>
+    </div>
+
+    <button class="btn" id="save-mold-btn">שמרו תבנית</button>
+    <div id="mold-save-msg" style="margin-top:14px; display:none;"></div>
   </div>
 
-  <!-- שדות לגלריית תמונות -->
-  <div id="fields-gallery" style="display:none;">
+  <!-- טאב 2: תמונות השראה (גלריה) — עדיין דרך קטע קוד להעתקה -->
+  <div class="tab-panel" id="panel-gallery">
+    <p class="page-lead">
+      תמונות (שילובי צבעים / אפקטים / דוגמאות) עדיין דורשות העלאת קובץ
+      לריפו, אז כאן בונים קטע קוד להדבקה ב-<code>js/data.js</code> אחרי
+      ששמרתן את התמונה בתיקייה המתאימה.
+    </p>
+    <div class="field">
+      <label for="g-type">לאיזו גלריה</label>
+      <select id="g-type">
+        <option value="combo">שילובי צבעים</option>
+        <option value="marble">אפקט שיש</option>
+        <option value="terrazzo">אפקט טרצו</option>
+        <option value="pattern">דוגמאות שונות</option>
+      </select>
+    </div>
     <div class="field">
       <label for="g-id">מזהה ייחודי לתמונה (אנגלית, בלי רווחים)</label>
       <input type="text" id="g-id" placeholder="לדוגמה: combo-2" />
@@ -60,35 +82,133 @@
       <label for="g-caption">כיתוב קצר (לא חובה)</label>
       <input type="text" id="g-caption" placeholder="לדוגמה: אפור + טרקוטה" />
     </div>
+    <button class="btn" id="build-gallery-btn">בנו את הקטע להעתקה</button>
+    <div id="gallery-output" style="margin-top:16px; display:none;">
+      <div class="result-card">
+        <h3 id="gallery-output-title"></h3>
+        <p class="hint" id="gallery-output-instructions" style="margin-bottom:10px;"></p>
+        <pre class="code-block" id="gallery-output-code"></pre>
+        <button class="btn secondary" id="gallery-copy-btn" style="margin-top:10px;">העתקה</button>
+      </div>
+    </div>
   </div>
 
-  <button class="btn" id="build-btn">בנו את הקטע להעתקה</button>
-
-  <div id="output" style="margin-top:20px; display:none;">
-    <div class="result-card">
-      <h3 id="output-title"></h3>
-      <p class="hint" id="output-instructions" style="margin-bottom:10px;"></p>
-      <pre class="code-block" id="output-code"></pre>
-      <button class="btn secondary" id="copy-btn" style="margin-top:10px;">העתקה</button>
+  <!-- טאב 3: סנכרון כל התוספות המקומיות -->
+  <div class="tab-panel" id="panel-sync">
+    <p class="page-lead">
+      כל תבנית/סיווג ששמרתן דרך "תבנית חדשה" נשמר כרגע רק בדפדפן הזה.
+      כדי שזה יופיע גם אצל חברים — מעתיקים את הקוד הבא ומדביקים בקובץ
+      <code>js/data.js</code> (בתוך המערכים המתאימים), עושים commit ו-push.
+    </p>
+    <div id="sync-empty" class="empty-note" style="display:none;">
+      אין כרגע תוספות מקומיות שממתינות לסנכרון.
+    </div>
+    <div id="sync-content" style="display:none;">
+      <div class="result-card" id="sync-cats-card" style="display:none;">
+        <h3>קטגוריות חדשות — להוסיף למערך MOLD_CATEGORIES</h3>
+        <pre class="code-block" id="sync-cats-code"></pre>
+      </div>
+      <div class="result-card" id="sync-molds-card" style="display:none;">
+        <h3>תבניות חדשות — להוסיף למערך MOLDS</h3>
+        <pre class="code-block" id="sync-molds-code"></pre>
+      </div>
+      <button class="btn secondary" id="sync-copy-btn">העתקת הכל</button>
+      <button class="btn" id="sync-clear-btn" style="margin-top:10px; background:#a33; ">נקו תוספות מקומיות (אחרי שהודבקו ונשמרו בקוד)</button>
     </div>
   </div>
 </main>
 
 <script src="js/data.js"></script>
+<script src="js/store.js"></script>
 <script src="js/main.js"></script>
 <script>
-  const typeSelect = document.getElementById("content-type");
-  const moldFields = document.getElementById("fields-mold");
-  const galleryFields = document.getElementById("fields-gallery");
-  const catSelect = document.getElementById("m-cat");
-
-  MOLD_CATEGORIES.forEach((c) => {
-    const opt = document.createElement("option");
-    opt.value = c.id;
-    opt.textContent = c.name;
-    catSelect.appendChild(opt);
+  // ---------- טאבים ----------
+  document.querySelectorAll(".tab-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".tab-btn").forEach((b) => b.classList.remove("active"));
+      document.querySelectorAll(".tab-panel").forEach((p) => p.classList.remove("active"));
+      btn.classList.add("active");
+      document.getElementById("panel-" + btn.dataset.tab).classList.add("active");
+      if (btn.dataset.tab === "sync") renderSyncTab();
+    });
   });
 
+  // ---------- טאב 1: תבנית חדשה ----------
+  const catSelect = document.getElementById("m-cat");
+  function refreshCatOptions() {
+    catSelect.innerHTML = "";
+    getAllCategories().forEach((c) => {
+      const opt = document.createElement("option");
+      opt.value = c.id;
+      opt.textContent = c.name;
+      catSelect.appendChild(opt);
+    });
+    const newOpt = document.createElement("option");
+    newOpt.value = "__new__";
+    newOpt.textContent = "+ סיווג חדש";
+    catSelect.appendChild(newOpt);
+  }
+  refreshCatOptions();
+
+  const newCatField = document.getElementById("m-new-cat-field");
+  catSelect.addEventListener("change", () => {
+    newCatField.style.display = catSelect.value === "__new__" ? "block" : "none";
+  });
+
+  document.getElementById("save-mold-btn").addEventListener("click", () => {
+    const id = document.getElementById("m-id").value.trim();
+    const desc = document.getElementById("m-desc").value.trim();
+    const volume = document.getElementById("m-volume").value.trim();
+    const imageNameRaw = document.getElementById("m-image-name").value.trim();
+    const msg = document.getElementById("mold-save-msg");
+
+    let categoryId = catSelect.value;
+    if (categoryId === "__new__") {
+      const newName = document.getElementById("m-new-cat").value.trim();
+      if (!newName) {
+        alert("יש למלא שם לסיווג החדש.");
+        return;
+      }
+      categoryId = addLocalCategory(newName);
+    }
+
+    if (!id || !desc || !volume) {
+      alert("יש למלא מספר סידורי, תיאור ונפח.");
+      return;
+    }
+
+    if (getAllMolds().some((m) => m.id === id)) {
+      if (!confirm(`כבר קיימת תבנית עם מספר סידורי ${id}. לעדכן אותה?`)) return;
+    }
+
+    const imageName = imageNameRaw || `${id}.jpg`;
+    const mold = {
+      id,
+      category: categoryId,
+      description: desc,
+      image: `images/molds/${imageName}`,
+      volumeMl: Number(volume),
+    };
+    addLocalMold(mold);
+
+    msg.style.display = "block";
+    msg.innerHTML = `<div class="result-card">
+      <strong>נשמר!</strong> תבנית מס' ${id} תופיע עכשיו בעמוד "התבניות שלי" בסיווג ${categoryId} (בדפדפן הזה).
+      אל תשכחו להעלות את התמונה בשם <code>${imageName}</code> לתיקייה <code>images/molds/</code>,
+      ולסנכרן דרך הטאב "סנכרון לכולם" כדי שזה יופיע גם אצל חברים.
+    </div>`;
+
+    document.getElementById("m-id").value = "";
+    document.getElementById("m-desc").value = "";
+    document.getElementById("m-volume").value = "";
+    document.getElementById("m-image-name").value = "";
+    document.getElementById("m-new-cat").value = "";
+    newCatField.style.display = "none";
+    refreshCatOptions();
+    catSelect.value = categoryId;
+  });
+
+  // ---------- טאב 2: גלריית תמונות (קוד להעתקה) ----------
   const galleryMeta = {
     combo: { arrayName: "COLOR_COMBOS", folder: "images/combos", label: "שילובי צבעים" },
     marble: { arrayName: "EFFECTS.marble", folder: "images/effects/marble", label: "אפקט שיש" },
@@ -96,78 +216,111 @@
     pattern: { arrayName: "PATTERNS", folder: "images/patterns", label: "דוגמאות שונות" },
   };
 
-  typeSelect.addEventListener("change", () => {
-    const isMold = typeSelect.value === "mold";
-    moldFields.style.display = isMold ? "block" : "none";
-    galleryFields.style.display = isMold ? "none" : "block";
-  });
+  document.getElementById("build-gallery-btn").addEventListener("click", () => {
+    const type = document.getElementById("g-type").value;
+    const meta = galleryMeta[type];
+    const id = document.getElementById("g-id").value.trim();
+    const caption = document.getElementById("g-caption").value.trim();
 
-  document.getElementById("build-btn").addEventListener("click", () => {
-    const type = typeSelect.value;
-    const output = document.getElementById("output");
-    const codeEl = document.getElementById("output-code");
-    const titleEl = document.getElementById("output-title");
-    const instrEl = document.getElementById("output-instructions");
-
-    if (type === "mold") {
-      const id = document.getElementById("m-id").value.trim();
-      const cat = catSelect.value;
-      const desc = document.getElementById("m-desc").value.trim();
-      const volume = document.getElementById("m-volume").value.trim();
-
-      if (!id || !desc || !volume) {
-        alert("יש למלא מספר סידורי, תיאור ונפח.");
-        return;
-      }
-
-      const imagePath = `images/molds/${id}.jpg`;
-      titleEl.textContent = "תבנית חדשה — הוספה ל-MOLDS ב-js/data.js";
-      instrEl.textContent = `1. שמרו את תמונת התבנית בשם ${id}.jpg בתוך התיקייה images/molds/. 2. הוסיפו את הבלוק הבא בתוך מערך MOLDS (לפני הסוגר המסיים ]). 3. שמרו, ועשו commit + push.`;
-      codeEl.textContent =
-        `{\n` +
-        `  id: "${id}",\n` +
-        `  category: "${cat}",\n` +
-        `  description: "${desc.replace(/"/g, '\\"')}",\n` +
-        `  image: "${imagePath}",\n` +
-        `  volumeMl: ${Number(volume)},\n` +
-        `},`;
-    } else {
-      const meta = galleryMeta[type];
-      const id = document.getElementById("g-id").value.trim();
-      const caption = document.getElementById("g-caption").value.trim();
-
-      if (!id) {
-        alert("יש למלא מזהה לתמונה.");
-        return;
-      }
-
-      const imagePath = `${meta.folder}/${id}.jpg`;
-      titleEl.textContent = `תמונה חדשה — הוספה ל-${meta.arrayName} ב-js/data.js`;
-      instrEl.textContent = `1. שמרו את התמונה בשם ${id}.jpg בתוך התיקייה ${meta.folder}/. 2. הוסיפו את הבלוק הבא בתוך מערך ${meta.arrayName} (לפני הסוגר המסיים ]). 3. שמרו, ועשו commit + push.`;
-      codeEl.textContent =
-        `{\n` +
-        `  id: "${id}",\n` +
-        `  caption: "${caption.replace(/"/g, '\\"')}",\n` +
-        `  image: "${imagePath}",\n` +
-        `},`;
+    if (!id) {
+      alert("יש למלא מזהה לתמונה.");
+      return;
     }
 
-    output.style.display = "block";
-    output.scrollIntoView({ behavior: "smooth" });
+    const imagePath = `${meta.folder}/${id}.jpg`;
+    document.getElementById("gallery-output-title").textContent = `תמונה חדשה — הוספה ל-${meta.arrayName} ב-js/data.js`;
+    document.getElementById("gallery-output-instructions").textContent =
+      `1. שמרו את התמונה בשם ${id}.jpg בתוך התיקייה ${meta.folder}/. 2. הוסיפו את הבלוק הבא בתוך מערך ${meta.arrayName} (לפני הסוגר המסיים ]). 3. שמרו, ועשו commit + push.`;
+    document.getElementById("gallery-output-code").textContent =
+      `{\n` +
+      `  id: "${id}",\n` +
+      `  caption: "${caption.replace(/"/g, '\\"')}",\n` +
+      `  image: "${imagePath}",\n` +
+      `},`;
+
+    document.getElementById("gallery-output").style.display = "block";
   });
 
-  document.getElementById("copy-btn").addEventListener("click", async () => {
-    const text = document.getElementById("output-code").textContent;
+  document.getElementById("gallery-copy-btn").addEventListener("click", async () => {
+    await copyText(document.getElementById("gallery-output-code").textContent, "gallery-copy-btn");
+  });
+
+  // ---------- טאב 3: סנכרון ----------
+  function renderSyncTab() {
+    const store = loadLocalStore();
+    const empty = document.getElementById("sync-empty");
+    const content = document.getElementById("sync-content");
+
+    if (store.categories.length === 0 && store.molds.length === 0) {
+      empty.style.display = "block";
+      content.style.display = "none";
+      return;
+    }
+    empty.style.display = "none";
+    content.style.display = "block";
+
+    const catsCard = document.getElementById("sync-cats-card");
+    if (store.categories.length > 0) {
+      catsCard.style.display = "block";
+      document.getElementById("sync-cats-code").textContent = store.categories
+        .map((c) => `{ id: "${c.id}", name: "${c.name}" },`)
+        .join("\n");
+    } else {
+      catsCard.style.display = "none";
+    }
+
+    const moldsCard = document.getElementById("sync-molds-card");
+    if (store.molds.length > 0) {
+      moldsCard.style.display = "block";
+      document.getElementById("sync-molds-code").textContent = store.molds
+        .map(
+          (m) =>
+            `{\n  id: "${m.id}",\n  category: "${m.category}",\n  description: "${m.description.replace(/"/g, '\\"')}",\n  image: "${m.image}",\n  volumeMl: ${m.volumeMl},\n},`
+        )
+        .join("\n");
+    } else {
+      moldsCard.style.display = "none";
+    }
+  }
+
+  document.getElementById("sync-copy-btn").addEventListener("click", async () => {
+    const store = loadLocalStore();
+    let text = "";
+    if (store.categories.length > 0) {
+      text += "// להוסיף למערך MOLD_CATEGORIES:\n";
+      text += store.categories.map((c) => `{ id: "${c.id}", name: "${c.name}" },`).join("\n");
+      text += "\n\n";
+    }
+    if (store.molds.length > 0) {
+      text += "// להוסיף למערך MOLDS:\n";
+      text += store.molds
+        .map(
+          (m) =>
+            `{\n  id: "${m.id}",\n  category: "${m.category}",\n  description: "${m.description.replace(/"/g, '\\"')}",\n  image: "${m.image}",\n  volumeMl: ${m.volumeMl},\n},`
+        )
+        .join("\n");
+    }
+    await copyText(text, "sync-copy-btn");
+  });
+
+  document.getElementById("sync-clear-btn").addEventListener("click", () => {
+    if (!confirm("לנקות את כל התוספות המקומיות? יש לוודא שכבר הודבקו ונשמרו ב-js/data.js לפני כן.")) return;
+    clearLocalStore();
+    renderSyncTab();
+    refreshCatOptions();
+  });
+
+  async function copyText(text, btnId) {
     try {
       await navigator.clipboard.writeText(text);
-      const btn = document.getElementById("copy-btn");
+      const btn = document.getElementById(btnId);
       const original = btn.textContent;
       btn.textContent = "הועתק!";
       setTimeout(() => (btn.textContent = original), 1500);
     } catch (e) {
       alert("לא ניתן להעתיק אוטומטית — יש לסמן את הטקסט ולהעתיק ידנית.");
     }
-  });
+  }
 
   renderBottomNav("");
 </script>

@@ -39,14 +39,17 @@
 </div>
 
 <script src="js/data.js"></script>
+<script src="js/store.js"></script>
 <script src="js/main.js"></script>
 <script>
   const params = new URLSearchParams(location.search);
   const catId = params.get("cat");
-  const cat = MOLD_CATEGORIES.find((c) => c.id === catId);
+  const allCategories = getAllCategories();
+  const allMolds = getAllMolds();
+  const cat = allCategories.find((c) => c.id === catId);
   document.getElementById("page-title").textContent = cat ? cat.name : "תבניות";
 
-  const molds = MOLDS.filter((m) => m.category === catId);
+  const molds = allMolds.filter((m) => m.category === catId);
   const grid = document.getElementById("mold-grid");
 
   if (molds.length === 0) {
@@ -75,7 +78,7 @@
   setupModalClosers(modal);
 
   function openMoldModal(id) {
-    const mold = MOLDS.find((m) => m.id === id);
+    const mold = allMolds.find((m) => m.id === id);
     if (!mold) return;
     const mix = calcMix(mold.volumeMl);
     document.getElementById("modal-title").textContent = `תבנית מס' ${mold.id}`;

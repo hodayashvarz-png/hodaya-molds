@@ -18,11 +18,14 @@
 </main>
 
 <script src="js/data.js"></script>
+<script src="js/store.js"></script>
 <script src="js/main.js"></script>
 <script>
   const grid = document.getElementById("cat-grid");
-  grid.innerHTML = MOLD_CATEGORIES.map((cat) => {
-    const count = MOLDS.filter((m) => m.category === cat.id).length;
+  const allCategories = getAllCategories();
+  const allMolds = getAllMolds();
+  grid.innerHTML = allCategories.map((cat) => {
+    const count = allMolds.filter((m) => m.category === cat.id).length;
     return `<a class="cat-card" href="mold-category.html?cat=${encodeURIComponent(cat.id)}">
       <span class="emoji">🧱</span>
       ${cat.name}

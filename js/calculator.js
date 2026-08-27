@@ -14,7 +14,7 @@ document.querySelectorAll(".tab-btn").forEach((btn) => {
 
 // ---------- מילוי רשימות הקטגוריות בתפריטים ----------
 function fillCategorySelect(selectEl) {
-  MOLD_CATEGORIES.forEach((cat) => {
+  getAllCategories().forEach((cat) => {
     const opt = document.createElement("option");
     opt.value = cat.id;
     opt.textContent = cat.name;
@@ -25,11 +25,12 @@ fillCategorySelect(document.getElementById("r-cat"));
 fillCategorySelect(document.getElementById("e-cat"));
 
 function moldsInCategory(catId) {
-  return catId === "all" ? MOLDS.slice() : MOLDS.filter((m) => m.category === catId);
+  const molds = getAllMolds();
+  return catId === "all" ? molds : molds.filter((m) => m.category === catId);
 }
 
 function moldLine(m) {
-  return `מס' ${m.id} — ${m.description} (${m.volumeMl} מ״ל, ${categoryName(MOLD_CATEGORIES, m.category)})`;
+  return `מס' ${m.id} — ${m.description} (${m.volumeMl} מ״ל, ${categoryName(getAllCategories(), m.category)})`;
 }
 
 // ---------- טאב 1: נפח -> בטון ומים ----------
@@ -155,8 +156,9 @@ document.getElementById("e-calc-btn").addEventListener("click", () => {
 
   const chosenMolds = [];
   const unknown = [];
+  const allMolds = getAllMolds();
   serialIds.forEach((id) => {
-    const m = MOLDS.find((m) => m.id === id);
+    const m = allMolds.find((m) => m.id === id);
     if (m) chosenMolds.push(m);
     else unknown.push(id);
   });
