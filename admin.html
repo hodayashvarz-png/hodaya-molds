@@ -25,7 +25,7 @@
       השמירה כאן נכתבת ישירות לריפו בגיטהאב, ותופיע באתר החי אצל כולם
       תוך כ-30–60 שניות (הזמן שלוקח לגיטהאב לבנות מחדש את האתר).
     </p>
-    <p class="hint" id="mold-token-warning" style="display:none; color:#a33; margin-bottom:14px;">
+    <p class="hint" id="mold-token-warning" style="display:none; color:#ff6b6b; margin-bottom:14px;">
       עדיין לא חיברת טוקן גיטהאב — עברי לטאב "חיבור לגיטהאב" והגדירי אותו לפני השמירה.
     </p>
 
@@ -348,7 +348,7 @@
       editSelect.value = "";
       renderEditOptions();
     } catch (err) {
-      msg.innerHTML = `<p class="empty-note" style="color:#a33;">שגיאה: ${err.message || err}</p>`;
+      msg.innerHTML = `<p class="empty-note" style="color:#ff6b6b;">שגיאה: ${err.message || err}</p>`;
     } finally {
       btn.disabled = false;
       btn.textContent = "שמרו תבנית";

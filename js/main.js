@@ -9,8 +9,11 @@ function attachImageFallback(imgEl, label) {
     imgEl.src =
       "data:image/svg+xml;utf8," +
       `<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'>` +
-      `<rect width='100%' height='100%' fill='%23efe7df'/>` +
-      `<text x='50%' y='50%' font-size='16' fill='%23a89b8c' text-anchor='middle' dominant-baseline='middle' font-family='Arial'>${text}</text>` +
+      `<rect width='100%' height='100%' fill='%2333363a'/>` +
+      `<circle cx='60' cy='70' r='5' fill='%23404448'/>` +
+      `<circle cx='230' cy='110' r='7' fill='%23404448'/>` +
+      `<circle cx='170' cy='210' r='4' fill='%23404448'/>` +
+      `<text x='50%' y='50%' font-size='16' fill='%23a3a7ad' text-anchor='middle' dominant-baseline='middle' font-family='Arial'>${text}</text>` +
       `</svg>`;
   });
 }
