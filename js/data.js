@@ -1,8 +1,8 @@
 /*
-  data.js — כל המידע של האתר נמצא כאן.
-  אפשר לערוך קובץ זה ידנית כדי להוסיף/לשנות תבניות, קטגוריות, תמונות וצבעים.
-  ראו הוראות מלאות ב-README.md ובעמוד admin.html (שם אפשר "לבנות" את הבלוק
-  הנכון להעתקה במקום לכתוב אותו ידנית).
+  data.js — מידע קבוע של האתר (לא כולל תבניות/קטגוריות — אלו נטענות
+  בזמן אמת מתוך data/categories.json ו-data/molds.json, כדי שאפשר יהיה
+  לעדכן אותן דרך admin.html בלי לגעת בקוד).
+  ראו הוראות מלאות ב-README.md.
 */
 
 // ---------- קבועים לחישוב בטון ומים ----------
@@ -11,76 +11,6 @@ const MIX_SETTINGS = {
   concreteDensityGPerMl: 1.9, // כמה גרם אבקת בטון/גבס לכל מ"ל נפח תבנית
   waterRatio: 0.18, // כמה מים (יחסית למשקל האבקה) — 0.18 = 18%
 };
-
-// ---------- קטגוריות (סיווגים) של תבניות ----------
-// כל קטגוריה = { id, name }. ה-id משמש בקישורים (mold-category.html?cat=...)
-const MOLD_CATEGORIES = [
-  { id: "kaarot", name: "קערות" },
-  { id: "agartalim", name: "אגרטלים" },
-  { id: "takshitim", name: "תכשיטים" },
-];
-
-// ---------- תבניות ----------
-// כל תבנית: id (מספר סידורי, ייחודי), category (id של קטגוריה),
-// description (תיאור קצר), image (נתיב לתמונה), volumeMl (נפח כולל במ"ל)
-const MOLDS = [
-  {
-    id: "101",
-    category: "kaarot",
-    description: "קערה עגולה קטנה",
-    image: "images/molds/101.jpg",
-    volumeMl: 350,
-  },
-  {
-    id: "102",
-    category: "kaarot",
-    description: "קערה אליפטית שטוחה",
-    image: "images/molds/102.jpg",
-    volumeMl: 520,
-  },
-  {
-    id: "103",
-    category: "kaarot",
-    description: "קערה עמוקה מחורצת",
-    image: "images/molds/103.jpg",
-    volumeMl: 780,
-  },
-  {
-    id: "201",
-    category: "agartalim",
-    description: "אגרטל צר וגבוה",
-    image: "images/molds/201.jpg",
-    volumeMl: 600,
-  },
-  {
-    id: "202",
-    category: "agartalim",
-    description: "אגרטל גיאומטרי",
-    image: "images/molds/202.jpg",
-    volumeMl: 940,
-  },
-  {
-    id: "301",
-    category: "takshitim",
-    description: "תליון עגול קטן",
-    image: "images/molds/301.jpg",
-    volumeMl: 15,
-  },
-  {
-    id: "302",
-    category: "takshitim",
-    description: "עגילים משולשים (זוג)",
-    image: "images/molds/302.jpg",
-    volumeMl: 10,
-  },
-  {
-    id: "303",
-    category: "takshitim",
-    description: "טבעת מעוצבת",
-    image: "images/molds/303.jpg",
-    volumeMl: 6,
-  },
-];
 
 // ---------- לוחות השראה: צבעים ----------
 // hex לצורך הצגת הריבוע, ו-mixTip הסבר קצר (כמה מילים) איך לערבב

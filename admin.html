@@ -16,14 +16,17 @@
   <div class="tabs">
     <button class="tab-btn active" data-tab="mold">תבנית חדשה</button>
     <button class="tab-btn" data-tab="gallery">תמונת השראה</button>
-    <button class="tab-btn" data-tab="sync">סנכרון לכולם</button>
+    <button class="tab-btn" data-tab="connect">חיבור לגיטהאב</button>
   </div>
 
   <!-- טאב 1: הוספת תבנית -->
   <div class="tab-panel active" id="panel-mold">
     <p class="page-lead">
-      הוספה כאן נשמרת מיד בדפדפן הזה, והתבנית תופיע ישר ב"התבניות שלי".
-      כדי שהיא תופיע גם אצל חברים — עברו לטאב "סנכרון לכולם" בהמשך.
+      השמירה כאן נכתבת ישירות לריפו בגיטהאב, ותופיע באתר החי אצל כולם
+      תוך כ-30–60 שניות (הזמן שלוקח לגיטהאב לבנות מחדש את האתר).
+    </p>
+    <p class="hint" id="mold-token-warning" style="display:none; color:#a33; margin-bottom:14px;">
+      עדיין לא חיברת טוקן גיטהאב — עברי לטאב "חיבור לגיטהאב" והגדירי אותו לפני השמירה.
     </p>
 
     <div class="field">
@@ -49,21 +52,21 @@
       <p class="hint">כמות הבטון והמים יחושבו אוטומטית לפי הנפח.</p>
     </div>
     <div class="field">
-      <label for="m-image-name">שם קובץ התמונה (לא חובה כרגע)</label>
-      <input type="text" id="m-image-name" placeholder="ברירת מחדל: מספר התבנית, לדוגמה 104.jpg" />
-      <p class="hint">את קובץ התמונה עצמו צריך להעלות לתיקייה images/molds/ בנפרד (דרך גיטהאב או ממני).</p>
+      <label for="m-image">תמונת התבנית (לא חובה)</label>
+      <input type="file" id="m-image" accept="image/*" />
+      <p class="hint">אפשר גם לשמור בלי תמונה עכשיו ולהוסיף אותה מאוחר יותר (פשוט שמרו את התבנית שוב עם אותו מספר סידורי + תמונה).</p>
     </div>
 
     <button class="btn" id="save-mold-btn">שמרו תבנית</button>
-    <div id="mold-save-msg" style="margin-top:14px; display:none;"></div>
+    <div id="mold-save-msg" style="margin-top:14px;"></div>
   </div>
 
-  <!-- טאב 2: תמונות השראה (גלריה) — עדיין דרך קטע קוד להעתקה -->
+  <!-- טאב 2: תמונות השראה (גלריה) — קטע קוד להעתקה -->
   <div class="tab-panel" id="panel-gallery">
     <p class="page-lead">
-      תמונות (שילובי צבעים / אפקטים / דוגמאות) עדיין דורשות העלאת קובץ
-      לריפו, אז כאן בונים קטע קוד להדבקה ב-<code>js/data.js</code> אחרי
-      ששמרתן את התמונה בתיקייה המתאימה.
+      תמונות (שילובי צבעים / אפקטים / דוגמאות) עדיין נוספות דרך עריכת קוד:
+      בוחרים כאן פרטים, מקבלים קטע מוכן, ומדביקים ב-<code>js/data.js</code>
+      אחרי ששומרים את התמונה בתיקייה המתאימה.
     </p>
     <div class="field">
       <label for="g-type">לאיזו גלריה</label>
@@ -93,33 +96,38 @@
     </div>
   </div>
 
-  <!-- טאב 3: סנכרון כל התוספות המקומיות -->
-  <div class="tab-panel" id="panel-sync">
+  <!-- טאב 3: חיבור לגיטהאב (טוקן) -->
+  <div class="tab-panel" id="panel-connect">
     <p class="page-lead">
-      כל תבנית/סיווג ששמרתן דרך "תבנית חדשה" נשמר כרגע רק בדפדפן הזה.
-      כדי שזה יופיע גם אצל חברים — מעתיקים את הקוד הבא ומדביקים בקובץ
-      <code>js/data.js</code> (בתוך המערכים המתאימים), עושים commit ו-push.
+      כדי ש"תבנית חדשה" תישמר ישירות לאתר החי (ותופיע אצל כולם), צריך
+      טוקן גישה אישי חד-פעמי מגיטהאב. הוא נשמר רק בדפדפן הזה, ונשלח רק
+      ישירות ל-GitHub — אף אחד אחר (כולל אני) לא רואה אותו.
     </p>
-    <div id="sync-empty" class="empty-note" style="display:none;">
-      אין כרגע תוספות מקומיות שממתינות לסנכרון.
+
+    <div class="result-card">
+      <h3>איך יוצרים טוקן (פעם אחת)</h3>
+      <ol style="font-size:14px; line-height:1.8; padding-inline-start:20px;">
+        <li>היכנסי לכתובת: <code>github.com/settings/personal-access-tokens/new</code></li>
+        <li>תחת "Repository access" בחרי <b>Only select repositories</b> ובחרי את <b>hodaya-molds</b> בלבד.</li>
+        <li>תחת "Permissions" → "Repository permissions" מצאי <b>Contents</b> ושני אותו ל-<b>Read and write</b>.</li>
+        <li>גללי למטה ולחצי <b>Generate token</b>.</li>
+        <li>העתיקי את הטוקן שנוצר (מתחיל ב-<code>github_pat_</code>) והדביקי אותו כאן למטה.</li>
+      </ol>
     </div>
-    <div id="sync-content" style="display:none;">
-      <div class="result-card" id="sync-cats-card" style="display:none;">
-        <h3>קטגוריות חדשות — להוסיף למערך MOLD_CATEGORIES</h3>
-        <pre class="code-block" id="sync-cats-code"></pre>
-      </div>
-      <div class="result-card" id="sync-molds-card" style="display:none;">
-        <h3>תבניות חדשות — להוסיף למערך MOLDS</h3>
-        <pre class="code-block" id="sync-molds-code"></pre>
-      </div>
-      <button class="btn secondary" id="sync-copy-btn">העתקת הכל</button>
-      <button class="btn" id="sync-clear-btn" style="margin-top:10px; background:#a33; ">נקו תוספות מקומיות (אחרי שהודבקו ונשמרו בקוד)</button>
+
+    <div class="field">
+      <label for="gh-token-input">טוקן גיטהאב</label>
+      <input type="password" id="gh-token-input" placeholder="github_pat_..." />
     </div>
+    <button class="btn" id="gh-token-save-btn">שמרו טוקן</button>
+    <button class="btn secondary" id="gh-token-clear-btn" style="margin-top:10px;">נתקו (מחקו טוקן מהדפדפן הזה)</button>
+    <p class="hint" id="gh-token-status" style="margin-top:14px;"></p>
   </div>
 </main>
 
 <script src="js/data.js"></script>
-<script src="js/store.js"></script>
+<script src="js/data-loader.js"></script>
+<script src="js/github-sync.js"></script>
 <script src="js/main.js"></script>
 <script>
   // ---------- טאבים ----------
@@ -129,15 +137,43 @@
       document.querySelectorAll(".tab-panel").forEach((p) => p.classList.remove("active"));
       btn.classList.add("active");
       document.getElementById("panel-" + btn.dataset.tab).classList.add("active");
-      if (btn.dataset.tab === "sync") renderSyncTab();
     });
   });
 
+  // ---------- טאב חיבור לגיטהאב ----------
+  function refreshTokenStatus() {
+    const has = !!getGhToken();
+    document.getElementById("gh-token-status").textContent = has
+      ? "מחובר ✓ — יש טוקן שמור בדפדפן הזה."
+      : "לא מחובר — עדיין אין טוקן שמור.";
+    document.getElementById("mold-token-warning").style.display = has ? "none" : "block";
+  }
+  refreshTokenStatus();
+
+  document.getElementById("gh-token-save-btn").addEventListener("click", () => {
+    const val = document.getElementById("gh-token-input").value.trim();
+    if (!val) {
+      alert("יש להדביק טוקן לפני השמירה.");
+      return;
+    }
+    setGhToken(val);
+    document.getElementById("gh-token-input").value = "";
+    refreshTokenStatus();
+  });
+
+  document.getElementById("gh-token-clear-btn").addEventListener("click", () => {
+    clearGhToken();
+    refreshTokenStatus();
+  });
+
   // ---------- טאב 1: תבנית חדשה ----------
+  let liveCategories = [];
+  let liveMolds = [];
+
   const catSelect = document.getElementById("m-cat");
-  function refreshCatOptions() {
+  function renderCatOptions() {
     catSelect.innerHTML = "";
-    getAllCategories().forEach((c) => {
+    liveCategories.forEach((c) => {
       const opt = document.createElement("option");
       opt.value = c.id;
       opt.textContent = c.name;
@@ -148,28 +184,41 @@
     newOpt.textContent = "+ סיווג חדש";
     catSelect.appendChild(newOpt);
   }
-  refreshCatOptions();
+
+  (async () => {
+    const data = await loadMoldData();
+    liveCategories = data.categories;
+    liveMolds = data.molds;
+    renderCatOptions();
+  })();
 
   const newCatField = document.getElementById("m-new-cat-field");
   catSelect.addEventListener("change", () => {
     newCatField.style.display = catSelect.value === "__new__" ? "block" : "none";
   });
 
-  document.getElementById("save-mold-btn").addEventListener("click", () => {
+  document.getElementById("save-mold-btn").addEventListener("click", async () => {
+    const token = getGhToken();
+    if (!token) {
+      alert('צריך קודם לחבר טוקן גיטהאב בטאב "חיבור לגיטהאב".');
+      return;
+    }
+
     const id = document.getElementById("m-id").value.trim();
     const desc = document.getElementById("m-desc").value.trim();
     const volume = document.getElementById("m-volume").value.trim();
-    const imageNameRaw = document.getElementById("m-image-name").value.trim();
+    const imageFile = document.getElementById("m-image").files[0];
     const msg = document.getElementById("mold-save-msg");
 
+    let newCategoryName = "";
     let categoryId = catSelect.value;
     if (categoryId === "__new__") {
-      const newName = document.getElementById("m-new-cat").value.trim();
-      if (!newName) {
+      newCategoryName = document.getElementById("m-new-cat").value.trim();
+      if (!newCategoryName) {
         alert("יש למלא שם לסיווג החדש.");
         return;
       }
-      categoryId = addLocalCategory(newName);
+      categoryId = newCategoryName;
     }
 
     if (!id || !desc || !volume) {
@@ -177,35 +226,73 @@
       return;
     }
 
-    if (getAllMolds().some((m) => m.id === id)) {
-      if (!confirm(`כבר קיימת תבנית עם מספר סידורי ${id}. לעדכן אותה?`)) return;
+    const btn = document.getElementById("save-mold-btn");
+    btn.disabled = true;
+    btn.textContent = "שומר...";
+    msg.innerHTML = "";
+
+    try {
+      // 1. קטגוריה חדשה (אם צריך)
+      if (categoryId === newCategoryName && !liveCategories.some((c) => c.id === categoryId)) {
+        const { data: cats, sha: catsSha } = await ghGetJSON("data/categories.json");
+        const current = cats || [];
+        if (!current.some((c) => c.id === categoryId)) {
+          current.push({ id: categoryId, name: newCategoryName });
+          await ghPutJSON("data/categories.json", current, `admin: הוספת סיווג ${newCategoryName}`, catsSha);
+        }
+        liveCategories = current;
+      }
+
+      // 2. תמונה (אם הועלתה)
+      let imagePath = `images/molds/${id}.jpg`;
+      if (imageFile) {
+        const ext = (imageFile.name.split(".").pop() || "jpg").toLowerCase();
+        imagePath = `images/molds/${id}.${ext}`;
+        const base64 = await readFileAsBase64(imageFile);
+        const existingImg = await ghGetFile(imagePath);
+        await ghPutBinaryFile(
+          imagePath,
+          base64,
+          `admin: העלאת תמונה לתבנית ${id}`,
+          existingImg ? existingImg.sha : undefined
+        );
+      } else {
+        const existing = liveMolds.find((m) => m.id === id);
+        if (existing) imagePath = existing.image;
+      }
+
+      // 3. עדכון קובץ התבניות
+      const { data: molds, sha: moldsSha } = await ghGetJSON("data/molds.json");
+      const currentMolds = (molds || []).filter((m) => m.id !== id);
+      currentMolds.push({
+        id,
+        category: categoryId,
+        description: desc,
+        image: imagePath,
+        volumeMl: Number(volume),
+      });
+      await ghPutJSON("data/molds.json", currentMolds, `admin: הוספת/עדכון תבנית ${id}`, moldsSha);
+      liveMolds = currentMolds;
+
+      msg.innerHTML = `<div class="result-card">
+        <strong>נשמר ✓</strong> תבנית מס' ${id} נכתבה ישירות לאתר.
+        תוך כ-30–60 שניות היא תופיע ב"התבניות שלי" אצל כולם (כולל אצלך, אחרי רענון).
+      </div>`;
+
+      document.getElementById("m-id").value = "";
+      document.getElementById("m-desc").value = "";
+      document.getElementById("m-volume").value = "";
+      document.getElementById("m-image").value = "";
+      document.getElementById("m-new-cat").value = "";
+      newCatField.style.display = "none";
+      renderCatOptions();
+      catSelect.value = categoryId;
+    } catch (err) {
+      msg.innerHTML = `<p class="empty-note" style="color:#a33;">שגיאה: ${err.message || err}</p>`;
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "שמרו תבנית";
     }
-
-    const imageName = imageNameRaw || `${id}.jpg`;
-    const mold = {
-      id,
-      category: categoryId,
-      description: desc,
-      image: `images/molds/${imageName}`,
-      volumeMl: Number(volume),
-    };
-    addLocalMold(mold);
-
-    msg.style.display = "block";
-    msg.innerHTML = `<div class="result-card">
-      <strong>נשמר!</strong> תבנית מס' ${id} תופיע עכשיו בעמוד "התבניות שלי" בסיווג ${categoryId} (בדפדפן הזה).
-      אל תשכחו להעלות את התמונה בשם <code>${imageName}</code> לתיקייה <code>images/molds/</code>,
-      ולסנכרן דרך הטאב "סנכרון לכולם" כדי שזה יופיע גם אצל חברים.
-    </div>`;
-
-    document.getElementById("m-id").value = "";
-    document.getElementById("m-desc").value = "";
-    document.getElementById("m-volume").value = "";
-    document.getElementById("m-image-name").value = "";
-    document.getElementById("m-new-cat").value = "";
-    newCatField.style.display = "none";
-    refreshCatOptions();
-    catSelect.value = categoryId;
   });
 
   // ---------- טאב 2: גלריית תמונות (קוד להעתקה) ----------
@@ -242,85 +329,17 @@
   });
 
   document.getElementById("gallery-copy-btn").addEventListener("click", async () => {
-    await copyText(document.getElementById("gallery-output-code").textContent, "gallery-copy-btn");
-  });
-
-  // ---------- טאב 3: סנכרון ----------
-  function renderSyncTab() {
-    const store = loadLocalStore();
-    const empty = document.getElementById("sync-empty");
-    const content = document.getElementById("sync-content");
-
-    if (store.categories.length === 0 && store.molds.length === 0) {
-      empty.style.display = "block";
-      content.style.display = "none";
-      return;
-    }
-    empty.style.display = "none";
-    content.style.display = "block";
-
-    const catsCard = document.getElementById("sync-cats-card");
-    if (store.categories.length > 0) {
-      catsCard.style.display = "block";
-      document.getElementById("sync-cats-code").textContent = store.categories
-        .map((c) => `{ id: "${c.id}", name: "${c.name}" },`)
-        .join("\n");
-    } else {
-      catsCard.style.display = "none";
-    }
-
-    const moldsCard = document.getElementById("sync-molds-card");
-    if (store.molds.length > 0) {
-      moldsCard.style.display = "block";
-      document.getElementById("sync-molds-code").textContent = store.molds
-        .map(
-          (m) =>
-            `{\n  id: "${m.id}",\n  category: "${m.category}",\n  description: "${m.description.replace(/"/g, '\\"')}",\n  image: "${m.image}",\n  volumeMl: ${m.volumeMl},\n},`
-        )
-        .join("\n");
-    } else {
-      moldsCard.style.display = "none";
-    }
-  }
-
-  document.getElementById("sync-copy-btn").addEventListener("click", async () => {
-    const store = loadLocalStore();
-    let text = "";
-    if (store.categories.length > 0) {
-      text += "// להוסיף למערך MOLD_CATEGORIES:\n";
-      text += store.categories.map((c) => `{ id: "${c.id}", name: "${c.name}" },`).join("\n");
-      text += "\n\n";
-    }
-    if (store.molds.length > 0) {
-      text += "// להוסיף למערך MOLDS:\n";
-      text += store.molds
-        .map(
-          (m) =>
-            `{\n  id: "${m.id}",\n  category: "${m.category}",\n  description: "${m.description.replace(/"/g, '\\"')}",\n  image: "${m.image}",\n  volumeMl: ${m.volumeMl},\n},`
-        )
-        .join("\n");
-    }
-    await copyText(text, "sync-copy-btn");
-  });
-
-  document.getElementById("sync-clear-btn").addEventListener("click", () => {
-    if (!confirm("לנקות את כל התוספות המקומיות? יש לוודא שכבר הודבקו ונשמרו ב-js/data.js לפני כן.")) return;
-    clearLocalStore();
-    renderSyncTab();
-    refreshCatOptions();
-  });
-
-  async function copyText(text, btnId) {
+    const text = document.getElementById("gallery-output-code").textContent;
     try {
       await navigator.clipboard.writeText(text);
-      const btn = document.getElementById(btnId);
+      const btn = document.getElementById("gallery-copy-btn");
       const original = btn.textContent;
       btn.textContent = "הועתק!";
       setTimeout(() => (btn.textContent = original), 1500);
     } catch (e) {
       alert("לא ניתן להעתיק אוטומטית — יש לסמן את הטקסט ולהעתיק ידנית.");
     }
-  }
+  });
 
   renderBottomNav("");
 </script>
