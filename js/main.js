@@ -34,14 +34,14 @@ function renderBottomNav(activeKey) {
   document.body.appendChild(nav);
 }
 
-// חישוב כמות בטון ומים לפי נפח (מ"ל) והגדרות התערובת ב-data.js
+// חישוב כמות בטון ומים (במ"ל) לפי נפח התבנית (מ"ל) והגדרות התערובת ב-data.js.
+// מחזיר null עבור תבנית שעדיין לא הוזן לה נפח.
 function calcMix(volumeMl, settings) {
+  if (volumeMl === null || volumeMl === undefined) return { concreteMl: null, waterMl: null };
   const s = settings || MIX_SETTINGS;
-  const concreteG = volumeMl * s.concreteDensityGPerMl;
-  const waterMl = concreteG * s.waterRatio;
   return {
-    concreteG: Math.round(concreteG),
-    waterMl: Math.round(waterMl),
+    concreteMl: Math.round(volumeMl * s.concretePerVolume),
+    waterMl: Math.round(volumeMl * s.waterPerVolume),
   };
 }
 

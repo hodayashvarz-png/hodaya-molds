@@ -27,12 +27,19 @@ document.querySelectorAll(".tab-btn").forEach((btn) => {
   fillCategorySelect(document.getElementById("r-cat"));
   fillCategorySelect(document.getElementById("e-cat"));
 
+  // טאבים 2/3 עובדים מול "כמה חומר גלם התבנית צורכת" (מ"ל בטון), לא מול
+  // נפח התבנית עצמו — ולכן משתמשים רק בתבניות שיש להן נפח מוזן.
   function moldsInCategory(catId) {
-    return catId === "all" ? molds : molds.filter((m) => m.category === catId);
+    const withVolume = molds.filter((m) => m.volumeMl != null);
+    return catId === "all" ? withVolume : withVolume.filter((m) => m.category === catId);
+  }
+
+  function moldConcreteMl(m) {
+    return calcMix(m.volumeMl).concreteMl;
   }
 
   function moldLine(m) {
-    return `מס' ${m.id} — ${m.description} (${m.volumeMl} מ״ל, ${categoryName(categories, m.category)})`;
+    return `מס' ${m.id} — ${m.description} (נפח תבנית ${m.volumeMl} מ״ל, צורך ${moldConcreteMl(m)} מ״ל בטון, ${categoryName(categories, m.category)})`;
   }
 
   // ---------- טאב 1: נפח -> בטון ומים ----------
@@ -43,14 +50,14 @@ document.querySelectorAll(".tab-btn").forEach((btn) => {
       result.innerHTML = `<p class="empty-note">יש להזין נפח תקין במ״ל.</p>`;
       return;
     }
-    const density = parseFloat(document.getElementById("v-density").value) || MIX_SETTINGS.concreteDensityGPerMl;
-    const ratio = parseFloat(document.getElementById("v-ratio").value) || MIX_SETTINGS.waterRatio;
-    const mix = calcMix(volume, { concreteDensityGPerMl: density, waterRatio: ratio });
+    const concretePerVolume = parseFloat(document.getElementById("v-density").value) || MIX_SETTINGS.concretePerVolume;
+    const waterPerVolume = parseFloat(document.getElementById("v-ratio").value) || MIX_SETTINGS.waterPerVolume;
+    const mix = calcMix(volume, { concretePerVolume, waterPerVolume });
 
     result.innerHTML = `
       <div class="result-card">
         <div class="stat-row"><span class="label">נפח</span><span class="value">${volume} מ״ל</span></div>
-        <div class="stat-row"><span class="label">בטון נדרש</span><span class="value">${mix.concreteG} גרם</span></div>
+        <div class="stat-row"><span class="label">בטון נדרש</span><span class="value">${mix.concreteMl} מ״ל</span></div>
         <div class="stat-row"><span class="label">מים נדרשים</span><span class="value">${mix.waterMl} מ״ל</span></div>
       </div>`;
   });
@@ -71,9 +78,10 @@ document.querySelectorAll(".tab-btn").forEach((btn) => {
     let total = 0;
     for (const m of shuffled) {
       if (combo.length >= maxSize) break;
-      if (total + m.volumeMl <= availableMl) {
+      const need = moldConcreteMl(m);
+      if (total + need <= availableMl) {
         combo.push(m);
-        total += m.volumeMl;
+        total += need;
       }
     }
     return { combo, total };
@@ -110,11 +118,11 @@ document.querySelectorAll(".tab-btn").forEach((btn) => {
 
     const pool = moldsInCategory(catId);
     if (pool.length === 0) {
-      result.innerHTML = `<p class="empty-note">אין תבניות בסיווג הזה.</p>`;
+      result.innerHTML = `<p class="empty-note">אין תבניות בסיווג הזה עם נפח מוזן.</p>`;
       return;
     }
 
-    const smallest = Math.min(...pool.map((m) => m.volumeMl));
+    const smallest = Math.min(...pool.map((m) => moldConcreteMl(m)));
     if (smallest > available) {
       result.innerHTML = `<p class="empty-note">אין תבנית בסיווג הזה שמתאימה לכמות הזו — כל התבניות דורשות יותר חומר.</p>`;
       return;
@@ -129,11 +137,10 @@ document.querySelectorAll(".tab-btn").forEach((btn) => {
     result.innerHTML = combos
       .map((c, i) => {
         const leftover = Math.round((available - c.total) * 10) / 10;
-        const mix = calcMix(c.total);
         return `<div class="result-card">
-          <h3>שילוב ${i + 1} — ניצול ${c.total} מ״ל מתוך ${available} מ״ל</h3>
+          <h3>שילוב ${i + 1} — ניצול ${c.total} מ״ל בטון מתוך ${available} מ״ל</h3>
           <ul>${c.combo.map((m) => `<li>${moldLine(m)}</li>`).join("")}</ul>
-          <div class="totals">בטון: ${mix.concreteG} גרם · מים: ${mix.waterMl} מ״ל · נותרים: ${leftover} מ״ל</div>
+          <div class="totals">נותרים: ${leftover} מ״ל</div>
         </div>`;
       })
       .join("");
@@ -158,23 +165,32 @@ document.querySelectorAll(".tab-btn").forEach((btn) => {
 
     const chosenMolds = [];
     const unknown = [];
+    const noVolume = [];
     serialIds.forEach((id) => {
       const m = molds.find((m) => m.id === id);
-      if (m) chosenMolds.push(m);
-      else unknown.push(id);
+      if (!m) {
+        unknown.push(id);
+      } else if (m.volumeMl == null) {
+        noVolume.push(id);
+      } else {
+        chosenMolds.push(m);
+      }
     });
 
-    const usedVolume = chosenMolds.reduce((sum, m) => sum + m.volumeMl, 0);
-    const remaining = available - usedVolume;
+    const usedConcrete = chosenMolds.reduce((sum, m) => sum + moldConcreteMl(m), 0);
+    const remaining = available - usedConcrete;
 
     let html = "";
     if (unknown.length > 0) {
       html += `<p class="empty-note">מספרים לא מזוהים: ${unknown.join(", ")}</p>`;
     }
+    if (noVolume.length > 0) {
+      html += `<p class="empty-note">לתבניות ${noVolume.join(", ")} עדיין לא הוזן נפח, אז לא ניתן לחשב אותן.</p>`;
+    }
 
     if (chosenMolds.length > 0) {
       html += `<div class="result-card">
-        <h3>תבניות שנבחרו — סה״כ ${usedVolume} מ״ל</h3>
+        <h3>תבניות שנבחרו — סה״כ ${usedConcrete} מ״ל בטון</h3>
         <ul>${chosenMolds.map((m) => `<li>${moldLine(m)}</li>`).join("")}</ul>
       </div>`;
     }
@@ -186,7 +202,7 @@ document.querySelectorAll(".tab-btn").forEach((btn) => {
     }
 
     const chosenIds = new Set(chosenMolds.map((m) => m.id));
-    const pool = moldsInCategory(catId).filter((m) => !chosenIds.has(m.id) && m.volumeMl <= remaining);
+    const pool = moldsInCategory(catId).filter((m) => !chosenIds.has(m.id) && moldConcreteMl(m) <= remaining);
 
     if (pool.length === 0) {
       html += `<p class="empty-note">נשארו ${remaining} מ״ל, אך אין תבנית בסיווג הזה שמתאימה לשארית.</p>`;
@@ -194,11 +210,10 @@ document.querySelectorAll(".tab-btn").forEach((btn) => {
       return;
     }
 
-    const suggestions = pool.sort((a, b) => b.volumeMl - a.volumeMl).slice(0, 5);
-    const mix = calcMix(remaining);
+    const suggestions = pool.sort((a, b) => moldConcreteMl(b) - moldConcreteMl(a)).slice(0, 5);
 
     html += `<div class="result-card">
-      <h3>שארית לניצול: ${remaining} מ״ל (בטון: ${mix.concreteG} גרם · מים: ${mix.waterMl} מ״ל)</h3>
+      <h3>שארית לניצול: ${remaining} מ״ל בטון</h3>
       <ul>${suggestions.map((m) => `<li>${moldLine(m)}</li>`).join("")}</ul>
     </div>`;
 

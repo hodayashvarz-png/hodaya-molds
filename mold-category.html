@@ -86,9 +86,12 @@
       const imgEl = document.getElementById("modal-img");
       imgEl.src = mold.image;
       attachImageFallback(imgEl, "אין תמונה עדיין");
-      document.getElementById("modal-volume").textContent = `${mold.volumeMl} מ״ל`;
-      document.getElementById("modal-concrete").textContent = `${mix.concreteG} גרם`;
-      document.getElementById("modal-water").textContent = `${mix.waterMl} מ״ל`;
+      document.getElementById("modal-volume").textContent =
+        mold.volumeMl != null ? `${mold.volumeMl} מ״ל` : "טרם הוזן";
+      document.getElementById("modal-concrete").textContent =
+        mix.concreteMl != null ? `${mix.concreteMl} מ״ל` : "טרם הוזן";
+      document.getElementById("modal-water").textContent =
+        mix.waterMl != null ? `${mix.waterMl} מ״ל` : "טרם הוזן";
       modal.classList.remove("hidden");
     }
   })();

@@ -72,8 +72,8 @@ settings → Personal access tokens).
 
 ```js
 const MIX_SETTINGS = {
-  concreteDensityGPerMl: 1.9, // גרם אבקה לכל מ"ל נפח
-  waterRatio: 0.18,           // יחס מים ממשקל האבקה
+  concretePerVolume: 1.2, // מ"ל בטון לכל מ"ל נפח תבנית
+  waterPerVolume: 0.6,    // מ"ל מים לכל מ"ל נפח תבנית
 };
 ```
 
