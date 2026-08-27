@@ -108,7 +108,7 @@ main {
 .home-banner {
   display: block;
   width: 100%;
-  aspect-ratio: 1672 / 941;
+  aspect-ratio: 1552 / 821;
   object-fit: cover;
   box-shadow: var(--shadow-sm);
 }
