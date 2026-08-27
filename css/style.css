@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700&family=Assistant:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@500;600;700&family=Assistant:wght@400;500;600;700&display=swap");
 
 :root {
   --bg: #f6f2ec;
@@ -42,9 +42,9 @@ body {
 a { color: inherit; text-decoration: none; }
 
 h1, h2, h3 {
-  font-family: "Frank Ruhl Libre", Georgia, serif;
-  font-weight: 700;
-  letter-spacing: 0.2px;
+  font-family: "Rubik", "Assistant", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0;
 }
 
 /* ---------- כותרת עליונה ---------- */
@@ -122,8 +122,8 @@ main {
 .cat-card:active { transform: scale(0.98); }
 
 .cat-card .cat-name {
-  font-family: "Frank Ruhl Libre", Georgia, serif;
-  font-weight: 700;
+  font-family: "Rubik", "Assistant", sans-serif;
+  font-weight: 600;
   font-size: 17px;
   color: var(--ink);
 }
