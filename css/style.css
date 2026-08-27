@@ -1,14 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700&family=Assistant:wght@400;500;600;700&display=swap");
+
 :root {
-  --bg: #faf7f4;
-  --surface: #ffffff;
-  --ink: #2b2622;
-  --muted: #7a7168;
-  --accent: #b5603a;
-  --accent-ink: #ffffff;
-  --border: #e6ddd4;
-  --radius: 14px;
-  --shadow: 0 2px 10px rgba(43, 38, 34, 0.08);
-  --nav-h: 62px;
+  --bg: #f6f2ec;
+  --surface: #fffdfa;
+  --surface-sunken: #efe8de;
+  --ink: #302a24;
+  --muted: #8c8175;
+  --border: #e4dccd;
+
+  --clay: #bf6a4d;
+  --clay-ink: #fffaf6;
+  --sage: #7f9478;
+  --ochre: #c99a3f;
+  --plum: #8a6a8a;
+
+  --radius-lg: 22px;
+  --radius-md: 14px;
+  --radius-sm: 10px;
+  --shadow: 0 10px 30px -12px rgba(48, 42, 36, 0.18);
+  --shadow-sm: 0 4px 14px -6px rgba(48, 42, 36, 0.14);
+  --nav-h: 66px;
 }
 
 * { box-sizing: border-box; }
@@ -18,89 +29,126 @@ html, body {
   padding: 0;
   background: var(--bg);
   color: var(--ink);
-  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+  font-family: "Assistant", "Segoe UI", Arial, Helvetica, sans-serif;
   direction: rtl;
+  -webkit-font-smoothing: antialiased;
 }
 
 body {
-  padding-bottom: calc(var(--nav-h) + 12px);
+  padding-bottom: calc(var(--nav-h) + 16px);
   min-height: 100vh;
 }
 
 a { color: inherit; text-decoration: none; }
 
+h1, h2, h3 {
+  font-family: "Frank Ruhl Libre", Georgia, serif;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+/* ---------- כותרת עליונה ---------- */
 header.top-bar {
   position: sticky;
   top: 0;
   z-index: 20;
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  padding: 14px 16px;
+  background: var(--bg);
+  padding: 22px 20px 14px;
   display: flex;
-  align-items: center;
-  gap: 10px;
+  align-items: baseline;
+  gap: 14px;
 }
 
 header.top-bar .back-link {
-  font-size: 20px;
-  padding: 4px 8px;
+  font-family: "Assistant", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+  padding: 4px 2px;
+  white-space: nowrap;
 }
 
 header.top-bar h1 {
-  font-size: 18px;
+  font-size: 22px;
   margin: 0;
   flex: 1;
+  color: var(--ink);
 }
 
 main {
-  padding: 16px;
+  padding: 4px 20px 20px;
   max-width: 720px;
   margin: 0 auto;
 }
 
 .page-lead {
   color: var(--muted);
-  font-size: 14px;
-  margin: 0 0 16px;
+  font-size: 14.5px;
+  line-height: 1.6;
+  margin: 0 0 22px;
 }
 
-/* כרטיסי קטגוריה / ניווט */
+/* ---------- כרטיסי קטגוריה / ניווט ---------- */
 .card-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-}
-
-.cat-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 20px 12px;
-  text-align: center;
-  font-weight: 600;
-  font-size: 15px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-
-.cat-card .emoji { font-size: 28px; }
-
-/* גריד תבניות / גלריה */
-.item-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 14px;
 }
 
+.cat-card {
+  position: relative;
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: 26px 18px 20px;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow: hidden;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.cat-card::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  background: var(--card-accent, var(--clay));
+}
+
+.cat-card:active { transform: scale(0.98); }
+
+.cat-card .cat-name {
+  font-family: "Frank Ruhl Libre", Georgia, serif;
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--ink);
+}
+
+.cat-card .cat-sub {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.cat-card:nth-of-type(3n+1) { --card-accent: var(--clay); }
+.cat-card:nth-of-type(3n+2) { --card-accent: var(--sage); }
+.cat-card:nth-of-type(3n+3) { --card-accent: var(--ochre); }
+
+/* ---------- גריד תבניות / גלריה ---------- */
+.item-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
 .item-card {
   background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-sm);
 }
 
 .item-card .thumb {
@@ -109,57 +157,59 @@ main {
   object-fit: cover;
   display: block;
   cursor: pointer;
-  background: #efe7df;
+  background: var(--surface-sunken);
 }
 
 .item-card .meta {
-  padding: 8px 10px 10px;
+  padding: 10px 12px 12px;
 }
 
 .item-card .serial {
   font-weight: 700;
-  font-size: 13px;
-  color: var(--accent);
+  font-size: 12.5px;
+  color: var(--clay);
+  letter-spacing: 0.3px;
 }
 
 .item-card .desc {
-  font-size: 13px;
+  font-size: 13.5px;
   color: var(--ink);
   margin-top: 2px;
 }
 
-/* ריבועי צבע */
+/* ---------- ריבועי צבע ---------- */
 .color-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  gap: 14px;
 }
 
 .color-swatch {
   aspect-ratio: 1 / 1;
-  border-radius: var(--radius);
-  border: 1px solid rgba(0,0,0,0.08);
-  box-shadow: var(--shadow);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: var(--shadow-sm);
   cursor: pointer;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding-bottom: 6px;
+  padding-bottom: 8px;
 }
 
 .color-swatch span {
-  background: rgba(255,255,255,0.85);
+  background: rgba(255,255,255,0.9);
   border-radius: 8px;
-  padding: 2px 6px;
-  font-size: 11px;
+  padding: 3px 8px;
+  font-size: 11.5px;
   font-weight: 600;
 }
 
-/* מודאל */
+/* ---------- מודאל ---------- */
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(20, 16, 12, 0.55);
+  background: rgba(38, 32, 26, 0.5);
+  backdrop-filter: blur(2px);
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -172,44 +222,44 @@ main {
   background: var(--surface);
   width: 100%;
   max-width: 520px;
-  border-radius: 18px 18px 0 0;
-  padding: 20px;
-  box-shadow: 0 -4px 20px rgba(0,0,0,0.2);
+  border-radius: 26px 26px 0 0;
+  padding: 26px 24px;
+  box-shadow: 0 -10px 40px rgba(0,0,0,0.18);
   max-height: 85vh;
   overflow-y: auto;
 }
 
 @media (min-width: 600px) {
   .modal-overlay { align-items: center; }
-  .modal-box { border-radius: 18px; }
+  .modal-box { border-radius: var(--radius-lg); }
 }
 
 .modal-box h2 {
   margin: 0 0 4px;
-  font-size: 18px;
+  font-size: 19px;
 }
 
 .modal-box .modal-sub {
   color: var(--muted);
-  font-size: 13px;
-  margin-bottom: 14px;
+  font-size: 13.5px;
+  margin-bottom: 16px;
 }
 
 .modal-box img.modal-img {
   width: 100%;
-  border-radius: 10px;
-  margin-bottom: 14px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 16px;
   aspect-ratio: 4/3;
   object-fit: cover;
-  background: #efe7df;
+  background: var(--surface-sunken);
 }
 
 .stat-row {
   display: flex;
   justify-content: space-between;
-  padding: 10px 0;
+  padding: 12px 0;
   border-bottom: 1px solid var(--border);
-  font-size: 14px;
+  font-size: 14.5px;
 }
 
 .stat-row:last-of-type { border-bottom: none; }
@@ -218,16 +268,18 @@ main {
 
 .close-btn {
   display: block;
-  margin: 16px auto 0;
+  margin: 20px auto 0;
   background: var(--ink);
-  color: #fff;
+  color: var(--surface);
   border: none;
   border-radius: 999px;
-  padding: 10px 26px;
+  padding: 11px 30px;
   font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
-/* ניווט תחתון */
+/* ---------- ניווט תחתון ---------- */
 nav.bottom-nav {
   position: fixed;
   bottom: 0;
@@ -235,7 +287,7 @@ nav.bottom-nav {
   left: 0;
   height: var(--nav-h);
   background: var(--surface);
-  border-top: 1px solid var(--border);
+  box-shadow: 0 -6px 20px -10px rgba(48, 42, 36, 0.2);
   display: flex;
   z-index: 30;
 }
@@ -243,88 +295,110 @@ nav.bottom-nav {
 nav.bottom-nav a {
   flex: 1;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
-  font-size: 11px;
+  font-size: 13.5px;
+  font-weight: 600;
   color: var(--muted);
+  position: relative;
 }
 
-nav.bottom-nav a .icon { font-size: 20px; }
-nav.bottom-nav a.active { color: var(--accent); font-weight: 700; }
+nav.bottom-nav a.active { color: var(--ink); }
 
-/* טאבים (מחשבון / אפקטים) */
+nav.bottom-nav a.active::after {
+  content: "";
+  position: absolute;
+  bottom: 12px;
+  width: 22px;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--clay);
+}
+
+/* ---------- טאבים (מחשבון / אפקטים) ---------- */
 .tabs {
   display: flex;
-  gap: 8px;
-  margin-bottom: 16px;
+  gap: 6px;
+  margin-bottom: 20px;
   overflow-x: auto;
+  padding-bottom: 2px;
 }
 
 .tab-btn {
   flex: none;
-  padding: 8px 16px;
+  padding: 9px 18px;
   border-radius: 999px;
   border: 1px solid var(--border);
   background: var(--surface);
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 600;
   color: var(--muted);
   white-space: nowrap;
+  cursor: pointer;
+  font-family: inherit;
 }
 
 .tab-btn.active {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--accent-ink);
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--surface);
 }
 
 .tab-panel { display: none; }
 .tab-panel.active { display: block; }
 
-/* טפסים */
+/* ---------- טפסים ---------- */
 .field {
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 .field label {
   display: block;
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 600;
-  margin-bottom: 6px;
+  margin-bottom: 7px;
+  color: var(--ink);
 }
 
 .field input,
 .field select,
 .field textarea {
   width: 100%;
-  padding: 10px 12px;
+  padding: 11px 13px;
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: var(--radius-sm);
   font-size: 15px;
   background: var(--surface);
   color: var(--ink);
   font-family: inherit;
 }
 
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--clay);
+}
+
 .field .hint {
-  font-size: 12px;
+  font-size: 12.5px;
   color: var(--muted);
-  margin-top: 4px;
+  margin-top: 5px;
+  line-height: 1.5;
 }
 
 .btn {
   display: inline-block;
-  background: var(--accent);
-  color: var(--accent-ink);
+  background: var(--clay);
+  color: var(--clay-ink);
   border: none;
-  border-radius: 10px;
-  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  padding: 13px 22px;
   font-size: 15px;
   font-weight: 700;
   cursor: pointer;
   width: 100%;
+  font-family: inherit;
 }
 
 .btn.secondary {
@@ -334,8 +408,8 @@ nav.bottom-nav a.active { color: var(--accent); font-weight: 700; }
 }
 
 details.advanced {
-  margin: 8px 0 18px;
-  font-size: 13px;
+  margin: 10px 0 20px;
+  font-size: 13.5px;
 }
 
 details.advanced summary {
@@ -346,27 +420,27 @@ details.advanced summary {
 
 .result-card {
   background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 16px 18px;
   margin-bottom: 14px;
 }
 
 .result-card h3 {
-  margin: 0 0 8px;
-  font-size: 15px;
+  margin: 0 0 10px;
+  font-size: 15.5px;
 }
 
 .result-card ul {
   margin: 6px 0;
   padding-inline-start: 18px;
-  font-size: 13px;
+  font-size: 13.5px;
+  line-height: 1.7;
 }
 
 .result-card .totals {
-  margin-top: 8px;
-  font-size: 13px;
+  margin-top: 10px;
+  font-size: 13.5px;
   color: var(--muted);
 }
 
@@ -374,14 +448,14 @@ details.advanced summary {
   text-align: center;
   color: var(--muted);
   font-size: 14px;
-  padding: 30px 10px;
+  padding: 34px 10px;
 }
 
 pre.code-block {
-  background: #2b2622;
+  background: var(--ink);
   color: #f2ece5;
-  padding: 12px;
-  border-radius: 10px;
+  padding: 14px;
+  border-radius: var(--radius-sm);
   font-size: 12px;
   overflow-x: auto;
   white-space: pre-wrap;

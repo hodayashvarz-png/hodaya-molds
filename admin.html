@@ -8,7 +8,7 @@
 </head>
 <body>
 <header class="top-bar">
-  <a class="back-link" href="index.html">➜</a>
+  <a class="back-link" href="index.html">חזרה</a>
   <h1>הוספת תוכן</h1>
 </header>
 
@@ -32,7 +32,7 @@
     <div class="field">
       <label for="m-edit-existing">לערוך תבנית קיימת (או להשאיר "תבנית חדשה")</label>
       <select id="m-edit-existing">
-        <option value="">🆕 תבנית חדשה</option>
+        <option value="">תבנית חדשה</option>
       </select>
     </div>
 
@@ -151,7 +151,7 @@
   function refreshTokenStatus() {
     const has = !!getGhToken();
     document.getElementById("gh-token-status").textContent = has
-      ? "מחובר ✓ — יש טוקן שמור בדפדפן הזה."
+      ? "מחובר — יש טוקן שמור בדפדפן הזה."
       : "לא מחובר — עדיין אין טוקן שמור.";
     document.getElementById("mold-token-warning").style.display = has ? "none" : "block";
   }
@@ -195,7 +195,7 @@
   const editSelect = document.getElementById("m-edit-existing");
   function renderEditOptions() {
     const previousValue = editSelect.value;
-    editSelect.innerHTML = '<option value="">🆕 תבנית חדשה</option>';
+    editSelect.innerHTML = '<option value="">תבנית חדשה</option>';
     liveMolds
       .slice()
       .sort((a, b) => (a.category + a.id).localeCompare(b.category + b.id))
@@ -336,7 +336,7 @@
       liveMolds = currentMolds;
 
       msg.innerHTML = `<div class="result-card">
-        <strong>נשמר ✓</strong> תבנית מס' ${id} נכתבה ישירות לאתר.
+        <strong>נשמר</strong> תבנית מס' ${id} נכתבה ישירות לאתר.
         תוך כ-30–60 שניות היא תופיע ב"התבניות שלי" אצל כולם (כולל אצלך, אחרי רענון).
       </div>`;
 

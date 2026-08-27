@@ -18,18 +18,14 @@ function attachImageFallback(imgEl, label) {
 // בונה סרגל ניווט תחתון ומסמן את הטאב הפעיל לפי שם הדף
 function renderBottomNav(activeKey) {
   const items = [
-    { key: "molds", href: "molds.html", icon: "🧱", label: "התבניות שלי" },
-    { key: "inspiration", href: "inspiration.html", icon: "🎨", label: "לוחות השראה" },
-    { key: "calculator", href: "calculator.html", icon: "🧮", label: "מחשבון" },
+    { key: "molds", href: "molds.html", label: "התבניות שלי" },
+    { key: "inspiration", href: "inspiration.html", label: "לוחות השראה" },
+    { key: "calculator", href: "calculator.html", label: "מחשבון" },
   ];
   const nav = document.createElement("nav");
   nav.className = "bottom-nav";
   nav.innerHTML = items
-    .map(
-      (it) =>
-        `<a href="${it.href}" class="${it.key === activeKey ? "active" : ""}">` +
-        `<span class="icon">${it.icon}</span><span>${it.label}</span></a>`
-    )
+    .map((it) => `<a href="${it.href}" class="${it.key === activeKey ? "active" : ""}">${it.label}</a>`)
     .join("");
   document.body.appendChild(nav);
 }

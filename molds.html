@@ -8,7 +8,7 @@
 </head>
 <body>
 <header class="top-bar">
-  <a class="back-link" href="index.html">➜</a>
+  <a class="back-link" href="index.html">חזרה</a>
   <h1>התבניות שלי</h1>
 </header>
 
@@ -29,9 +29,8 @@
     grid.innerHTML = categories.map((cat) => {
       const count = molds.filter((m) => m.category === cat.id).length;
       return `<a class="cat-card" href="mold-category.html?cat=${encodeURIComponent(cat.id)}">
-        <span class="emoji">🧱</span>
-        ${cat.name}
-        <span style="font-size:12px;color:var(--muted);font-weight:400;">${count} תבניות</span>
+        <span class="cat-name">${cat.name}</span>
+        <span class="cat-sub">${count} תבניות</span>
       </a>`;
     }).join("");
   })();
