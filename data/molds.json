@@ -54,5 +54,12 @@
     "description": "טבעת מעוצבת",
     "image": "images/molds/303.jpg",
     "volumeMl": 6
+  },
+  {
+    "id": "909009",
+    "category": "kaarot",
+    "description": "ניסון",
+    "image": "images/molds/909009.jpg",
+    "volumeMl": 794
   }
 ]
