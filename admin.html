@@ -30,6 +30,13 @@
     </p>
 
     <div class="field">
+      <label for="m-edit-existing">לערוך תבנית קיימת (או להשאיר "תבנית חדשה")</label>
+      <select id="m-edit-existing">
+        <option value="">🆕 תבנית חדשה</option>
+      </select>
+    </div>
+
+    <div class="field">
       <label for="m-cat">סיווג</label>
       <select id="m-cat"></select>
     </div>
@@ -54,7 +61,7 @@
     <div class="field">
       <label for="m-image">תמונת התבנית (לא חובה)</label>
       <input type="file" id="m-image" accept="image/*" />
-      <p class="hint">אפשר גם לשמור בלי תמונה עכשיו ולהוסיף אותה מאוחר יותר (פשוט שמרו את התבנית שוב עם אותו מספר סידורי + תמונה).</p>
+      <p class="hint" id="m-image-hint">אפשר גם לשמור בלי תמונה עכשיו ולהוסיף אותה מאוחר יותר (פשוט שמרו את התבנית שוב עם אותו מספר סידורי + תמונה).</p>
     </div>
 
     <button class="btn" id="save-mold-btn">שמרו תבנית</button>
@@ -166,7 +173,7 @@
     refreshTokenStatus();
   });
 
-  // ---------- טאב 1: תבנית חדשה ----------
+  // ---------- טאב 1: תבנית חדשה / עריכת תבנית קיימת ----------
   let liveCategories = [];
   let liveMolds = [];
 
@@ -185,11 +192,65 @@
     catSelect.appendChild(newOpt);
   }
 
+  const editSelect = document.getElementById("m-edit-existing");
+  function renderEditOptions() {
+    const previousValue = editSelect.value;
+    editSelect.innerHTML = '<option value="">🆕 תבנית חדשה</option>';
+    liveMolds
+      .slice()
+      .sort((a, b) => (a.category + a.id).localeCompare(b.category + b.id))
+      .forEach((m) => {
+        const opt = document.createElement("option");
+        opt.value = m.id;
+        opt.textContent = `מס' ${m.id} — ${m.description} (${categoryName(liveCategories, m.category)})`;
+        editSelect.appendChild(opt);
+      });
+    editSelect.value = liveMolds.some((m) => m.id === previousValue) ? previousValue : "";
+  }
+
+  const idField = document.getElementById("m-id");
+  const descField = document.getElementById("m-desc");
+  const volumeField = document.getElementById("m-volume");
+  const imageHint = document.getElementById("m-image-hint");
+  const saveBtn = document.getElementById("save-mold-btn");
+
+  function resetMoldForm() {
+    idField.value = "";
+    idField.disabled = false;
+    descField.value = "";
+    volumeField.value = "";
+    document.getElementById("m-image").value = "";
+    imageHint.textContent =
+      "אפשר גם לשמור בלי תמונה עכשיו ולהוסיף אותה מאוחר יותר (פשוט שמרו את התבנית שוב עם אותו מספר סידורי + תמונה).";
+    saveBtn.textContent = "שמרו תבנית";
+    newCatField.style.display = "none";
+  }
+
+  editSelect.addEventListener("change", () => {
+    const mold = liveMolds.find((m) => m.id === editSelect.value);
+    if (!mold) {
+      resetMoldForm();
+      return;
+    }
+    idField.value = mold.id;
+    idField.disabled = true; // כדי לא ליצור בטעות תבנית כפולה עם id אחר
+    descField.value = mold.description;
+    volumeField.value = mold.volumeMl != null ? mold.volumeMl : "";
+    catSelect.value = liveCategories.some((c) => c.id === mold.category) ? mold.category : "__new__";
+    newCatField.style.display = catSelect.value === "__new__" ? "block" : "none";
+    document.getElementById("m-image").value = "";
+    imageHint.textContent = mold.image
+      ? `יש כבר תמונה שמורה (${mold.image}) — צריך להעלות תמונה כאן רק אם רוצים להחליף אותה.`
+      : "עדיין אין תמונה לתבנית הזו — אפשר להוסיף אחת עכשיו.";
+    saveBtn.textContent = "עדכנו תבנית";
+  });
+
   (async () => {
     const data = await loadMoldData();
     liveCategories = data.categories;
     liveMolds = data.molds;
     renderCatOptions();
+    renderEditOptions();
   })();
 
   const newCatField = document.getElementById("m-new-cat-field");
@@ -221,8 +282,8 @@
       categoryId = newCategoryName;
     }
 
-    if (!id || !desc || !volume) {
-      alert("יש למלא מספר סידורי, תיאור ונפח.");
+    if (!id || !desc) {
+      alert("יש למלא מספר סידורי ותיאור (הנפח אפשר להשלים מאוחר יותר).");
       return;
     }
 
@@ -269,7 +330,7 @@
         category: categoryId,
         description: desc,
         image: imagePath,
-        volumeMl: Number(volume),
+        volumeMl: volume ? Number(volume) : null,
       });
       await ghPutJSON("data/molds.json", currentMolds, `admin: הוספת/עדכון תבנית ${id}`, moldsSha);
       liveMolds = currentMolds;
@@ -279,14 +340,13 @@
         תוך כ-30–60 שניות היא תופיע ב"התבניות שלי" אצל כולם (כולל אצלך, אחרי רענון).
       </div>`;
 
-      document.getElementById("m-id").value = "";
-      document.getElementById("m-desc").value = "";
-      document.getElementById("m-volume").value = "";
-      document.getElementById("m-image").value = "";
-      document.getElementById("m-new-cat").value = "";
-      newCatField.style.display = "none";
+      if (!liveCategories.some((c) => c.id === categoryId)) {
+        liveCategories = liveCategories.concat([{ id: categoryId, name: newCategoryName || categoryId }]);
+      }
       renderCatOptions();
-      catSelect.value = categoryId;
+      resetMoldForm();
+      editSelect.value = "";
+      renderEditOptions();
     } catch (err) {
       msg.innerHTML = `<p class="empty-note" style="color:#a33;">שגיאה: ${err.message || err}</p>`;
     } finally {
