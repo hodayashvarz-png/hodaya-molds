@@ -41,9 +41,28 @@ html, body {
 body {
   background-color: var(--bg-fallback);
   background-image: var(--bg-tex);
-  background-size: 700px 260px;
+  background-size: 1640px 240px;
   padding-bottom: calc(var(--nav-h) + 16px);
   min-height: 100vh;
+  position: relative;
+}
+
+/* וינייטה — משוליים כהים יותר סביב האתר, כדי שהרקע ירגיש כמו קיר אחד רציף */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, 0.4) 100%);
+}
+
+header.top-bar,
+.home-banner,
+main,
+nav.bottom-nav {
+  position: relative;
+  z-index: 1;
 }
 
 a { color: inherit; text-decoration: none; }
