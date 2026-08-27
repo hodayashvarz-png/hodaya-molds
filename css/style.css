@@ -41,7 +41,9 @@ html, body {
 body {
   background-color: var(--bg-fallback);
   background-image: var(--bg-tex);
-  background-size: 1640px 240px;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: 100% auto;
   padding-bottom: calc(var(--nav-h) + 16px);
   min-height: 100vh;
   position: relative;
