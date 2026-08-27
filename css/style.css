@@ -40,13 +40,22 @@ html, body {
 
 body {
   background-color: var(--bg-fallback);
-  background-image: var(--bg-tex);
-  background-repeat: no-repeat;
-  background-position: top center;
-  background-size: 100% auto;
   padding-bottom: calc(var(--nav-h) + 16px);
   min-height: 100vh;
   position: relative;
+}
+
+/* טקסטורת הקיר — תמונה אחת, קבועה מאחורי כל העמוד, מכסה את כל הרקע תמיד */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: var(--bg-tex);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 header.top-bar,
