@@ -3,7 +3,7 @@
 :root {
   /* משטחים מרוקמים (טקסטורת בטון/סיוד) */
   --bg-tex: url("../textures/bg-mauve.png");
-  --bg-fallback: #65525b;
+  --bg-fallback: #5c4b5a;
   --card-tex: url("../textures/card-khaki.png");
   --card-fallback: #d2ccb6;
 
@@ -47,16 +47,6 @@ body {
   padding-bottom: calc(var(--nav-h) + 16px);
   min-height: 100vh;
   position: relative;
-}
-
-/* וינייטה — משוליים כהים יותר סביב האתר, כדי שהרקע ירגיש כמו קיר אחד רציף */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, 0.4) 100%);
 }
 
 header.top-bar,
