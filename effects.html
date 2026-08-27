@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>אפקטים</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<header class="top-bar">
+  <a class="back-link" href="inspiration.html">➜</a>
+  <h1>אפקטים</h1>
+</header>
+
+<main>
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="marble">אפקט שיש</button>
+    <button class="tab-btn" data-tab="terrazzo">אפקט טרצו</button>
+  </div>
+
+  <div class="tab-panel active" id="panel-marble">
+    <div class="item-grid" id="grid-marble"></div>
+    <p class="empty-note" id="empty-marble" style="display:none;">עדיין לא הועלו תמונות. אפשר להוסיף דרך admin.html.</p>
+  </div>
+  <div class="tab-panel" id="panel-terrazzo">
+    <div class="item-grid" id="grid-terrazzo"></div>
+    <p class="empty-note" id="empty-terrazzo" style="display:none;">עדיין לא הועלו תמונות. אפשר להוסיף דרך admin.html.</p>
+  </div>
+</main>
+
+<div class="modal-overlay hidden" id="modal">
+  <div class="modal-box">
+    <img class="modal-img" id="modal-img" alt="" />
+    <p id="modal-caption" style="font-size:14px;"></p>
+    <button class="close-btn" data-close-modal>סגירה</button>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script>
+  const modal = document.getElementById("modal");
+  setupModalClosers(modal);
+
+  function renderGallery(items, gridEl, emptyEl) {
+    if (items.length === 0) {
+      emptyEl.style.display = "block";
+      return;
+    }
+    gridEl.innerHTML = items
+      .map(
+        (item) => `<div class="item-card">
+          <img class="thumb" src="${item.image}" alt="${item.caption || ""}" data-id="${item.id}" />
+          <div class="meta"><div class="desc">${item.caption || ""}</div></div>
+        </div>`
+      )
+      .join("");
+    gridEl.querySelectorAll("img.thumb").forEach((img) => {
+      attachImageFallback(img, "אין תמונה עדיין");
+      img.addEventListener("click", () => {
+        const item = items.find((c) => c.id === img.dataset.id);
+        document.getElementById("modal-img").src = item.image;
+        document.getElementById("modal-caption").textContent = item.caption || "";
+        modal.classList.remove("hidden");
+      });
+    });
+  }
+
+  renderGallery(EFFECTS.marble, document.getElementById("grid-marble"), document.getElementById("empty-marble"));
+  renderGallery(EFFECTS.terrazzo, document.getElementById("grid-terrazzo"), document.getElementById("empty-terrazzo"));
+
+  document.querySelectorAll(".tab-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".tab-btn").forEach((b) => b.classList.remove("active"));
+      document.querySelectorAll(".tab-panel").forEach((p) => p.classList.remove("active"));
+      btn.classList.add("active");
+      document.getElementById("panel-" + btn.dataset.tab).classList.add("active");
+    });
+  });
+
+  renderBottomNav("inspiration");
+</script>
+</body>
+</html>

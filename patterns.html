@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>דוגמאות שונות</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<header class="top-bar">
+  <a class="back-link" href="inspiration.html">➜</a>
+  <h1>דוגמאות שונות</h1>
+</header>
+
+<main>
+  <p class="page-lead">עוד השראה כללית לעבודות יציקה.</p>
+  <div class="item-grid" id="grid"></div>
+  <p class="empty-note" id="empty-note" style="display:none;">עדיין לא הועלו תמונות. אפשר להוסיף דרך admin.html.</p>
+</main>
+
+<div class="modal-overlay hidden" id="modal">
+  <div class="modal-box">
+    <img class="modal-img" id="modal-img" alt="" />
+    <p id="modal-caption" style="font-size:14px;"></p>
+    <button class="close-btn" data-close-modal>סגירה</button>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script>
+  const grid = document.getElementById("grid");
+  if (PATTERNS.length === 0) {
+    document.getElementById("empty-note").style.display = "block";
+  } else {
+    grid.innerHTML = PATTERNS.map(
+      (item) => `<div class="item-card">
+        <img class="thumb" src="${item.image}" alt="${item.caption || ""}" data-id="${item.id}" />
+        <div class="meta"><div class="desc">${item.caption || ""}</div></div>
+      </div>`
+    ).join("");
+
+    const modal = document.getElementById("modal");
+    setupModalClosers(modal);
+    grid.querySelectorAll("img.thumb").forEach((img) => {
+      attachImageFallback(img, "אין תמונה עדיין");
+      img.addEventListener("click", () => {
+        const item = PATTERNS.find((c) => c.id === img.dataset.id);
+        document.getElementById("modal-img").src = item.image;
+        document.getElementById("modal-caption").textContent = item.caption || "";
+        modal.classList.remove("hidden");
+      });
+    });
+  }
+
+  renderBottomNav("inspiration");
+</script>
+</body>
+</html>

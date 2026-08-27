@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>הוספת תוכן</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<header class="top-bar">
+  <a class="back-link" href="index.html">➜</a>
+  <h1>הוספת תוכן</h1>
+</header>
+
+<main>
+  <p class="page-lead">
+    כלי עזר שבונה עבורך את הקטע להעתקה לקובץ <code>js/data.js</code>.
+    האתר סטטי (בלי שרת), כך שכדי שתוכן חדש יופיע לכולם צריך להדביק אותו
+    בקובץ ולעשות commit + push. פירוט מלא ב-README.
+  </p>
+
+  <div class="field">
+    <label for="content-type">סוג התוכן שרוצים להוסיף</label>
+    <select id="content-type">
+      <option value="mold">תבנית ל"התבניות שלי"</option>
+      <option value="combo">תמונה ל"שילובי צבעים"</option>
+      <option value="marble">תמונה ל"אפקט שיש"</option>
+      <option value="terrazzo">תמונה ל"אפקט טרצו"</option>
+      <option value="pattern">תמונה ל"דוגמאות שונות"</option>
+    </select>
+  </div>
+
+  <!-- שדות לתבנית -->
+  <div id="fields-mold">
+    <div class="field">
+      <label for="m-id">מספר סידורי (ייחודי)</label>
+      <input type="text" id="m-id" placeholder="לדוגמה: 104" />
+    </div>
+    <div class="field">
+      <label for="m-cat">סיווג</label>
+      <select id="m-cat"></select>
+    </div>
+    <div class="field">
+      <label for="m-desc">תיאור קצר</label>
+      <input type="text" id="m-desc" placeholder="לדוגמה: קערה משולשת גדולה" />
+    </div>
+    <div class="field">
+      <label for="m-volume">נפח כולל (מ״ל)</label>
+      <input type="number" id="m-volume" placeholder="לדוגמה: 480" />
+    </div>
+  </div>
+
+  <!-- שדות לגלריית תמונות -->
+  <div id="fields-gallery" style="display:none;">
+    <div class="field">
+      <label for="g-id">מזהה ייחודי לתמונה (אנגלית, בלי רווחים)</label>
+      <input type="text" id="g-id" placeholder="לדוגמה: combo-2" />
+    </div>
+    <div class="field">
+      <label for="g-caption">כיתוב קצר (לא חובה)</label>
+      <input type="text" id="g-caption" placeholder="לדוגמה: אפור + טרקוטה" />
+    </div>
+  </div>
+
+  <button class="btn" id="build-btn">בנו את הקטע להעתקה</button>
+
+  <div id="output" style="margin-top:20px; display:none;">
+    <div class="result-card">
+      <h3 id="output-title"></h3>
+      <p class="hint" id="output-instructions" style="margin-bottom:10px;"></p>
+      <pre class="code-block" id="output-code"></pre>
+      <button class="btn secondary" id="copy-btn" style="margin-top:10px;">העתקה</button>
+    </div>
+  </div>
+</main>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script>
+  const typeSelect = document.getElementById("content-type");
+  const moldFields = document.getElementById("fields-mold");
+  const galleryFields = document.getElementById("fields-gallery");
+  const catSelect = document.getElementById("m-cat");
+
+  MOLD_CATEGORIES.forEach((c) => {
+    const opt = document.createElement("option");
+    opt.value = c.id;
+    opt.textContent = c.name;
+    catSelect.appendChild(opt);
+  });
+
+  const galleryMeta = {
+    combo: { arrayName: "COLOR_COMBOS", folder: "images/combos", label: "שילובי צבעים" },
+    marble: { arrayName: "EFFECTS.marble", folder: "images/effects/marble", label: "אפקט שיש" },
+    terrazzo: { arrayName: "EFFECTS.terrazzo", folder: "images/effects/terrazzo", label: "אפקט טרצו" },
+    pattern: { arrayName: "PATTERNS", folder: "images/patterns", label: "דוגמאות שונות" },
+  };
+
+  typeSelect.addEventListener("change", () => {
+    const isMold = typeSelect.value === "mold";
+    moldFields.style.display = isMold ? "block" : "none";
+    galleryFields.style.display = isMold ? "none" : "block";
+  });
+
+  document.getElementById("build-btn").addEventListener("click", () => {
+    const type = typeSelect.value;
+    const output = document.getElementById("output");
+    const codeEl = document.getElementById("output-code");
+    const titleEl = document.getElementById("output-title");
+    const instrEl = document.getElementById("output-instructions");
+
+    if (type === "mold") {
+      const id = document.getElementById("m-id").value.trim();
+      const cat = catSelect.value;
+      const desc = document.getElementById("m-desc").value.trim();
+      const volume = document.getElementById("m-volume").value.trim();
+
+      if (!id || !desc || !volume) {
+        alert("יש למלא מספר סידורי, תיאור ונפח.");
+        return;
+      }
+
+      const imagePath = `images/molds/${id}.jpg`;
+      titleEl.textContent = "תבנית חדשה — הוספה ל-MOLDS ב-js/data.js";
+      instrEl.textContent = `1. שמרו את תמונת התבנית בשם ${id}.jpg בתוך התיקייה images/molds/. 2. הוסיפו את הבלוק הבא בתוך מערך MOLDS (לפני הסוגר המסיים ]). 3. שמרו, ועשו commit + push.`;
+      codeEl.textContent =
+        `{\n` +
+        `  id: "${id}",\n` +
+        `  category: "${cat}",\n` +
+        `  description: "${desc.replace(/"/g, '\\"')}",\n` +
+        `  image: "${imagePath}",\n` +
+        `  volumeMl: ${Number(volume)},\n` +
+        `},`;
+    } else {
+      const meta = galleryMeta[type];
+      const id = document.getElementById("g-id").value.trim();
+      const caption = document.getElementById("g-caption").value.trim();
+
+      if (!id) {
+        alert("יש למלא מזהה לתמונה.");
+        return;
+      }
+
+      const imagePath = `${meta.folder}/${id}.jpg`;
+      titleEl.textContent = `תמונה חדשה — הוספה ל-${meta.arrayName} ב-js/data.js`;
+      instrEl.textContent = `1. שמרו את התמונה בשם ${id}.jpg בתוך התיקייה ${meta.folder}/. 2. הוסיפו את הבלוק הבא בתוך מערך ${meta.arrayName} (לפני הסוגר המסיים ]). 3. שמרו, ועשו commit + push.`;
+      codeEl.textContent =
+        `{\n` +
+        `  id: "${id}",\n` +
+        `  caption: "${caption.replace(/"/g, '\\"')}",\n` +
+        `  image: "${imagePath}",\n` +
+        `},`;
+    }
+
+    output.style.display = "block";
+    output.scrollIntoView({ behavior: "smooth" });
+  });
+
+  document.getElementById("copy-btn").addEventListener("click", async () => {
+    const text = document.getElementById("output-code").textContent;
+    try {
+      await navigator.clipboard.writeText(text);
+      const btn = document.getElementById("copy-btn");
+      const original = btn.textContent;
+      btn.textContent = "הועתק!";
+      setTimeout(() => (btn.textContent = original), 1500);
+    } catch (e) {
+      alert("לא ניתן להעתיק אוטומטית — יש לסמן את הטקסט ולהעתיק ידנית.");
+    }
+  });
+
+  renderBottomNav("");
+</script>
+</body>
+</html>

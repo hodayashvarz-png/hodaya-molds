@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>תבניות</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<header class="top-bar">
+  <a class="back-link" href="molds.html">➜</a>
+  <h1 id="page-title">תבניות</h1>
+</header>
+
+<main>
+  <div class="item-grid" id="mold-grid"></div>
+  <p class="empty-note" id="empty-note" style="display:none;">אין עדיין תבניות בסיווג הזה.</p>
+</main>
+
+<div class="modal-overlay hidden" id="modal">
+  <div class="modal-box">
+    <h2 id="modal-title"></h2>
+    <p class="modal-sub" id="modal-desc"></p>
+    <img class="modal-img" id="modal-img" alt="" />
+    <div class="stat-row">
+      <span class="label">נפח כולל</span>
+      <span class="value" id="modal-volume"></span>
+    </div>
+    <div class="stat-row">
+      <span class="label">בטון נדרש</span>
+      <span class="value" id="modal-concrete"></span>
+    </div>
+    <div class="stat-row">
+      <span class="label">מים נדרשים</span>
+      <span class="value" id="modal-water"></span>
+    </div>
+    <button class="close-btn" data-close-modal>סגירה</button>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script>
+  const params = new URLSearchParams(location.search);
+  const catId = params.get("cat");
+  const cat = MOLD_CATEGORIES.find((c) => c.id === catId);
+  document.getElementById("page-title").textContent = cat ? cat.name : "תבניות";
+
+  const molds = MOLDS.filter((m) => m.category === catId);
+  const grid = document.getElementById("mold-grid");
+
+  if (molds.length === 0) {
+    document.getElementById("empty-note").style.display = "block";
+  } else {
+    grid.innerHTML = molds
+      .map(
+        (m) => `
+      <div class="item-card">
+        <img class="thumb" src="${m.image}" alt="${m.description}" data-id="${m.id}" />
+        <div class="meta">
+          <div class="serial">מס' ${m.id}</div>
+          <div class="desc">${m.description}</div>
+        </div>
+      </div>`
+      )
+      .join("");
+
+    grid.querySelectorAll("img.thumb").forEach((img) => {
+      attachImageFallback(img, "אין תמונה עדיין");
+      img.addEventListener("click", () => openMoldModal(img.dataset.id));
+    });
+  }
+
+  const modal = document.getElementById("modal");
+  setupModalClosers(modal);
+
+  function openMoldModal(id) {
+    const mold = MOLDS.find((m) => m.id === id);
+    if (!mold) return;
+    const mix = calcMix(mold.volumeMl);
+    document.getElementById("modal-title").textContent = `תבנית מס' ${mold.id}`;
+    document.getElementById("modal-desc").textContent = mold.description;
+    const imgEl = document.getElementById("modal-img");
+    imgEl.src = mold.image;
+    attachImageFallback(imgEl, "אין תמונה עדיין");
+    document.getElementById("modal-volume").textContent = `${mold.volumeMl} מ״ל`;
+    document.getElementById("modal-concrete").textContent = `${mix.concreteG} גרם`;
+    document.getElementById("modal-water").textContent = `${mix.waterMl} מ״ל`;
+    modal.classList.remove("hidden");
+  }
+
+  renderBottomNav("molds");
+</script>
+</body>
+</html>

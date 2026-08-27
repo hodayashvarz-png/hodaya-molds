@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>מחשבון</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<header class="top-bar">
+  <a class="back-link" href="index.html">➜</a>
+  <h1>מחשבון</h1>
+</header>
+
+<main>
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="volume">נפח → בטון ומים</button>
+    <button class="tab-btn" data-tab="random">ניצול חומר גלם</button>
+    <button class="tab-btn" data-tab="extra">תבניות נוספות</button>
+  </div>
+
+  <!-- טאב 1: נפח תבנית -> בטון ומים -->
+  <div class="tab-panel active" id="panel-volume">
+    <p class="page-lead">הזינו נפח תבנית במ״ל, ותקבלו כמה בטון וכמה מים צריך.</p>
+    <div class="field">
+      <label for="v-volume">נפח התבנית (מ״ל)</label>
+      <input type="number" id="v-volume" min="0" placeholder="לדוגמה: 500" />
+    </div>
+    <details class="advanced">
+      <summary>הגדרות מתקדמות (יחסי תערובת)</summary>
+      <div class="field">
+        <label for="v-density">גרם אבקה למ״ל נפח</label>
+        <input type="number" id="v-density" step="0.01" value="1.9" />
+      </div>
+      <div class="field">
+        <label for="v-ratio">יחס מים (חלק ממשקל האבקה)</label>
+        <input type="number" id="v-ratio" step="0.01" value="0.18" />
+      </div>
+    </details>
+    <button class="btn" id="v-calc-btn">חשבו</button>
+    <div id="v-result" style="margin-top:16px;"></div>
+  </div>
+
+  <!-- טאב 2: ניצול חומר גלם - שילובים אקראיים -->
+  <div class="tab-panel" id="panel-random">
+    <p class="page-lead">הזינו כמה חומר גלם (גבס) יש לכם, ונציע 3 שילובי תבניות אקראיים לניצול הכמות.</p>
+    <div class="field">
+      <label for="r-volume">נפח חומר גלם זמין (מ״ל)</label>
+      <input type="number" id="r-volume" min="0" placeholder="לדוגמה: 1500" />
+    </div>
+    <div class="field">
+      <label for="r-cat">סיווג תבניות (לא חובה)</label>
+      <select id="r-cat">
+        <option value="all">הכל</option>
+      </select>
+    </div>
+    <button class="btn" id="r-calc-btn">הצע 3 שילובים</button>
+    <div id="r-result" style="margin-top:16px;"></div>
+  </div>
+
+  <!-- טאב 3: ניצול חומר גלם עם תבניות שכבר נבחרו -->
+  <div class="tab-panel" id="panel-extra">
+    <p class="page-lead">הזינו את נפח חומר הגלם ואת מספרי התבניות שכבר בחרתן — ונציע 5 תבניות נוספות לניצול השארית.</p>
+    <div class="field">
+      <label for="e-volume">נפח חומר גלם זמין (מ״ל)</label>
+      <input type="number" id="e-volume" min="0" placeholder="לדוגמה: 2000" />
+    </div>
+    <div class="field">
+      <label for="e-serials">מספרי תבניות שנבחרו (מופרדים בפסיקים)</label>
+      <input type="text" id="e-serials" placeholder="לדוגמה: 101, 202" />
+    </div>
+    <div class="field">
+      <label for="e-cat">סיווג לתבניות הנוספות (לא חובה)</label>
+      <select id="e-cat">
+        <option value="all">הכל</option>
+      </select>
+    </div>
+    <button class="btn" id="e-calc-btn">הצע 5 תבניות נוספות</button>
+    <div id="e-result" style="margin-top:16px;"></div>
+  </div>
+</main>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script src="js/calculator.js"></script>
+</body>
+</html>

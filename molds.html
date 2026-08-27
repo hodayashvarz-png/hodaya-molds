@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>התבניות שלי</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<header class="top-bar">
+  <a class="back-link" href="index.html">➜</a>
+  <h1>התבניות שלי</h1>
+</header>
+
+<main>
+  <p class="page-lead">בחרו סיווג כדי לראות את כל התבניות שבו.</p>
+  <div class="card-grid" id="cat-grid"></div>
+</main>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script>
+  const grid = document.getElementById("cat-grid");
+  grid.innerHTML = MOLD_CATEGORIES.map((cat) => {
+    const count = MOLDS.filter((m) => m.category === cat.id).length;
+    return `<a class="cat-card" href="mold-category.html?cat=${encodeURIComponent(cat.id)}">
+      <span class="emoji">🧱</span>
+      ${cat.name}
+      <span style="font-size:12px;color:var(--muted);font-weight:400;">${count} תבניות</span>
+    </a>`;
+  }).join("");
+
+  renderBottomNav("molds");
+</script>
+</body>
+</html>

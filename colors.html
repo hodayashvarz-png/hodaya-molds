@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>צבעים</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<header class="top-bar">
+  <a class="back-link" href="inspiration.html">➜</a>
+  <h1>צבעים</h1>
+</header>
+
+<main>
+  <p class="page-lead">לחצו על ריבוע צבע כדי לראות הצעה כללית לערבוב עם בטון לבן.</p>
+  <div class="color-grid" id="color-grid"></div>
+</main>
+
+<div class="modal-overlay hidden" id="modal">
+  <div class="modal-box">
+    <h2 id="modal-title"></h2>
+    <p class="modal-sub">הצעת ערבוב (יחס כללי, לא מדויק)</p>
+    <p id="modal-tip" style="font-size:15px; line-height:1.6;"></p>
+    <button class="close-btn" data-close-modal>סגירה</button>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/main.js"></script>
+<script>
+  const grid = document.getElementById("color-grid");
+  grid.innerHTML = COLORS.map(
+    (c) => `<div class="color-swatch" style="background:${c.hex};" data-id="${c.id}">
+      <span>${c.name}</span>
+    </div>`
+  ).join("");
+
+  const modal = document.getElementById("modal");
+  setupModalClosers(modal);
+
+  grid.querySelectorAll(".color-swatch").forEach((el) => {
+    el.addEventListener("click", () => {
+      const color = COLORS.find((c) => c.id === el.dataset.id);
+      document.getElementById("modal-title").textContent = color.name;
+      document.getElementById("modal-tip").textContent = color.mixTip;
+      modal.classList.remove("hidden");
+    });
+  });
+
+  renderBottomNav("inspiration");
+</script>
+</body>
+</html>
