@@ -61,5 +61,12 @@
     "description": "ניסון",
     "image": "images/molds/909009.jpg",
     "volumeMl": 794
+  },
+  {
+    "id": "999",
+    "category": "kaarot",
+    "description": "ניסיון",
+    "image": "images/molds/999.jpg",
+    "volumeMl": 800
   }
 ]
