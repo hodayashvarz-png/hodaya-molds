@@ -3,7 +3,7 @@
 :root {
   /* משטחים מרוקמים (טקסטורת בטון/סיוד) */
   --bg-tex: url("../textures/bg-mauve.png");
-  --bg-fallback: #7c626a;
+  --bg-fallback: #65525b;
   --card-tex: url("../textures/card-khaki.png");
   --card-fallback: #d2ccb6;
 
@@ -41,7 +41,7 @@ html, body {
 body {
   background-color: var(--bg-fallback);
   background-image: var(--bg-tex);
-  background-size: 560px 780px;
+  background-size: 700px 260px;
   padding-bottom: calc(var(--nav-h) + 16px);
   min-height: 100vh;
 }
