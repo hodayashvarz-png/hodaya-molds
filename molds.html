@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <title>התבניות שלי</title>
 <link rel="stylesheet" href="css/style.css" />
+<script src="js/main.js"></script>
 </head>
 <body>
 <header class="top-bar">
@@ -20,7 +21,6 @@
 
 <script src="js/data.js"></script>
 <script src="js/data-loader.js"></script>
-<script src="js/main.js"></script>
 <script>
   (async () => {
     const { categories, molds } = await loadMoldData();
@@ -28,9 +28,14 @@
     document.getElementById("loading-note").style.display = "none";
     grid.innerHTML = categories.map((cat) => {
       const count = molds.filter((m) => m.category === cat.id).length;
+      const image = cat.image || `images/categories/${encodeURIComponent(cat.id)}.jpg`;
       return `<a class="cat-card" href="mold-category.html?cat=${encodeURIComponent(cat.id)}">
-        <span class="cat-name">${cat.name}</span>
-        <span class="cat-sub">${count} תבניות</span>
+        <img class="cat-card-img" src="${image}" alt="" onerror="cardImgFallback(this)" />
+        <div class="cat-card-overlay"></div>
+        <div class="cat-card-text">
+          <span class="cat-name">${cat.name}</span>
+          <span class="cat-sub">${count} תבניות</span>
+        </div>
       </a>`;
     }).join("");
   })();

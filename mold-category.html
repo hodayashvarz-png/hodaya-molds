@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <title>תבניות</title>
 <link rel="stylesheet" href="css/style.css" />
+<script src="js/main.js"></script>
 </head>
 <body>
 <header class="top-bar">
@@ -40,7 +41,6 @@
 
 <script src="js/data.js"></script>
 <script src="js/data-loader.js"></script>
-<script src="js/main.js"></script>
 <script>
   (async () => {
     const params = new URLSearchParams(location.search);
@@ -59,7 +59,7 @@
         .map(
           (m) => `
         <div class="item-card">
-          <img class="thumb" src="${m.image}" alt="${m.description}" data-id="${m.id}" />
+          <img class="thumb" src="${m.image}" alt="${m.description}" data-id="${m.id}" onerror="moldImgFallback(this, 'אין תמונה עדיין')" />
           <div class="meta">
             <div class="serial">מס' ${m.id}</div>
             <div class="desc">${m.description}</div>
@@ -69,7 +69,6 @@
         .join("");
 
       grid.querySelectorAll("img.thumb").forEach((img) => {
-        attachImageFallback(img, "אין תמונה עדיין");
         img.addEventListener("click", () => openMoldModal(img.dataset.id));
       });
     }
@@ -84,8 +83,8 @@
       document.getElementById("modal-title").textContent = `תבנית מס' ${mold.id}`;
       document.getElementById("modal-desc").textContent = mold.description;
       const imgEl = document.getElementById("modal-img");
+      imgEl.onerror = () => moldImgFallback(imgEl, "אין תמונה עדיין");
       imgEl.src = mold.image;
-      attachImageFallback(imgEl, "אין תמונה עדיין");
       document.getElementById("modal-volume").textContent =
         mold.volumeMl != null ? `${mold.volumeMl} מ״ל` : "טרם הוזן";
       document.getElementById("modal-concrete").textContent =

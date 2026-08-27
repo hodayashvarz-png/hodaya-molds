@@ -2,20 +2,28 @@
 
 // מחליף תמונה חסרה בריבוע placeholder עם טקסט, כדי שהאתר ייראה תקין
 // גם לפני שהועלו תמונות אמיתיות.
-function attachImageFallback(imgEl, label) {
-  imgEl.addEventListener("error", function onErr() {
-    imgEl.removeEventListener("error", onErr);
-    const text = encodeURIComponent(label || "אין תמונה עדיין");
-    imgEl.src =
-      "data:image/svg+xml;utf8," +
-      `<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'>` +
-      `<rect width='100%' height='100%' fill='%2333363a'/>` +
-      `<circle cx='60' cy='70' r='5' fill='%23404448'/>` +
-      `<circle cx='230' cy='110' r='7' fill='%23404448'/>` +
-      `<circle cx='170' cy='210' r='4' fill='%23404448'/>` +
-      `<text x='50%' y='50%' font-size='16' fill='%23a3a7ad' text-anchor='middle' dominant-baseline='middle' font-family='Arial'>${text}</text>` +
-      `</svg>`;
-  });
+// חשוב: נקרא ישירות מתוך תכונת ה-HTML onerror="moldImgFallback(this, '...')"
+// ולא דרך addEventListener מאוחר — כי תמונה שחסרה יכולה להיכשל בטעינה
+// עוד לפני שסקריפט חיצוני מספיק לרוץ ולצרף מאזין (race condition).
+function moldImgFallback(imgEl, label) {
+  imgEl.onerror = null;
+  const text = encodeURIComponent(label || "אין תמונה עדיין");
+  imgEl.src =
+    "data:image/svg+xml;utf8," +
+    `<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'>` +
+    `<rect width='100%' height='100%' fill='%23d2ccb6'/>` +
+    `<circle cx='60' cy='70' r='5' fill='%23bfb79f'/>` +
+    `<circle cx='230' cy='110' r='7' fill='%23bfb79f'/>` +
+    `<circle cx='170' cy='210' r='4' fill='%23bfb79f'/>` +
+    `<text x='50%' y='50%' font-size='16' fill='%236e645c' text-anchor='middle' dominant-baseline='middle' font-family='Arial'>${text}</text>` +
+    `</svg>`;
+}
+
+// מחליף תמונת כרטיס-קטגוריה חסרה (עם כותרת) בטקסטורת הבטון/חאקי — בלי טקסט,
+// כי לכרטיס כבר יש כותרת מוצגת מעליה. גם זו נקראת ישירות מ-onerror בתכונת ה-HTML.
+function cardImgFallback(imgEl) {
+  imgEl.onerror = null;
+  imgEl.src = "textures/card-khaki.png";
 }
 
 // בונה סרגל ניווט תחתון ומסמן את הטאב הפעיל לפי שם הדף

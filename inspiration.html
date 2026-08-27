@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <title>לוחות השראה</title>
 <link rel="stylesheet" href="css/style.css" />
+<script src="js/main.js"></script>
 </head>
 <body>
 <header class="top-bar">
@@ -16,26 +17,41 @@
   <p class="page-lead">רעיונות לצבעים, שילובים, אפקטים ודוגמאות.</p>
   <div class="card-grid">
     <a class="cat-card" href="colors.html">
-      <span class="cat-name">צבעים</span>
-      <span class="cat-sub">פלטה והצעות ערבוב</span>
+      <img class="cat-card-img" src="images/categories/colors.jpg" alt="" onerror="cardImgFallback(this)" />
+      <div class="cat-card-overlay"></div>
+      <div class="cat-card-text">
+        <span class="cat-name">צבעים</span>
+        <span class="cat-sub">פלטה והצעות ערבוב</span>
+      </div>
     </a>
     <a class="cat-card" href="combos.html">
-      <span class="cat-name">שילובי צבעים</span>
-      <span class="cat-sub">גלריית השראה</span>
+      <img class="cat-card-img" src="images/categories/combos.jpg" alt="" onerror="cardImgFallback(this)" />
+      <div class="cat-card-overlay"></div>
+      <div class="cat-card-text">
+        <span class="cat-name">שילובי צבעים</span>
+        <span class="cat-sub">גלריית השראה</span>
+      </div>
     </a>
     <a class="cat-card" href="effects.html">
-      <span class="cat-name">אפקטים</span>
-      <span class="cat-sub">שיש וטרצו</span>
+      <img class="cat-card-img" src="images/categories/effects.jpg" alt="" onerror="cardImgFallback(this)" />
+      <div class="cat-card-overlay"></div>
+      <div class="cat-card-text">
+        <span class="cat-name">אפקטים</span>
+        <span class="cat-sub">שיש וטרצו</span>
+      </div>
     </a>
     <a class="cat-card" href="patterns.html">
-      <span class="cat-name">דוגמאות שונות</span>
-      <span class="cat-sub">עוד השראה</span>
+      <img class="cat-card-img" src="images/categories/patterns.jpg" alt="" onerror="cardImgFallback(this)" />
+      <div class="cat-card-overlay"></div>
+      <div class="cat-card-text">
+        <span class="cat-name">דוגמאות שונות</span>
+        <span class="cat-sub">עוד השראה</span>
+      </div>
     </a>
   </div>
 </main>
 
 <script src="js/data.js"></script>
-<script src="js/main.js"></script>
 <script>
   renderBottomNav("inspiration");
 </script>

@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <title>אפקטים</title>
 <link rel="stylesheet" href="css/style.css" />
+<script src="js/main.js"></script>
 </head>
 <body>
 <header class="top-bar">
@@ -37,7 +38,6 @@
 </div>
 
 <script src="js/data.js"></script>
-<script src="js/main.js"></script>
 <script>
   const modal = document.getElementById("modal");
   setupModalClosers(modal);
@@ -50,16 +50,17 @@
     gridEl.innerHTML = items
       .map(
         (item) => `<div class="item-card">
-          <img class="thumb" src="${item.image}" alt="${item.caption || ""}" data-id="${item.id}" />
+          <img class="thumb" src="${item.image}" alt="${item.caption || ""}" data-id="${item.id}" onerror="moldImgFallback(this, 'אין תמונה עדיין')" />
           <div class="meta"><div class="desc">${item.caption || ""}</div></div>
         </div>`
       )
       .join("");
     gridEl.querySelectorAll("img.thumb").forEach((img) => {
-      attachImageFallback(img, "אין תמונה עדיין");
       img.addEventListener("click", () => {
         const item = items.find((c) => c.id === img.dataset.id);
-        document.getElementById("modal-img").src = item.image;
+        const modalImg = document.getElementById("modal-img");
+        modalImg.onerror = () => moldImgFallback(modalImg, "אין תמונה עדיין");
+        modalImg.src = item.image;
         document.getElementById("modal-caption").textContent = item.caption || "";
         modal.classList.remove("hidden");
       });
