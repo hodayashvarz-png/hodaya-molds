@@ -84,6 +84,15 @@ main {
   margin: 0 auto;
 }
 
+/* ---------- באנר עמוד הבית ---------- */
+.home-banner {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1672 / 941;
+  object-fit: cover;
+  box-shadow: var(--shadow-sm);
+}
+
 .page-lead {
   color: var(--muted-on-bg);
   font-size: 14.5px;
