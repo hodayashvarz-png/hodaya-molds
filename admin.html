@@ -17,6 +17,7 @@
   <div class="tabs">
     <button class="tab-btn active" data-tab="mold">תבנית חדשה</button>
     <button class="tab-btn" data-tab="catimg">תמונת קטגוריה</button>
+    <button class="tab-btn" data-tab="homeimg">כרטיסיות הבית</button>
     <button class="tab-btn" data-tab="gallery">תמונת השראה</button>
     <button class="tab-btn" data-tab="connect">חיבור לגיטהאב</button>
   </div>
@@ -93,6 +94,36 @@
     </div>
     <button class="btn" id="save-catimg-btn">שמרו תמונה</button>
     <div id="catimg-save-msg" style="margin-top:14px;"></div>
+  </div>
+
+  <!-- טאב: כרטיסיות עמוד הבית -->
+  <div class="tab-panel" id="panel-homeimg">
+    <p class="page-lead">
+      מעלים תמונה לאחת משלוש הכרטיסיות בעמוד הבית (התבניות שלי / לוחות
+      השראה / מחשבון). השמירה נכתבת ישירות לאתר החי, אותו דבר כמו
+      בטאבים האחרים.
+    </p>
+    <p class="hint" id="homeimg-token-warning" style="display:none; color:#ff6b6b; margin-bottom:14px;">
+      עדיין לא חיברת טוקן גיטהאב — עברי לטאב "חיבור לגיטהאב" והגדירי אותו לפני השמירה.
+    </p>
+    <div class="field">
+      <label for="h-card">כרטיסייה</label>
+      <select id="h-card">
+        <option value="molds">התבניות שלי</option>
+        <option value="inspiration">לוחות השראה</option>
+        <option value="calculator">מחשבון</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="h-image">תמונה</label>
+      <input type="file" id="h-image" accept="image/*" />
+      <p class="hint">
+        עדיף תמונה ביחס רוחב-גובה של 4:3 (או 21:9 לכרטיסיית "מחשבון"
+        הרחבה) — כדי שכל התמונה תיראה בכרטיסייה ולא תיחתך.
+      </p>
+    </div>
+    <button class="btn" id="save-homeimg-btn">שמרו תמונה</button>
+    <div id="homeimg-save-msg" style="margin-top:14px;"></div>
   </div>
 
   <!-- טאב 2: תמונות השראה (גלריה) — קטע קוד להעתקה -->
@@ -181,6 +212,7 @@
       : "לא מחובר — עדיין אין טוקן שמור.";
     document.getElementById("mold-token-warning").style.display = has ? "none" : "block";
     document.getElementById("catimg-token-warning").style.display = has ? "none" : "block";
+    document.getElementById("homeimg-token-warning").style.display = has ? "none" : "block";
   }
   refreshTokenStatus();
 
@@ -442,6 +474,52 @@
         תוך כ-30–60 שניות היא תופיע בכרטיסייה ב"התבניות שלי" אצל כולם (כולל אצלך, אחרי רענון).
       </div>`;
       document.getElementById("c-image").value = "";
+    } catch (err) {
+      msg.innerHTML = `<p class="empty-note" style="color:#ff6b6b;">שגיאה: ${err.message || err}</p>`;
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "שמרו תמונה";
+    }
+  });
+
+  // ---------- טאב: כרטיסיות עמוד הבית ----------
+  document.getElementById("save-homeimg-btn").addEventListener("click", async () => {
+    const token = getGhToken();
+    if (!token) {
+      alert('צריך קודם לחבר טוקן גיטהאב בטאב "חיבור לגיטהאב".');
+      return;
+    }
+
+    const card = document.getElementById("h-card").value;
+    const imageFile = document.getElementById("h-image").files[0];
+    const msg = document.getElementById("homeimg-save-msg");
+
+    if (!imageFile) {
+      alert("יש לבחור תמונה.");
+      return;
+    }
+
+    const btn = document.getElementById("save-homeimg-btn");
+    btn.disabled = true;
+    btn.textContent = "שומר...";
+    msg.innerHTML = "";
+
+    try {
+      const imagePath = `images/categories/${card}.jpg`;
+      const base64 = await readFileAsBase64(imageFile);
+      const existingImg = await ghGetFile(imagePath);
+      await ghPutBinaryFile(
+        imagePath,
+        base64,
+        `admin: תמונת כרטיסיית בית ${card}`,
+        existingImg ? existingImg.sha : undefined
+      );
+
+      msg.innerHTML = `<div class="result-card">
+        <strong>נשמר</strong> התמונה נכתבה ישירות לאתר.
+        תוך כ-30–60 שניות היא תופיע בעמוד הבית אצל כולם (כולל אצלך, אחרי רענון).
+      </div>`;
+      document.getElementById("h-image").value = "";
     } catch (err) {
       msg.innerHTML = `<p class="empty-note" style="color:#ff6b6b;">שגיאה: ${err.message || err}</p>`;
     } finally {
