@@ -7,20 +7,6 @@
     "volumeMl": 125
   },
   {
-    "id": "15",
-    "category": "ואזות חלולות למבחנות",
-    "description": "אגרטל א",
-    "image": "images/molds/15.jpg",
-    "volumeMl": 120
-  },
-  {
-    "id": "16",
-    "category": "ואזות חלולות למבחנות",
-    "description": "אגרטל ב",
-    "image": "images/molds/16.jpg",
-    "volumeMl": 125
-  },
-  {
     "id": "101",
     "category": "ואזות אחרות",
     "description": "קטנה קלאסית",
@@ -200,13 +186,6 @@
     "category": "מגשים שטוחים ללא דפנות",
     "description": "דג פסים לאורך",
     "image": "images/molds/206.jpg",
-    "volumeMl": null
-  },
-  {
-    "id": "207",
-    "category": "מגשים שטוחים ללא דפנות",
-    "description": "דג פסים לרוחב",
-    "image": "images/molds/207.jpg",
     "volumeMl": null
   },
   {
@@ -544,5 +523,26 @@
     "description": "אליפסה גדולה",
     "image": "images/molds/17.png",
     "volumeMl": 150
+  },
+  {
+    "id": "207",
+    "category": "מגשים שטוחים ללא דפנות",
+    "description": "דג פסים לרוחב",
+    "image": "images/molds/207.png",
+    "volumeMl": null
+  },
+  {
+    "id": "15",
+    "category": "ואזות חלולות למבחנות",
+    "description": "אגרטל א",
+    "image": "images/molds/15.png",
+    "volumeMl": 120
+  },
+  {
+    "id": "16",
+    "category": "ואזות חלולות למבחנות",
+    "description": "אגרטל ב",
+    "image": "images/molds/16.png",
+    "volumeMl": 125
   }
 ]
