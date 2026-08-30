@@ -329,13 +329,6 @@
     "volumeMl": 60
   },
   {
-    "id": "51",
-    "category": "לשתילים קטנים",
-    "description": "טראמפ",
-    "image": "images/molds/51.jpg",
-    "volumeMl": 300
-  },
-  {
     "id": "52",
     "category": "לשתילים קטנים",
     "description": "ינשוף",
@@ -544,5 +537,12 @@
     "description": "לב",
     "image": "images/molds/12.png",
     "volumeMl": 150
+  },
+  {
+    "id": "51",
+    "category": "לשתילים קטנים",
+    "description": "טראמפ",
+    "image": "images/molds/51.png",
+    "volumeMl": 300
   }
 ]
