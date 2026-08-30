@@ -189,13 +189,6 @@
     "volumeMl": 90
   },
   {
-    "id": "32",
-    "category": "קערות קטנות ומגשים עם עומק",
-    "description": "עיגול עם פסים",
-    "image": "images/molds/32.jpg",
-    "volumeMl": 75
-  },
-  {
     "id": "33",
     "category": "קערות קטנות ומגשים עם עומק",
     "description": "עיגול עם פסים",
@@ -544,5 +537,12 @@
     "description": "מלבן קטן",
     "image": "images/molds/13.png",
     "volumeMl": 125
+  },
+  {
+    "id": "32",
+    "category": "קערות קטנות ומגשים עם עומק",
+    "description": "עיגול עם פסים",
+    "image": "images/molds/32.png",
+    "volumeMl": 75
   }
 ]
