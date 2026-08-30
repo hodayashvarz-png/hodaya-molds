@@ -427,13 +427,6 @@
     "volumeMl": null
   },
   {
-    "id": "77",
-    "category": "שונות",
-    "description": "מעמד לטבעות קטן",
-    "image": "images/molds/77.jpg",
-    "volumeMl": 40
-  },
-  {
     "id": "78",
     "category": "שונות",
     "description": "מעמד לטבעות בינוני",
@@ -544,5 +537,12 @@
     "description": "עיגול עם פסים",
     "image": "images/molds/32.png",
     "volumeMl": 75
+  },
+  {
+    "id": "77",
+    "category": "שונות",
+    "description": "מעמד לטבעות קטן",
+    "image": "images/molds/77.png",
+    "volumeMl": 40
   }
 ]
