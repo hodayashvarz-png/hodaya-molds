@@ -49,7 +49,9 @@
     const cat = allCategories.find((c) => c.id === catId);
     document.getElementById("page-title").textContent = cat ? cat.name : "תבניות";
 
-    const molds = allMolds.filter((m) => m.category === catId);
+    const molds = allMolds
+      .filter((m) => m.category === catId)
+      .sort((a, b) => Number(a.id) - Number(b.id) || a.id.localeCompare(b.id));
     const grid = document.getElementById("mold-grid");
 
     if (molds.length === 0) {
