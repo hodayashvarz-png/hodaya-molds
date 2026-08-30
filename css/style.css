@@ -123,7 +123,7 @@ main {
 /* ---------- כרטיסי קטגוריה (עם תמונה) ---------- */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 14px;
 }
 
@@ -134,10 +134,6 @@ main {
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-sm);
-}
-
-.cat-card[style*="grid-column"] {
-  aspect-ratio: 21 / 9;
 }
 
 .cat-card .cat-card-img {
@@ -172,6 +168,18 @@ main {
 .cat-card .cat-sub {
   font-size: 12px;
   color: rgba(255, 255, 255, 0.82);
+}
+
+.card-grid .cat-card-text {
+  padding: 10px 10px 9px;
+}
+
+.card-grid .cat-name {
+  font-size: 13.5px;
+}
+
+.card-grid .cat-sub {
+  font-size: 10.5px;
 }
 
 /* ---------- גריד תבניות / גלריה ---------- */
