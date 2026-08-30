@@ -21,13 +21,6 @@
     "volumeMl": null
   },
   {
-    "id": "107",
-    "category": "ואזות אחרות",
-    "description": "עגולה ארוכה",
-    "image": "images/molds/107.jpg",
-    "volumeMl": null
-  },
-  {
     "id": "109",
     "category": "ואזות אחרות",
     "description": "בינוני- קטן בצורת שק",
@@ -543,6 +536,13 @@
     "category": "ואזות אחרות",
     "description": "רחבה קצרה מרובעת",
     "image": "images/molds/105.png",
+    "volumeMl": null
+  },
+  {
+    "id": "107",
+    "category": "ואזות אחרות",
+    "description": "עגולה ארוכה",
+    "image": "images/molds/107.png",
     "volumeMl": null
   }
 ]
