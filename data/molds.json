@@ -14,13 +14,6 @@
     "volumeMl": null
   },
   {
-    "id": "103",
-    "category": "ואזות אחרות",
-    "description": "8 דפנות בינונית",
-    "image": "images/molds/103.jpg",
-    "volumeMl": null
-  },
-  {
     "id": "104",
     "category": "ואזות אחרות",
     "description": "הרבה דפנות, רחבה קצרה",
@@ -544,5 +537,12 @@
     "description": "קערה עגולה קטנה יחסית שטוחה",
     "image": "images/molds/35.png",
     "volumeMl": 50
+  },
+  {
+    "id": "103",
+    "category": "ואזות אחרות",
+    "description": "8 דפנות בינונית",
+    "image": "images/molds/103.png",
+    "volumeMl": null
   }
 ]
