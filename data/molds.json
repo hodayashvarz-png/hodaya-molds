@@ -21,13 +21,6 @@
     "volumeMl": 125
   },
   {
-    "id": "17",
-    "category": "ואזות חלולות למבחנות",
-    "description": "אליפסה גדולה",
-    "image": "images/molds/17.jpg",
-    "volumeMl": 150
-  },
-  {
     "id": "101",
     "category": "ואזות אחרות",
     "description": "קטנה קלאסית",
@@ -544,5 +537,12 @@
     "description": "אליפסה קטנה",
     "image": "images/molds/14.png",
     "volumeMl": 125
+  },
+  {
+    "id": "17",
+    "category": "ואזות חלולות למבחנות",
+    "description": "אליפסה גדולה",
+    "image": "images/molds/17.png",
+    "volumeMl": 150
   }
 ]
