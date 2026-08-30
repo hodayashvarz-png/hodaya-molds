@@ -532,17 +532,17 @@
     "volumeMl": null
   },
   {
-    "id": "101",
-    "category": "ואזות אחרות",
-    "description": "קטנה קלאסית",
-    "image": "images/molds/101.png",
-    "volumeMl": null
-  },
-  {
     "id": "102",
     "category": "ואזות אחרות",
     "description": "קטנה ארוכה צרה עם פסים",
     "image": "images/molds/102.png",
+    "volumeMl": null
+  },
+  {
+    "id": "101",
+    "category": "ואזות אחרות",
+    "description": "קטנה קלאסית",
+    "image": "images/molds/101.png",
     "volumeMl": null
   }
 ]
