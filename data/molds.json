@@ -224,13 +224,6 @@
     "volumeMl": 100
   },
   {
-    "id": "39",
-    "category": "קערות קטנות ומגשים עם עומק",
-    "description": "חמסה קטנה",
-    "image": "images/molds/39.jpg",
-    "volumeMl": 25
-  },
-  {
     "id": "310",
     "category": "קערות קטנות ומגשים עם עומק",
     "description": "קערה עגולה גדולה",
@@ -544,5 +537,12 @@
     "description": "קערה עגולה קטנה יחסית שטוחה",
     "image": "images/molds/34.png",
     "volumeMl": 50
+  },
+  {
+    "id": "39",
+    "category": "קערות קטנות ומגשים עם עומק",
+    "description": "חמסה קטנה",
+    "image": "images/molds/39.png",
+    "volumeMl": 25
   }
 ]
