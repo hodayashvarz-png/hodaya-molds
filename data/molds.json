@@ -35,13 +35,6 @@
     "volumeMl": 150
   },
   {
-    "id": "18",
-    "category": "ואזות חלולות למבחנות",
-    "description": "עיגול שמן",
-    "image": "images/molds/18.jpg",
-    "volumeMl": 250
-  },
-  {
     "id": "101",
     "category": "ואזות אחרות",
     "description": "קטנה קלאסית",
@@ -544,5 +537,12 @@
     "description": "טראמפ",
     "image": "images/molds/51.png",
     "volumeMl": 300
+  },
+  {
+    "id": "18",
+    "category": "ואזות חלולות למבחנות",
+    "description": "עיגול שמן",
+    "image": "images/molds/18.png",
+    "volumeMl": 250
   }
 ]
