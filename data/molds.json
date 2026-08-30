@@ -182,13 +182,6 @@
     "volumeMl": 90
   },
   {
-    "id": "35",
-    "category": "קערות קטנות ומגשים עם עומק",
-    "description": "קערה עגולה קטנה יחסית שטוחה",
-    "image": "images/molds/35.jpg",
-    "volumeMl": 50
-  },
-  {
     "id": "36",
     "category": "קערות קטנות ומגשים עם עומק",
     "description": "כנף מלאך ימין",
@@ -544,5 +537,12 @@
     "description": "עיגול עם פסים",
     "image": "images/molds/33.png",
     "volumeMl": 75
+  },
+  {
+    "id": "35",
+    "category": "קערות קטנות ומגשים עם עומק",
+    "description": "קערה עגולה קטנה יחסית שטוחה",
+    "image": "images/molds/35.png",
+    "volumeMl": 50
   }
 ]
