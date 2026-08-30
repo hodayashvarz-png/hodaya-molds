@@ -7,13 +7,6 @@
     "volumeMl": 125
   },
   {
-    "id": "16",
-    "category": "ואזות חלולות למבחנות",
-    "description": "אגרטל ב",
-    "image": "images/molds/16.jpg",
-    "volumeMl": 125
-  },
-  {
     "id": "101",
     "category": "ואזות אחרות",
     "description": "קטנה קלאסית",
@@ -544,5 +537,12 @@
     "description": "אגרטל א",
     "image": "images/molds/15.png",
     "volumeMl": 120
+  },
+  {
+    "id": "16",
+    "category": "ואזות חלולות למבחנות",
+    "description": "אגרטל ב",
+    "image": "images/molds/16.png",
+    "volumeMl": 125
   }
 ]
