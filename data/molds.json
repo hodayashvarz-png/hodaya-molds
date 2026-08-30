@@ -1,12 +1,5 @@
 [
   {
-    "id": "12",
-    "category": "ואזות חלולות למבחנות",
-    "description": "לב",
-    "image": "images/molds/12.jpg",
-    "volumeMl": 150
-  },
-  {
     "id": "13",
     "category": "ואזות חלולות למבחנות",
     "description": "מלבן קטן",
@@ -543,6 +536,13 @@
     "category": "ואזות חלולות למבחנות",
     "description": "עיגול",
     "image": "images/molds/11.png",
+    "volumeMl": 150
+  },
+  {
+    "id": "12",
+    "category": "ואזות חלולות למבחנות",
+    "description": "לב",
+    "image": "images/molds/12.png",
     "volumeMl": 150
   }
 ]
