@@ -16,6 +16,7 @@
 <main>
   <div class="tabs">
     <button class="tab-btn active" data-tab="mold">תבנית חדשה</button>
+    <button class="tab-btn" data-tab="catimg">תמונת קטגוריה</button>
     <button class="tab-btn" data-tab="gallery">תמונת השראה</button>
     <button class="tab-btn" data-tab="connect">חיבור לגיטהאב</button>
   </div>
@@ -67,6 +68,31 @@
 
     <button class="btn" id="save-mold-btn">שמרו תבנית</button>
     <div id="mold-save-msg" style="margin-top:14px;"></div>
+  </div>
+
+  <!-- טאב: תמונת כרטיסיית קטגוריה -->
+  <div class="tab-panel" id="panel-catimg">
+    <p class="page-lead">
+      מעלים תמונה שתופיע כרקע לכרטיסייה של סיווג ב"התבניות שלי". השמירה
+      נכתבת ישירות לאתר החי, אותו דבר כמו בטאב "תבנית חדשה".
+    </p>
+    <p class="hint" id="catimg-token-warning" style="display:none; color:#ff6b6b; margin-bottom:14px;">
+      עדיין לא חיברת טוקן גיטהאב — עברי לטאב "חיבור לגיטהאב" והגדירי אותו לפני השמירה.
+    </p>
+    <div class="field">
+      <label for="c-cat">סיווג</label>
+      <select id="c-cat"></select>
+    </div>
+    <div class="field">
+      <label for="c-image">תמונה</label>
+      <input type="file" id="c-image" accept="image/*" />
+      <p class="hint">
+        עדיף תמונה ביחס רוחב-גובה של 4:3 (כמו הכרטיסייה עצמה) — כדי שכל
+        התמונה תיראה בכרטיסייה ולא תיחתך.
+      </p>
+    </div>
+    <button class="btn" id="save-catimg-btn">שמרו תמונה</button>
+    <div id="catimg-save-msg" style="margin-top:14px;"></div>
   </div>
 
   <!-- טאב 2: תמונות השראה (גלריה) — קטע קוד להעתקה -->
@@ -154,6 +180,7 @@
       ? "מחובר — יש טוקן שמור בדפדפן הזה."
       : "לא מחובר — עדיין אין טוקן שמור.";
     document.getElementById("mold-token-warning").style.display = has ? "none" : "block";
+    document.getElementById("catimg-token-warning").style.display = has ? "none" : "block";
   }
   refreshTokenStatus();
 
@@ -245,12 +272,26 @@
     saveBtn.textContent = "עדכנו תבנית";
   });
 
+  const catImgSelect = document.getElementById("c-cat");
+  function renderCatImgOptions() {
+    const previousValue = catImgSelect.value;
+    catImgSelect.innerHTML = "";
+    liveCategories.forEach((c) => {
+      const opt = document.createElement("option");
+      opt.value = c.id;
+      opt.textContent = c.name;
+      catImgSelect.appendChild(opt);
+    });
+    catImgSelect.value = liveCategories.some((c) => c.id === previousValue) ? previousValue : catImgSelect.value;
+  }
+
   (async () => {
     const data = await loadMoldData();
     liveCategories = data.categories;
     liveMolds = data.molds;
     renderCatOptions();
     renderEditOptions();
+    renderCatImgOptions();
   })();
 
   const newCatField = document.getElementById("m-new-cat-field");
@@ -352,6 +393,60 @@
     } finally {
       btn.disabled = false;
       btn.textContent = "שמרו תבנית";
+    }
+  });
+
+  // ---------- טאב: תמונת כרטיסיית קטגוריה ----------
+  document.getElementById("save-catimg-btn").addEventListener("click", async () => {
+    const token = getGhToken();
+    if (!token) {
+      alert('צריך קודם לחבר טוקן גיטהאב בטאב "חיבור לגיטהאב".');
+      return;
+    }
+
+    const categoryId = catImgSelect.value;
+    const imageFile = document.getElementById("c-image").files[0];
+    const msg = document.getElementById("catimg-save-msg");
+
+    if (!categoryId || !imageFile) {
+      alert("יש לבחור סיווג ותמונה.");
+      return;
+    }
+
+    const btn = document.getElementById("save-catimg-btn");
+    btn.disabled = true;
+    btn.textContent = "שומר...";
+    msg.innerHTML = "";
+
+    try {
+      const ext = (imageFile.name.split(".").pop() || "jpg").toLowerCase();
+      const imagePath = `images/categories/${categoryId}.${ext}`;
+      const base64 = await readFileAsBase64(imageFile);
+      const existingImg = await ghGetFile(imagePath);
+      await ghPutBinaryFile(
+        imagePath,
+        base64,
+        `admin: תמונת כרטיסייה לסיווג ${categoryId}`,
+        existingImg ? existingImg.sha : undefined
+      );
+
+      const { data: cats, sha: catsSha } = await ghGetJSON("data/categories.json");
+      const currentCats = (cats || []).map((c) => (c.id === categoryId ? { ...c, image: imagePath } : c));
+      await ghPutJSON("data/categories.json", currentCats, `admin: עדכון תמונת כרטיסייה ${categoryId}`, catsSha);
+      liveCategories = currentCats;
+      renderCatOptions();
+      renderCatImgOptions();
+
+      msg.innerHTML = `<div class="result-card">
+        <strong>נשמר</strong> התמונה נכתבה ישירות לאתר.
+        תוך כ-30–60 שניות היא תופיע בכרטיסייה ב"התבניות שלי" אצל כולם (כולל אצלך, אחרי רענון).
+      </div>`;
+      document.getElementById("c-image").value = "";
+    } catch (err) {
+      msg.innerHTML = `<p class="empty-note" style="color:#ff6b6b;">שגיאה: ${err.message || err}</p>`;
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "שמרו תמונה";
     }
   });
 
