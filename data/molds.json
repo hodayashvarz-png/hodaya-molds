@@ -1,12 +1,5 @@
 [
   {
-    "id": "13",
-    "category": "ואזות חלולות למבחנות",
-    "description": "מלבן קטן",
-    "image": "images/molds/13.jpg",
-    "volumeMl": 125
-  },
-  {
     "id": "101",
     "category": "ואזות אחרות",
     "description": "קטנה קלאסית",
@@ -543,6 +536,13 @@
     "category": "ואזות חלולות למבחנות",
     "description": "אגרטל ב",
     "image": "images/molds/16.png",
+    "volumeMl": 125
+  },
+  {
+    "id": "13",
+    "category": "ואזות חלולות למבחנות",
+    "description": "מלבן קטן",
+    "image": "images/molds/13.png",
     "volumeMl": 125
   }
 ]
