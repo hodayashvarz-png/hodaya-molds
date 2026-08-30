@@ -7,13 +7,6 @@
     "volumeMl": 125
   },
   {
-    "id": "14",
-    "category": "ואזות חלולות למבחנות",
-    "description": "אליפסה קטנה",
-    "image": "images/molds/14.jpg",
-    "volumeMl": 125
-  },
-  {
     "id": "15",
     "category": "ואזות חלולות למבחנות",
     "description": "אגרטל א",
@@ -544,5 +537,12 @@
     "description": "עיגול שמן",
     "image": "images/molds/18.png",
     "volumeMl": 250
+  },
+  {
+    "id": "14",
+    "category": "ואזות חלולות למבחנות",
+    "description": "אליפסה קטנה",
+    "image": "images/molds/14.png",
+    "volumeMl": 125
   }
 ]
