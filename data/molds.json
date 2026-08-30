@@ -224,13 +224,6 @@
     "volumeMl": 150
   },
   {
-    "id": "41",
-    "category": "לנרות קטנים",
-    "description": "לב",
-    "image": "images/molds/41.jpg",
-    "volumeMl": null
-  },
-  {
     "id": "42",
     "category": "לנרות קטנים",
     "description": "לב",
@@ -543,6 +536,13 @@
     "category": "מגשים שטוחים עם דפנות",
     "description": "אסימטרי בינוני",
     "image": "images/molds/27.png",
+    "volumeMl": null
+  },
+  {
+    "id": "41",
+    "category": "לנרות קטנים",
+    "description": "לב",
+    "image": "images/molds/41.png",
     "volumeMl": null
   }
 ]
