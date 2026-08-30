@@ -1,12 +1,5 @@
 [
   {
-    "id": "11",
-    "category": "ואזות חלולות למבחנות",
-    "description": "עיגול",
-    "image": "images/molds/11.jpg",
-    "volumeMl": 150
-  },
-  {
     "id": "12",
     "category": "ואזות חלולות למבחנות",
     "description": "לב",
@@ -544,5 +537,12 @@
     "description": "מיני כוס משושה",
     "image": "images/molds/712.jpg",
     "volumeMl": null
+  },
+  {
+    "id": "11",
+    "category": "ואזות חלולות למבחנות",
+    "description": "עיגול",
+    "image": "images/molds/11.png",
+    "volumeMl": 150
   }
 ]
