@@ -1,30 +1,9 @@
 [
   {
-    "id": "11",
-    "category": "ואזות חלולות למבחנות",
-    "description": "עיגול",
-    "image": "images/molds/11.jpg",
-    "volumeMl": 150
-  },
-  {
-    "id": "12",
-    "category": "ואזות חלולות למבחנות",
-    "description": "לב",
-    "image": "images/molds/12.jpg",
-    "volumeMl": 150
-  },
-  {
     "id": "13",
     "category": "ואזות חלולות למבחנות",
     "description": "מלבן קטן",
     "image": "images/molds/13.jpg",
-    "volumeMl": 125
-  },
-  {
-    "id": "14",
-    "category": "ואזות חלולות למבחנות",
-    "description": "אליפסה קטנה",
-    "image": "images/molds/14.jpg",
     "volumeMl": 125
   },
   {
@@ -40,20 +19,6 @@
     "description": "אגרטל ב",
     "image": "images/molds/16.jpg",
     "volumeMl": 125
-  },
-  {
-    "id": "17",
-    "category": "ואזות חלולות למבחנות",
-    "description": "אליפסה גדולה",
-    "image": "images/molds/17.jpg",
-    "volumeMl": 150
-  },
-  {
-    "id": "18",
-    "category": "ואזות חלולות למבחנות",
-    "description": "עיגול שמן",
-    "image": "images/molds/18.jpg",
-    "volumeMl": 250
   },
   {
     "id": "101",
@@ -343,13 +308,6 @@
     "volumeMl": 60
   },
   {
-    "id": "51",
-    "category": "לשתילים קטנים",
-    "description": "טראמפ",
-    "image": "images/molds/51.jpg",
-    "volumeMl": 300
-  },
-  {
     "id": "52",
     "category": "לשתילים קטנים",
     "description": "ינשוף",
@@ -544,5 +502,47 @@
     "description": "מיני כוס משושה",
     "image": "images/molds/712.jpg",
     "volumeMl": null
+  },
+  {
+    "id": "11",
+    "category": "ואזות חלולות למבחנות",
+    "description": "עיגול",
+    "image": "images/molds/11.png",
+    "volumeMl": 150
+  },
+  {
+    "id": "12",
+    "category": "ואזות חלולות למבחנות",
+    "description": "לב",
+    "image": "images/molds/12.png",
+    "volumeMl": 150
+  },
+  {
+    "id": "51",
+    "category": "לשתילים קטנים",
+    "description": "טראמפ",
+    "image": "images/molds/51.png",
+    "volumeMl": 300
+  },
+  {
+    "id": "18",
+    "category": "ואזות חלולות למבחנות",
+    "description": "עיגול שמן",
+    "image": "images/molds/18.png",
+    "volumeMl": 250
+  },
+  {
+    "id": "14",
+    "category": "ואזות חלולות למבחנות",
+    "description": "אליפסה קטנה",
+    "image": "images/molds/14.png",
+    "volumeMl": 125
+  },
+  {
+    "id": "17",
+    "category": "ואזות חלולות למבחנות",
+    "description": "אליפסה גדולה",
+    "image": "images/molds/17.png",
+    "volumeMl": 150
   }
 ]
