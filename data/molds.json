@@ -196,13 +196,6 @@
     "volumeMl": 75
   },
   {
-    "id": "34",
-    "category": "קערות קטנות ומגשים עם עומק",
-    "description": "קערה עגולה קטנה יחסית שטוחה",
-    "image": "images/molds/34.jpg",
-    "volumeMl": 50
-  },
-  {
     "id": "35",
     "category": "קערות קטנות ומגשים עם עומק",
     "description": "קערה עגולה קטנה יחסית שטוחה",
@@ -544,5 +537,12 @@
     "description": "מעמד לטבעות קטן",
     "image": "images/molds/77.png",
     "volumeMl": 40
+  },
+  {
+    "id": "34",
+    "category": "קערות קטנות ומגשים עם עומק",
+    "description": "קערה עגולה קטנה יחסית שטוחה",
+    "image": "images/molds/34.png",
+    "volumeMl": 50
   }
 ]
