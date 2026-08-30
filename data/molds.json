@@ -203,13 +203,6 @@
     "volumeMl": null
   },
   {
-    "id": "207",
-    "category": "מגשים שטוחים ללא דפנות",
-    "description": "דג פסים לרוחב",
-    "image": "images/molds/207.jpg",
-    "volumeMl": null
-  },
-  {
     "id": "31",
     "category": "קערות קטנות ומגשים עם עומק",
     "description": "אליפסה קטנה",
@@ -544,5 +537,12 @@
     "description": "אליפסה גדולה",
     "image": "images/molds/17.png",
     "volumeMl": 150
+  },
+  {
+    "id": "207",
+    "category": "מגשים שטוחים ללא דפנות",
+    "description": "דג פסים לרוחב",
+    "image": "images/molds/207.png",
+    "volumeMl": null
   }
 ]
