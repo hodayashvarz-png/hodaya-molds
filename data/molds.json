@@ -119,13 +119,6 @@
     "volumeMl": 100
   },
   {
-    "id": "27",
-    "category": "מגשים שטוחים עם דפנות",
-    "description": "אסימטרי בינוני",
-    "image": "images/molds/27.jpg",
-    "volumeMl": null
-  },
-  {
     "id": "28",
     "category": "מגשים שטוחים עם דפנות",
     "description": "אסימטרי גדול",
@@ -544,5 +537,12 @@
     "description": "חמסה קטנה",
     "image": "images/molds/39.png",
     "volumeMl": 25
+  },
+  {
+    "id": "27",
+    "category": "מגשים שטוחים עם דפנות",
+    "description": "אסימטרי בינוני",
+    "image": "images/molds/27.png",
+    "volumeMl": null
   }
 ]
