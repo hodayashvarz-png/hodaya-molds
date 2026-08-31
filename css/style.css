@@ -104,6 +104,24 @@ main {
   margin: 0 auto;
 }
 
+@media (min-width: 900px) {
+  main {
+    max-width: 1100px;
+  }
+  .card-grid {
+    gap: 20px;
+  }
+  .card-grid .cat-card-text {
+    padding: 16px 16px 14px;
+  }
+  .card-grid .cat-name {
+    font-size: 17px;
+  }
+  .card-grid .cat-sub {
+    font-size: 12px;
+  }
+}
+
 /* ---------- באנר עמוד הבית ---------- */
 .home-banner {
   display: block;
