@@ -1,65 +1,9 @@
 [
   {
-    "id": "13",
-    "category": "ואזות חלולות למבחנות",
-    "description": "מלבן קטן",
-    "image": "images/molds/13.jpg",
-    "volumeMl": 125
-  },
-  {
-    "id": "101",
-    "category": "ואזות אחרות",
-    "description": "קטנה קלאסית",
-    "image": "images/molds/101.jpg",
-    "volumeMl": null
-  },
-  {
-    "id": "102",
-    "category": "ואזות אחרות",
-    "description": "קטנה ארוכה צרה עם פסים",
-    "image": "images/molds/102.jpg",
-    "volumeMl": null
-  },
-  {
-    "id": "103",
-    "category": "ואזות אחרות",
-    "description": "8 דפנות בינונית",
-    "image": "images/molds/103.jpg",
-    "volumeMl": null
-  },
-  {
-    "id": "104",
-    "category": "ואזות אחרות",
-    "description": "הרבה דפנות, רחבה קצרה",
-    "image": "images/molds/104.jpg",
-    "volumeMl": null
-  },
-  {
-    "id": "105",
-    "category": "ואזות אחרות",
-    "description": "רחבה קצרה מרובעת",
-    "image": "images/molds/105.jpg",
-    "volumeMl": null
-  },
-  {
     "id": "106",
     "category": "ואזות אחרות",
     "description": "הרבה דפנות, רחבה קצרה",
     "image": "images/molds/106.jpg",
-    "volumeMl": null
-  },
-  {
-    "id": "107",
-    "category": "ואזות אחרות",
-    "description": "עגולה ארוכה",
-    "image": "images/molds/107.jpg",
-    "volumeMl": null
-  },
-  {
-    "id": "108",
-    "category": "ואזות אחרות",
-    "description": "עגולה קצרה",
-    "image": "images/molds/108.jpg",
     "volumeMl": null
   },
   {
@@ -126,13 +70,6 @@
     "volumeMl": 100
   },
   {
-    "id": "27",
-    "category": "מגשים שטוחים עם דפנות",
-    "description": "אסימטרי בינוני",
-    "image": "images/molds/27.jpg",
-    "volumeMl": null
-  },
-  {
     "id": "28",
     "category": "מגשים שטוחים עם דפנות",
     "description": "אסימטרי גדול",
@@ -196,34 +133,6 @@
     "volumeMl": 90
   },
   {
-    "id": "32",
-    "category": "קערות קטנות ומגשים עם עומק",
-    "description": "עיגול עם פסים",
-    "image": "images/molds/32.jpg",
-    "volumeMl": 75
-  },
-  {
-    "id": "33",
-    "category": "קערות קטנות ומגשים עם עומק",
-    "description": "עיגול עם פסים",
-    "image": "images/molds/33.jpg",
-    "volumeMl": 75
-  },
-  {
-    "id": "34",
-    "category": "קערות קטנות ומגשים עם עומק",
-    "description": "קערה עגולה קטנה יחסית שטוחה",
-    "image": "images/molds/34.jpg",
-    "volumeMl": 50
-  },
-  {
-    "id": "35",
-    "category": "קערות קטנות ומגשים עם עומק",
-    "description": "קערה עגולה קטנה יחסית שטוחה",
-    "image": "images/molds/35.jpg",
-    "volumeMl": 50
-  },
-  {
     "id": "36",
     "category": "קערות קטנות ומגשים עם עומק",
     "description": "כנף מלאך ימין",
@@ -245,25 +154,11 @@
     "volumeMl": 100
   },
   {
-    "id": "39",
-    "category": "קערות קטנות ומגשים עם עומק",
-    "description": "חמסה קטנה",
-    "image": "images/molds/39.jpg",
-    "volumeMl": 25
-  },
-  {
     "id": "310",
     "category": "קערות קטנות ומגשים עם עומק",
     "description": "קערה עגולה גדולה",
     "image": "images/molds/310.jpg",
     "volumeMl": 150
-  },
-  {
-    "id": "41",
-    "category": "לנרות קטנים",
-    "description": "לב",
-    "image": "images/molds/41.jpg",
-    "volumeMl": null
   },
   {
     "id": "42",
@@ -441,13 +336,6 @@
     "volumeMl": null
   },
   {
-    "id": "77",
-    "category": "שונות",
-    "description": "מעמד לטבעות קטן",
-    "image": "images/molds/77.jpg",
-    "volumeMl": 40
-  },
-  {
     "id": "78",
     "category": "שונות",
     "description": "מעמד לטבעות בינוני",
@@ -544,5 +432,117 @@
     "description": "אגרטל ב",
     "image": "images/molds/16.png",
     "volumeMl": 125
+  },
+  {
+    "id": "13",
+    "category": "ואזות חלולות למבחנות",
+    "description": "מלבן קטן",
+    "image": "images/molds/13.png",
+    "volumeMl": 125
+  },
+  {
+    "id": "32",
+    "category": "קערות קטנות ומגשים עם עומק",
+    "description": "עיגול עם פסים",
+    "image": "images/molds/32.png",
+    "volumeMl": 75
+  },
+  {
+    "id": "77",
+    "category": "שונות",
+    "description": "מעמד לטבעות קטן",
+    "image": "images/molds/77.png",
+    "volumeMl": 40
+  },
+  {
+    "id": "34",
+    "category": "קערות קטנות ומגשים עם עומק",
+    "description": "קערה עגולה קטנה יחסית שטוחה",
+    "image": "images/molds/34.png",
+    "volumeMl": 50
+  },
+  {
+    "id": "39",
+    "category": "קערות קטנות ומגשים עם עומק",
+    "description": "חמסה קטנה",
+    "image": "images/molds/39.png",
+    "volumeMl": 25
+  },
+  {
+    "id": "27",
+    "category": "מגשים שטוחים עם דפנות",
+    "description": "אסימטרי בינוני",
+    "image": "images/molds/27.png",
+    "volumeMl": null
+  },
+  {
+    "id": "41",
+    "category": "לנרות קטנים",
+    "description": "לב",
+    "image": "images/molds/41.png",
+    "volumeMl": null
+  },
+  {
+    "id": "33",
+    "category": "קערות קטנות ומגשים עם עומק",
+    "description": "עיגול עם פסים",
+    "image": "images/molds/33.png",
+    "volumeMl": 75
+  },
+  {
+    "id": "35",
+    "category": "קערות קטנות ומגשים עם עומק",
+    "description": "קערה עגולה קטנה יחסית שטוחה",
+    "image": "images/molds/35.png",
+    "volumeMl": 50
+  },
+  {
+    "id": "103",
+    "category": "ואזות אחרות",
+    "description": "8 דפנות בינונית",
+    "image": "images/molds/103.png",
+    "volumeMl": null
+  },
+  {
+    "id": "108",
+    "category": "ואזות אחרות",
+    "description": "עגולה קצרה",
+    "image": "images/molds/108.png",
+    "volumeMl": null
+  },
+  {
+    "id": "104",
+    "category": "ואזות אחרות",
+    "description": "הרבה דפנות, רחבה קצרה",
+    "image": "images/molds/104.png",
+    "volumeMl": null
+  },
+  {
+    "id": "105",
+    "category": "ואזות אחרות",
+    "description": "רחבה קצרה מרובעת",
+    "image": "images/molds/105.png",
+    "volumeMl": null
+  },
+  {
+    "id": "107",
+    "category": "ואזות אחרות",
+    "description": "עגולה ארוכה",
+    "image": "images/molds/107.png",
+    "volumeMl": null
+  },
+  {
+    "id": "102",
+    "category": "ואזות אחרות",
+    "description": "קטנה ארוכה צרה עם פסים",
+    "image": "images/molds/102.png",
+    "volumeMl": null
+  },
+  {
+    "id": "101",
+    "category": "ואזות אחרות",
+    "description": "קטנה קלאסית",
+    "image": "images/molds/101.png",
+    "volumeMl": null
   }
 ]
