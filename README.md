@@ -74,7 +74,7 @@ settings → Personal access tokens).
 ```js
 const MIX_SETTINGS = {
   concretePerVolume: 1.2, // מ"ל בטון לכל מ"ל נפח תבנית
-  waterPerVolume: 0.6,    // מ"ל מים לכל מ"ל נפח תבנית
+  waterPerVolume: 0.4,    // מ"ל מים לכל מ"ל נפח תבנית (יחס מים:בטון = 1:3)
 };
 ```
 
