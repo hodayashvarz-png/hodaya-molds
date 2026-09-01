@@ -145,14 +145,14 @@
       </select>
     </div>
     <div class="field">
-      <label for="g-caption">כיתוב קצר (לא חובה)</label>
+      <label for="g-caption">כיתוב קצר (לא חובה, יחול על כל התמונות שנבחרו)</label>
       <input type="text" id="g-caption" placeholder="לדוגמה: אפור + טרקוטה" />
     </div>
     <div class="field">
-      <label for="g-image">תמונה</label>
-      <input type="file" id="g-image" accept="image/*" />
+      <label for="g-image">תמונה (אפשר לבחור כמה ביחד)</label>
+      <input type="file" id="g-image" accept="image/*" multiple />
     </div>
-    <button class="btn" id="save-gallery-btn">שמרו תמונה</button>
+    <button class="btn" id="save-gallery-btn">שמרו תמונות</button>
     <div id="gallery-save-msg" style="margin-top:14px;"></div>
   </div>
 
@@ -542,40 +542,44 @@
     const type = document.getElementById("g-type").value;
     const meta = galleryMeta[type];
     const caption = document.getElementById("g-caption").value.trim();
-    const imageFile = document.getElementById("g-image").files[0];
+    const imageFiles = Array.from(document.getElementById("g-image").files);
     const msg = document.getElementById("gallery-save-msg");
 
-    if (!imageFile) {
-      alert("יש לבחור תמונה.");
+    if (imageFiles.length === 0) {
+      alert("יש לבחור לפחות תמונה אחת.");
       return;
     }
 
     const btn = document.getElementById("save-gallery-btn");
     btn.disabled = true;
-    btn.textContent = "שומר...";
+    btn.textContent = imageFiles.length > 1 ? "שומר תמונות..." : "שומר...";
     msg.innerHTML = "";
 
     try {
-      const id = `${type}-${Date.now()}`;
-      const ext = (imageFile.name.split(".").pop() || "jpg").toLowerCase();
-      const imagePath = `${meta.folder}/${id}.${ext}`;
-      const base64 = await readFileAsBase64(imageFile);
-      await ghPutBinaryFile(imagePath, base64, `admin: תמונת השראה חדשה (${type})`);
+      const newEntries = await Promise.all(
+        imageFiles.map(async (imageFile, i) => {
+          const id = `${type}-${Date.now()}-${i}`;
+          const ext = (imageFile.name.split(".").pop() || "jpg").toLowerCase();
+          const imagePath = `${meta.folder}/${id}.${ext}`;
+          const base64 = await readFileAsBase64(imageFile);
+          await ghPutBinaryFile(imagePath, base64, `admin: תמונת השראה חדשה (${type})`);
+          return { id, caption, image: imagePath };
+        })
+      );
 
       const { data, sha } = await ghGetJSON(meta.jsonPath);
-      const entry = { id, caption, image: imagePath };
       let updated;
       if (meta.nestedIn) {
         updated = data || { marble: [], terrazzo: [] };
-        updated[meta.nestedIn] = (updated[meta.nestedIn] || []).concat([entry]);
+        updated[meta.nestedIn] = (updated[meta.nestedIn] || []).concat(newEntries);
       } else {
-        updated = (data || []).concat([entry]);
+        updated = (data || []).concat(newEntries);
       }
-      await ghPutJSON(meta.jsonPath, updated, `admin: תמונת השראה חדשה (${type})`, sha);
+      await ghPutJSON(meta.jsonPath, updated, `admin: ${newEntries.length} תמונות השראה חדשות (${type})`, sha);
 
       msg.innerHTML = `<div class="result-card">
-        <strong>נשמר</strong> התמונה נכתבה ישירות לאתר.
-        תוך כ-30–60 שניות היא תופיע בלוח ההשראה המתאים אצל כולם (כולל אצלך, אחרי רענון).
+        <strong>נשמר</strong> ${newEntries.length} תמונות נכתבו ישירות לאתר.
+        תוך כ-30–60 שניות הן יופיעו בלוח ההשראה המתאים אצל כולם (כולל אצלך, אחרי רענון).
       </div>`;
       document.getElementById("g-caption").value = "";
       document.getElementById("g-image").value = "";
@@ -583,7 +587,7 @@
       msg.innerHTML = `<p class="empty-note" style="color:#ff6b6b;">שגיאה: ${err.message || err}</p>`;
     } finally {
       btn.disabled = false;
-      btn.textContent = "שמרו תמונה";
+      btn.textContent = "שמרו תמונות";
     }
   });
 
