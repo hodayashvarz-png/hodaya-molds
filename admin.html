@@ -364,13 +364,16 @@
     try {
       // 1. קטגוריה חדשה (אם צריך)
       if (categoryId === newCategoryName && !liveCategories.some((c) => c.id === categoryId)) {
-        const { data: cats, sha: catsSha } = await ghGetJSON("data/categories.json");
-        const current = cats || [];
-        if (!current.some((c) => c.id === categoryId)) {
-          current.push({ id: categoryId, name: newCategoryName });
-          await ghPutJSON("data/categories.json", current, `admin: הוספת סיווג ${newCategoryName}`, catsSha);
-        }
-        liveCategories = current;
+        await ghUpdateJSON(
+          "data/categories.json",
+          (cats) => {
+            const current = cats || [];
+            if (!current.some((c) => c.id === categoryId)) current.push({ id: categoryId, name: newCategoryName });
+            liveCategories = current;
+            return current;
+          },
+          `admin: הוספת סיווג ${newCategoryName}`
+        );
       }
 
       // 2. תמונה (אם הועלתה)
@@ -392,17 +395,22 @@
       }
 
       // 3. עדכון קובץ התבניות
-      const { data: molds, sha: moldsSha } = await ghGetJSON("data/molds.json");
-      const currentMolds = (molds || []).filter((m) => m.id !== id);
-      currentMolds.push({
-        id,
-        category: categoryId,
-        description: desc,
-        image: imagePath,
-        volumeMl: volume ? Number(volume) : null,
-      });
-      await ghPutJSON("data/molds.json", currentMolds, `admin: הוספת/עדכון תבנית ${id}`, moldsSha);
-      liveMolds = currentMolds;
+      await ghUpdateJSON(
+        "data/molds.json",
+        (molds) => {
+          const currentMolds = (molds || []).filter((m) => m.id !== id);
+          currentMolds.push({
+            id,
+            category: categoryId,
+            description: desc,
+            image: imagePath,
+            volumeMl: volume ? Number(volume) : null,
+          });
+          liveMolds = currentMolds;
+          return currentMolds;
+        },
+        `admin: הוספת/עדכון תבנית ${id}`
+      );
 
       msg.innerHTML = `<div class="result-card">
         <strong>נשמר</strong> תבנית מס' ${id} נכתבה ישירות לאתר.
@@ -458,10 +466,15 @@
         existingImg ? existingImg.sha : undefined
       );
 
-      const { data: cats, sha: catsSha } = await ghGetJSON("data/categories.json");
-      const currentCats = (cats || []).map((c) => (c.id === categoryId ? { ...c, image: imagePath } : c));
-      await ghPutJSON("data/categories.json", currentCats, `admin: עדכון תמונת כרטיסייה ${categoryId}`, catsSha);
-      liveCategories = currentCats;
+      await ghUpdateJSON(
+        "data/categories.json",
+        (cats) => {
+          const currentCats = (cats || []).map((c) => (c.id === categoryId ? { ...c, image: imagePath } : c));
+          liveCategories = currentCats;
+          return currentCats;
+        },
+        `admin: עדכון תמונת כרטיסייה ${categoryId}`
+      );
       renderCatOptions();
       renderCatImgOptions();
 
@@ -567,15 +580,18 @@
         })
       );
 
-      const { data, sha } = await ghGetJSON(meta.jsonPath);
-      let updated;
-      if (meta.nestedIn) {
-        updated = data || { marble: [], terrazzo: [] };
-        updated[meta.nestedIn] = (updated[meta.nestedIn] || []).concat(newEntries);
-      } else {
-        updated = (data || []).concat(newEntries);
-      }
-      await ghPutJSON(meta.jsonPath, updated, `admin: ${newEntries.length} תמונות השראה חדשות (${type})`, sha);
+      await ghUpdateJSON(
+        meta.jsonPath,
+        (data) => {
+          if (meta.nestedIn) {
+            const updated = data || { marble: [], terrazzo: [] };
+            updated[meta.nestedIn] = (updated[meta.nestedIn] || []).concat(newEntries);
+            return updated;
+          }
+          return (data || []).concat(newEntries);
+        },
+        `admin: ${newEntries.length} תמונות השראה חדשות (${type})`
+      );
 
       msg.innerHTML = `<div class="result-card">
         <strong>נשמר</strong> ${newEntries.length} תמונות נכתבו ישירות לאתר.

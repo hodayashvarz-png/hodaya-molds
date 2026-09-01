@@ -53,10 +53,13 @@ async function ghError(res) {
   } catch (e) {
     // אין תוכן JSON
   }
-  if (res.status === 401) return new Error("הטוקן לא תקין או פג תוקף. יש ליצור טוקן חדש.");
-  if (res.status === 403) return new Error("אין לטוקן הזה הרשאת כתיבה לריפו הזה.");
-  if (res.status === 409) return new Error("מישהו/משהו אחר עדכן את הקובץ במקביל. נסו שוב.");
-  return new Error(`שגיאה מול גיטהאב (${res.status}): ${detail || res.statusText}`);
+  let err;
+  if (res.status === 401) err = new Error("הטוקן לא תקין או פג תוקף. יש ליצור טוקן חדש.");
+  else if (res.status === 403) err = new Error("אין לטוקן הזה הרשאת כתיבה לריפו הזה.");
+  else if (res.status === 409) err = new Error("מישהו/משהו אחר עדכן את הקובץ במקביל. נסו שוב.");
+  else err = new Error(`שגיאה מול גיטהאב (${res.status}): ${detail || res.statusText}`);
+  err.status = res.status;
+  return err;
 }
 
 // כותב/מעדכן קובץ טקסט (contentString) בריפו.
@@ -105,6 +108,25 @@ async function ghGetJSON(path) {
 async function ghPutJSON(path, obj, message, sha) {
   const text = JSON.stringify(obj, null, 2) + "\n";
   return ghPutTextFile(path, text, message, sha);
+}
+
+// קורא-משנה-כותב עם הגנה מפני התנגשות: אם בין הקריאה לכתיבה מישהו/משהו
+// אחר עדכן את אותו קובץ JSON (409), קוראים מחדש את הגרסה הכי עדכנית,
+// מפעילים שוב את updateFn עליה, ומנסים לכתוב שוב (עד כמה ניסיונות).
+// updateFn מקבל את הנתונים הנוכחיים (או null אם הקובץ לא קיים) ומחזיר
+// את הנתונים החדשים לשמירה.
+async function ghUpdateJSON(path, updateFn, message) {
+  const maxAttempts = 4;
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    const { data, sha } = await ghGetJSON(path);
+    const updated = await updateFn(data);
+    try {
+      return await ghPutJSON(path, updated, message, sha);
+    } catch (err) {
+      if (err.status === 409 && attempt < maxAttempts) continue;
+      throw err;
+    }
+  }
 }
 
 // קורא קובץ תמונה מהדפדפן (File) ומחזיר את חלק ה-base64 בלבד
