@@ -38,6 +38,7 @@
 </div>
 
 <script src="js/data.js"></script>
+<script src="js/data-loader.js"></script>
 <script>
   const modal = document.getElementById("modal");
   setupModalClosers(modal);
@@ -67,8 +68,11 @@
     });
   }
 
-  renderGallery(EFFECTS.marble, document.getElementById("grid-marble"), document.getElementById("empty-marble"));
-  renderGallery(EFFECTS.terrazzo, document.getElementById("grid-terrazzo"), document.getElementById("empty-terrazzo"));
+  (async () => {
+    const { effects } = await loadGalleryData();
+    renderGallery(effects.marble, document.getElementById("grid-marble"), document.getElementById("empty-marble"));
+    renderGallery(effects.terrazzo, document.getElementById("grid-terrazzo"), document.getElementById("empty-terrazzo"));
+  })();
 
   document.querySelectorAll(".tab-btn").forEach((btn) => {
     btn.addEventListener("click", () => {

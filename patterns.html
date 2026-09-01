@@ -28,31 +28,35 @@
 </div>
 
 <script src="js/data.js"></script>
+<script src="js/data-loader.js"></script>
 <script>
-  const grid = document.getElementById("grid");
-  if (PATTERNS.length === 0) {
-    document.getElementById("empty-note").style.display = "block";
-  } else {
-    grid.innerHTML = PATTERNS.map(
-      (item) => `<div class="item-card">
-        <img class="thumb" src="${item.image}" alt="${item.caption || ""}" data-id="${item.id}" onerror="moldImgFallback(this, 'אין תמונה עדיין')" />
-        <div class="meta"><div class="desc">${item.caption || ""}</div></div>
-      </div>`
-    ).join("");
+  (async () => {
+    const { patterns } = await loadGalleryData();
+    const grid = document.getElementById("grid");
+    if (patterns.length === 0) {
+      document.getElementById("empty-note").style.display = "block";
+    } else {
+      grid.innerHTML = patterns.map(
+        (item) => `<div class="item-card">
+          <img class="thumb" src="${item.image}" alt="${item.caption || ""}" data-id="${item.id}" onerror="moldImgFallback(this, 'אין תמונה עדיין')" />
+          <div class="meta"><div class="desc">${item.caption || ""}</div></div>
+        </div>`
+      ).join("");
 
-    const modal = document.getElementById("modal");
-    setupModalClosers(modal);
-    grid.querySelectorAll("img.thumb").forEach((img) => {
-      img.addEventListener("click", () => {
-        const item = PATTERNS.find((c) => c.id === img.dataset.id);
-        const modalImg = document.getElementById("modal-img");
-        modalImg.onerror = () => moldImgFallback(modalImg, "אין תמונה עדיין");
-        modalImg.src = item.image;
-        document.getElementById("modal-caption").textContent = item.caption || "";
-        modal.classList.remove("hidden");
+      const modal = document.getElementById("modal");
+      setupModalClosers(modal);
+      grid.querySelectorAll("img.thumb").forEach((img) => {
+        img.addEventListener("click", () => {
+          const item = patterns.find((c) => c.id === img.dataset.id);
+          const modalImg = document.getElementById("modal-img");
+          modalImg.onerror = () => moldImgFallback(modalImg, "אין תמונה עדיין");
+          modalImg.src = item.image;
+          document.getElementById("modal-caption").textContent = item.caption || "";
+          modal.classList.remove("hidden");
+        });
       });
-    });
-  }
+    }
+  })();
 
   renderBottomNav("inspiration");
 </script>

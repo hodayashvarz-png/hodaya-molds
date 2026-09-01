@@ -534,15 +534,3 @@ details.advanced summary {
   font-size: 14px;
   padding: 34px 10px;
 }
-
-pre.code-block {
-  background: rgba(20, 16, 20, 0.4);
-  border: 1px solid rgba(241, 234, 240, 0.2);
-  color: #f2ece5;
-  padding: 14px;
-  border-radius: var(--radius-sm);
-  font-size: 12px;
-  overflow-x: auto;
-  white-space: pre-wrap;
-  word-break: break-word;
-}

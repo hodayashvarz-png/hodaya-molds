@@ -129,9 +129,11 @@
   <!-- טאב 2: תמונות השראה (גלריה) — קטע קוד להעתקה -->
   <div class="tab-panel" id="panel-gallery">
     <p class="page-lead">
-      תמונות (שילובי צבעים / אפקטים / דוגמאות) עדיין נוספות דרך עריכת קוד:
-      בוחרים כאן פרטים, מקבלים קטע מוכן, ומדביקים ב-<code>js/data.js</code>
-      אחרי ששומרים את התמונה בתיקייה המתאימה.
+      מעלים תמונה ללוחות ההשראה (שילובי צבעים / אפקטים / דוגמאות). השמירה
+      נכתבת ישירות לאתר החי, אותו דבר כמו בטאבים האחרים.
+    </p>
+    <p class="hint" id="gallery-token-warning" style="display:none; color:#ff6b6b; margin-bottom:14px;">
+      עדיין לא חיברת טוקן גיטהאב — עברי לטאב "חיבור לגיטהאב" והגדירי אותו לפני השמירה.
     </p>
     <div class="field">
       <label for="g-type">לאיזו גלריה</label>
@@ -143,22 +145,15 @@
       </select>
     </div>
     <div class="field">
-      <label for="g-id">מזהה ייחודי לתמונה (אנגלית, בלי רווחים)</label>
-      <input type="text" id="g-id" placeholder="לדוגמה: combo-2" />
-    </div>
-    <div class="field">
       <label for="g-caption">כיתוב קצר (לא חובה)</label>
       <input type="text" id="g-caption" placeholder="לדוגמה: אפור + טרקוטה" />
     </div>
-    <button class="btn" id="build-gallery-btn">בנו את הקטע להעתקה</button>
-    <div id="gallery-output" style="margin-top:16px; display:none;">
-      <div class="result-card">
-        <h3 id="gallery-output-title"></h3>
-        <p class="hint" id="gallery-output-instructions" style="margin-bottom:10px;"></p>
-        <pre class="code-block" id="gallery-output-code"></pre>
-        <button class="btn secondary" id="gallery-copy-btn" style="margin-top:10px;">העתקה</button>
-      </div>
+    <div class="field">
+      <label for="g-image">תמונה</label>
+      <input type="file" id="g-image" accept="image/*" />
     </div>
+    <button class="btn" id="save-gallery-btn">שמרו תמונה</button>
+    <div id="gallery-save-msg" style="margin-top:14px;"></div>
   </div>
 
   <!-- טאב 3: חיבור לגיטהאב (טוקן) -->
@@ -213,6 +208,7 @@
     document.getElementById("mold-token-warning").style.display = has ? "none" : "block";
     document.getElementById("catimg-token-warning").style.display = has ? "none" : "block";
     document.getElementById("homeimg-token-warning").style.display = has ? "none" : "block";
+    document.getElementById("gallery-token-warning").style.display = has ? "none" : "block";
   }
   refreshTokenStatus();
 
@@ -528,49 +524,66 @@
     }
   });
 
-  // ---------- טאב 2: גלריית תמונות (קוד להעתקה) ----------
+  // ---------- טאב: תמונת השראה (גלריות) ----------
   const galleryMeta = {
-    combo: { arrayName: "COLOR_COMBOS", folder: "images/combos", label: "שילובי צבעים" },
-    marble: { arrayName: "EFFECTS.marble", folder: "images/effects/marble", label: "אפקט שיש" },
-    terrazzo: { arrayName: "EFFECTS.terrazzo", folder: "images/effects/terrazzo", label: "אפקט טרצו" },
-    pattern: { arrayName: "PATTERNS", folder: "images/patterns", label: "דוגמאות שונות" },
+    combo: { jsonPath: "data/combos.json", folder: "images/combos", nestedIn: null },
+    marble: { jsonPath: "data/effects.json", folder: "images/effects/marble", nestedIn: "marble" },
+    terrazzo: { jsonPath: "data/effects.json", folder: "images/effects/terrazzo", nestedIn: "terrazzo" },
+    pattern: { jsonPath: "data/patterns.json", folder: "images/patterns", nestedIn: null },
   };
 
-  document.getElementById("build-gallery-btn").addEventListener("click", () => {
-    const type = document.getElementById("g-type").value;
-    const meta = galleryMeta[type];
-    const id = document.getElementById("g-id").value.trim();
-    const caption = document.getElementById("g-caption").value.trim();
-
-    if (!id) {
-      alert("יש למלא מזהה לתמונה.");
+  document.getElementById("save-gallery-btn").addEventListener("click", async () => {
+    const token = getGhToken();
+    if (!token) {
+      alert('צריך קודם לחבר טוקן גיטהאב בטאב "חיבור לגיטהאב".');
       return;
     }
 
-    const imagePath = `${meta.folder}/${id}.jpg`;
-    document.getElementById("gallery-output-title").textContent = `תמונה חדשה — הוספה ל-${meta.arrayName} ב-js/data.js`;
-    document.getElementById("gallery-output-instructions").textContent =
-      `1. שמרו את התמונה בשם ${id}.jpg בתוך התיקייה ${meta.folder}/. 2. הוסיפו את הבלוק הבא בתוך מערך ${meta.arrayName} (לפני הסוגר המסיים ]). 3. שמרו, ועשו commit + push.`;
-    document.getElementById("gallery-output-code").textContent =
-      `{\n` +
-      `  id: "${id}",\n` +
-      `  caption: "${caption.replace(/"/g, '\\"')}",\n` +
-      `  image: "${imagePath}",\n` +
-      `},`;
+    const type = document.getElementById("g-type").value;
+    const meta = galleryMeta[type];
+    const caption = document.getElementById("g-caption").value.trim();
+    const imageFile = document.getElementById("g-image").files[0];
+    const msg = document.getElementById("gallery-save-msg");
 
-    document.getElementById("gallery-output").style.display = "block";
-  });
+    if (!imageFile) {
+      alert("יש לבחור תמונה.");
+      return;
+    }
 
-  document.getElementById("gallery-copy-btn").addEventListener("click", async () => {
-    const text = document.getElementById("gallery-output-code").textContent;
+    const btn = document.getElementById("save-gallery-btn");
+    btn.disabled = true;
+    btn.textContent = "שומר...";
+    msg.innerHTML = "";
+
     try {
-      await navigator.clipboard.writeText(text);
-      const btn = document.getElementById("gallery-copy-btn");
-      const original = btn.textContent;
-      btn.textContent = "הועתק!";
-      setTimeout(() => (btn.textContent = original), 1500);
-    } catch (e) {
-      alert("לא ניתן להעתיק אוטומטית — יש לסמן את הטקסט ולהעתיק ידנית.");
+      const id = `${type}-${Date.now()}`;
+      const ext = (imageFile.name.split(".").pop() || "jpg").toLowerCase();
+      const imagePath = `${meta.folder}/${id}.${ext}`;
+      const base64 = await readFileAsBase64(imageFile);
+      await ghPutBinaryFile(imagePath, base64, `admin: תמונת השראה חדשה (${type})`);
+
+      const { data, sha } = await ghGetJSON(meta.jsonPath);
+      const entry = { id, caption, image: imagePath };
+      let updated;
+      if (meta.nestedIn) {
+        updated = data || { marble: [], terrazzo: [] };
+        updated[meta.nestedIn] = (updated[meta.nestedIn] || []).concat([entry]);
+      } else {
+        updated = (data || []).concat([entry]);
+      }
+      await ghPutJSON(meta.jsonPath, updated, `admin: תמונת השראה חדשה (${type})`, sha);
+
+      msg.innerHTML = `<div class="result-card">
+        <strong>נשמר</strong> התמונה נכתבה ישירות לאתר.
+        תוך כ-30–60 שניות היא תופיע בלוח ההשראה המתאים אצל כולם (כולל אצלך, אחרי רענון).
+      </div>`;
+      document.getElementById("g-caption").value = "";
+      document.getElementById("g-image").value = "";
+    } catch (err) {
+      msg.innerHTML = `<p class="empty-note" style="color:#ff6b6b;">שגיאה: ${err.message || err}</p>`;
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "שמרו תמונה";
     }
   });
 
