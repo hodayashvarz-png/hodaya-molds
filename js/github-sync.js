@@ -124,6 +124,19 @@ async function ghPutJSON(path, obj, message, sha) {
   return ghPutTextFile(path, text, message, sha);
 }
 
+// מריץ פעולה עם ניסיון חוזר אם היא נכשלת בהתנגשות (409) — למשל כתיבת
+// כמה קבצים ברצף לאותו branch, ששניים מהם עלולים להתנגש על אותו commit.
+async function ghRetry(fn, attempts = 4) {
+  for (let attempt = 1; attempt <= attempts; attempt++) {
+    try {
+      return await fn();
+    } catch (err) {
+      if (err.status === 409 && attempt < attempts) continue;
+      throw err;
+    }
+  }
+}
+
 // קורא-משנה-כותב עם הגנה מפני התנגשות: אם בין הקריאה לכתיבה מישהו/משהו
 // אחר עדכן את אותו קובץ JSON (409), קוראים מחדש את הגרסה הכי עדכנית,
 // מפעילים שוב את updateFn עליה, ומנסים לכתוב שוב (עד כמה ניסיונות).

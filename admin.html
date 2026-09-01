@@ -576,16 +576,20 @@
     msg.innerHTML = "";
 
     try {
-      const newEntries = await Promise.all(
-        imageFiles.map(async (imageFile, i) => {
-          const id = `${type}-${Date.now()}-${i}`;
-          const ext = (imageFile.name.split(".").pop() || "jpg").toLowerCase();
-          const imagePath = `${meta.folder}/${id}.${ext}`;
-          const base64 = await readFileAsBase64(imageFile);
-          await ghPutBinaryFile(imagePath, base64, `admin: תמונת השראה חדשה (${type})`);
-          return { id, caption, image: imagePath };
-        })
-      );
+      // מעלים אחת-אחת (לא במקביל): כל העלאה יוצרת commit חדש על אותו
+      // branch, ומספר בקשות PUT במקביל מתנגשות זו בזו על ה-branch עצמו
+      // (409) גם כשהן קבצים שונים לגמרי.
+      const newEntries = [];
+      for (let i = 0; i < imageFiles.length; i++) {
+        const imageFile = imageFiles[i];
+        if (imageFiles.length > 1) btn.textContent = `שומר תמונה ${i + 1} מתוך ${imageFiles.length}...`;
+        const id = `${type}-${Date.now()}-${i}`;
+        const ext = (imageFile.name.split(".").pop() || "jpg").toLowerCase();
+        const imagePath = `${meta.folder}/${id}.${ext}`;
+        const base64 = await readFileAsBase64(imageFile);
+        await ghRetry(() => ghPutBinaryFile(imagePath, base64, `admin: תמונת השראה חדשה (${type})`));
+        newEntries.push({ id, caption, image: imagePath });
+      }
 
       await ghUpdateJSON(
         meta.jsonPath,
