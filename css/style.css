@@ -104,24 +104,6 @@ main {
   margin: 0 auto;
 }
 
-@media (min-width: 900px) {
-  main {
-    max-width: 1100px;
-  }
-  .card-grid {
-    gap: 20px;
-  }
-  .card-grid .cat-card-text {
-    padding: 16px 16px 14px;
-  }
-  .card-grid .cat-name {
-    font-size: 17px;
-  }
-  .card-grid .cat-sub {
-    font-size: 12px;
-  }
-}
-
 /* ---------- באנר עמוד הבית ---------- */
 .home-banner {
   display: block;
@@ -205,6 +187,29 @@ main {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 16px;
+}
+
+/* שינויים למסכים רחבים — מונח אחרי כל הכללים הבסיסיים המקבילים,
+   כדי שלא יידרסו על ידי כלל בסיסי מאוחר יותר עם אותה ספציפיות */
+@media (min-width: 900px) {
+  main {
+    max-width: 1100px;
+  }
+  .card-grid {
+    gap: 20px;
+  }
+  .card-grid .cat-card-text {
+    padding: 16px 16px 14px;
+  }
+  .card-grid .cat-name {
+    font-size: 17px;
+  }
+  .card-grid .cat-sub {
+    font-size: 12px;
+  }
+  .item-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .item-card {
