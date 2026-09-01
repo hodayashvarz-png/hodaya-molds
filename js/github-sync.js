@@ -98,6 +98,20 @@ async function ghPutBinaryFile(path, base64Content, message, sha) {
   return res.json();
 }
 
+// מוחק קובץ מהריפו (למשל תמונה). לא זורק שגיאה אם הקובץ כבר לא קיים.
+async function ghDeleteFile(path, message) {
+  const existing = await ghGetFile(path);
+  if (!existing) return;
+  const url = `https://api.github.com/repos/${GH_OWNER}/${GH_REPO}/contents/${path}`;
+  const res = await fetch(url, {
+    method: "DELETE",
+    headers: { ...ghHeaders(), "Content-Type": "application/json" },
+    body: JSON.stringify({ message, sha: existing.sha, branch: GH_BRANCH }),
+  });
+  if (!res.ok) throw await ghError(res);
+  return res.json();
+}
+
 async function ghGetJSON(path) {
   const file = await ghGetFile(path);
   if (!file) return { data: null, sha: null };

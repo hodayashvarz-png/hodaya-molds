@@ -154,6 +154,13 @@
     </div>
     <button class="btn" id="save-gallery-btn">שמרו תמונות</button>
     <div id="gallery-save-msg" style="margin-top:14px;"></div>
+
+    <div class="field" style="margin-top:24px;">
+      <label>תמונות קיימות בגלריה שנבחרה (לחיצה על × מוחקת לצמיתות)</label>
+      <div id="gallery-existing" style="display:flex; flex-wrap:wrap; gap:10px; margin-top:8px;"></div>
+      <p class="hint" id="gallery-existing-empty" style="display:none;">אין עדיין תמונות בגלריה הזו.</p>
+      <p class="hint" id="gallery-existing-loading">טוען...</p>
+    </div>
   </div>
 
   <!-- טאב 3: חיבור לגיטהאב (טוקן) -->
@@ -599,6 +606,7 @@
       </div>`;
       document.getElementById("g-caption").value = "";
       document.getElementById("g-image").value = "";
+      renderExistingGalleryImages();
     } catch (err) {
       msg.innerHTML = `<p class="empty-note" style="color:#ff6b6b;">שגיאה: ${err.message || err}</p>`;
     } finally {
@@ -606,6 +614,79 @@
       btn.textContent = "שמרו תמונות";
     }
   });
+
+  // ---------- ניהול/מחיקה של תמונות השראה קיימות ----------
+  function galleryEntriesOf(data, meta) {
+    if (meta.nestedIn) return (data && data[meta.nestedIn]) || [];
+    return data || [];
+  }
+
+  async function renderExistingGalleryImages() {
+    const type = document.getElementById("g-type").value;
+    const meta = galleryMeta[type];
+    const existingEl = document.getElementById("gallery-existing");
+    const emptyEl = document.getElementById("gallery-existing-empty");
+    const loadingEl = document.getElementById("gallery-existing-loading");
+
+    existingEl.innerHTML = "";
+    emptyEl.style.display = "none";
+    loadingEl.style.display = "block";
+
+    try {
+      const { data } = await ghGetJSON(meta.jsonPath);
+      const entries = galleryEntriesOf(data, meta);
+      loadingEl.style.display = "none";
+
+      if (entries.length === 0) {
+        emptyEl.style.display = "block";
+        return;
+      }
+
+      existingEl.innerHTML = entries
+        .map(
+          (item) => `<div style="position:relative; width:88px;">
+            <img src="${item.image}" style="width:88px; height:88px; object-fit:cover; border-radius:8px; display:block; background:var(--card-fallback);" onerror="moldImgFallback(this, '')" />
+            <button type="button" data-id="${item.id}" title="מחיקה" style="position:absolute; top:-6px; left:-6px; width:22px; height:22px; border-radius:50%; border:none; background:#a33; color:#fff; font-size:13px; line-height:1; cursor:pointer;">×</button>
+          </div>`
+        )
+        .join("");
+
+      existingEl.querySelectorAll("button[data-id]").forEach((delBtn) => {
+        delBtn.addEventListener("click", async () => {
+          const entry = entries.find((e) => e.id === delBtn.dataset.id);
+          if (!entry) return;
+          if (!confirm("למחוק את התמונה הזו לצמיתות?")) return;
+
+          delBtn.disabled = true;
+          try {
+            await ghUpdateJSON(
+              meta.jsonPath,
+              (freshData) => {
+                if (meta.nestedIn) {
+                  const updated = freshData || { marble: [], terrazzo: [] };
+                  updated[meta.nestedIn] = (updated[meta.nestedIn] || []).filter((e) => e.id !== entry.id);
+                  return updated;
+                }
+                return (freshData || []).filter((e) => e.id !== entry.id);
+              },
+              `admin: מחיקת תמונת השראה (${type})`
+            );
+            await ghDeleteFile(entry.image, `admin: מחיקת קובץ תמונת השראה (${type})`);
+            renderExistingGalleryImages();
+          } catch (err) {
+            alert(`שגיאה במחיקה: ${err.message || err}`);
+            delBtn.disabled = false;
+          }
+        });
+      });
+    } catch (err) {
+      loadingEl.style.display = "none";
+      existingEl.innerHTML = `<p class="empty-note" style="color:#ff6b6b;">שגיאה בטעינה: ${err.message || err}</p>`;
+    }
+  }
+
+  document.getElementById("g-type").addEventListener("change", renderExistingGalleryImages);
+  renderExistingGalleryImages();
 
   renderBottomNav("");
 </script>
