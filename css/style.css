@@ -123,8 +123,17 @@ main {
 /* ---------- כרטיסי קטגוריה (עם תמונה) ---------- */
 .card-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 14px;
+}
+
+/* כרטיסי עמוד הבית — 3 בשורה, גבוהים יותר כדי שהתמונה והטקסט ייכנסו בנוחות */
+.home-cards {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.home-cards .cat-card {
+  aspect-ratio: 3 / 4;
 }
 
 .cat-card {
@@ -170,15 +179,15 @@ main {
   color: rgba(255, 255, 255, 0.82);
 }
 
-.card-grid .cat-card-text {
+.home-cards .cat-card-text {
   padding: 10px 10px 9px;
 }
 
-.card-grid .cat-name {
+.home-cards .cat-name {
   font-size: 13.5px;
 }
 
-.card-grid .cat-sub {
+.home-cards .cat-sub {
   font-size: 10.5px;
 }
 
@@ -198,13 +207,13 @@ main {
   .card-grid {
     gap: 20px;
   }
-  .card-grid .cat-card-text {
+  .home-cards .cat-card-text {
     padding: 16px 16px 14px;
   }
-  .card-grid .cat-name {
+  .home-cards .cat-name {
     font-size: 17px;
   }
-  .card-grid .cat-sub {
+  .home-cards .cat-sub {
     font-size: 12px;
   }
   .item-grid {
