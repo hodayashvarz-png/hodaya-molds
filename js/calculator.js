@@ -74,14 +74,19 @@ document.querySelectorAll(".tab-btn").forEach((btn) => {
     const capacity = Math.max(0, Math.floor(availableMl));
     const numMasks = 1 << priorityCats.length;
 
-    const makeEmptyRow = () => {
+    // כל תא נושא גם reachable: mask=0 מתחיל תמיד "הושג" (שילוב ריק תקין
+    // עם 0 קטגוריות עדיפות בשימוש); כל מסכה אחרת מתחילה "לא הושגה" —
+    // היא הופכת reachable רק דרך מעבר אמיתי של פריט מהקטגוריה המתאימה.
+    // בלי זה, "שילוב ריק" בכל המסכות היה מאפשר לפריטים לא-עדיפות
+    // "להצטרף" למסכת עדיפות בלי שאף פריט עדיפות נכלל בפועל.
+    const makeRow = (reachableDefault) => {
       const row = new Array(capacity + 1);
-      for (let c = 0; c <= capacity; c++) row[c] = { total: 0, count: 0, items: null };
+      for (let c = 0; c <= capacity; c++) row[c] = { total: 0, count: 0, items: null, reachable: reachableDefault };
       return row;
     };
 
     let dp = [];
-    for (let mask = 0; mask < numMasks; mask++) dp.push(makeEmptyRow());
+    for (let mask = 0; mask < numMasks; mask++) dp.push(makeRow(mask === 0));
 
     for (const m of pool) {
       const w = moldConcreteMl(m);
@@ -97,13 +102,21 @@ document.querySelectorAll(".tab-btn").forEach((btn) => {
         const targetMask = mask | bit;
         for (let c = w; c <= capacity; c++) {
           const prevCell = dpPrev[mask][c - w];
+          if (!prevCell.reachable) continue; // אי אפשר להרחיב ממצב שלא הושג
           const candidateTotal = prevCell.total + w;
           const candidateCount = prevCell.count + 1;
           const current = dpNext[targetMask][c];
           const better =
-            candidateTotal > current.total || (candidateTotal === current.total && candidateCount < current.count);
+            !current.reachable ||
+            candidateTotal > current.total ||
+            (candidateTotal === current.total && candidateCount < current.count);
           if (better) {
-            dpNext[targetMask][c] = { total: candidateTotal, count: candidateCount, items: { mold: m, prev: prevCell.items } };
+            dpNext[targetMask][c] = {
+              total: candidateTotal,
+              count: candidateCount,
+              items: { mold: m, prev: prevCell.items },
+              reachable: true,
+            };
           }
         }
       }
@@ -111,10 +124,31 @@ document.querySelectorAll(".tab-btn").forEach((btn) => {
       dp = dpNext;
     }
 
-    let best = { total: 0, count: 0, items: null };
-    for (let mask = 0; mask < numMasks; mask++) {
+    // בוחרים את המצב הסופי הכי טוב: קודם כל מעדיפים לייצג כמה שיותר
+    // מהעדיפויות שנבחרו (אפילו במחיר ניצול/מספר פריטים פחות אופטימלי),
+    // ורק בין שילובים ששווים בזה — משווים לפי ניצול ואז מספר פריטים.
+    const popcount = (n) => {
+      let c = 0;
+      while (n) {
+        c += n & 1;
+        n >>= 1;
+      }
+      return c;
+    };
+
+    let best = dp[0][capacity];
+    let bestPopcount = 0;
+    for (let mask = 1; mask < numMasks; mask++) {
       const cell = dp[mask][capacity];
-      if (cell.total > best.total || (cell.total === best.total && cell.count < best.count)) best = cell;
+      if (!cell.reachable) continue; // המסכה הזו לא הושגה בפועל
+      const pc = popcount(mask);
+      const better =
+        pc > bestPopcount ||
+        (pc === bestPopcount && (cell.total > best.total || (cell.total === best.total && cell.count < best.count)));
+      if (better) {
+        best = cell;
+        bestPopcount = pc;
+      }
     }
 
     const combo = [];
