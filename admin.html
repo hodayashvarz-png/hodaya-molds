@@ -18,7 +18,7 @@
   <div class="tabs">
     <button class="tab-btn active" data-tab="mold">תבנית חדשה</button>
     <button class="tab-btn" data-tab="catimg">תמונת קטגוריה</button>
-    <button class="tab-btn" data-tab="homeimg">כרטיסיות הבית</button>
+    <button class="tab-btn" data-tab="homeimg">תמונות כרטיסיות</button>
     <button class="tab-btn" data-tab="gallery">תמונת השראה</button>
     <button class="tab-btn" data-tab="connect">חיבור לגיטהאב</button>
   </div>
@@ -97,12 +97,11 @@
     <div id="catimg-save-msg" style="margin-top:14px;"></div>
   </div>
 
-  <!-- טאב: כרטיסיות עמוד הבית -->
+  <!-- טאב: כרטיסיות עמוד הבית ולוחות השראה -->
   <div class="tab-panel" id="panel-homeimg">
     <p class="page-lead">
-      מעלים תמונה לאחת משלוש הכרטיסיות בעמוד הבית (התבניות שלי / לוחות
-      השראה / מחשבון). השמירה נכתבת ישירות לאתר החי, אותו דבר כמו
-      בטאבים האחרים.
+      מעלים תמונה לאחת מכרטיסיות עמוד הבית או לוחות ההשראה. השמירה
+      נכתבת ישירות לאתר החי, אותו דבר כמו בטאבים האחרים.
     </p>
     <p class="hint" id="homeimg-token-warning" style="display:none; color:#ff6b6b; margin-bottom:14px;">
       עדיין לא חיברת טוקן גיטהאב — עברי לטאב "חיבור לגיטהאב" והגדירי אותו לפני השמירה.
@@ -110,9 +109,13 @@
     <div class="field">
       <label for="h-card">כרטיסייה</label>
       <select id="h-card">
-        <option value="molds">התבניות שלי</option>
-        <option value="inspiration">לוחות השראה</option>
-        <option value="calculator">מחשבון</option>
+        <option value="molds">עמוד הבית — התבניות שלי</option>
+        <option value="inspiration">עמוד הבית — לוחות השראה</option>
+        <option value="calculator">עמוד הבית — מחשבון</option>
+        <option value="colors">לוחות השראה — צבעים</option>
+        <option value="combos">לוחות השראה — שילובי צבעים</option>
+        <option value="effects">לוחות השראה — אפקטים</option>
+        <option value="patterns">לוחות השראה — דוגמאות שונות</option>
       </select>
     </div>
     <div class="field">
