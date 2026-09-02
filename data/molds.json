@@ -46,14 +46,14 @@
     "category": "מגשים שטוחים עם דפנות",
     "description": "אובלי- אליפסה",
     "image": "images/molds/23.jpg",
-    "volumeMl": null
+    "volumeMl": 150
   },
   {
     "id": "24",
     "category": "מגשים שטוחים עם דפנות",
     "description": "ריבוע",
     "image": "images/molds/24.jpg",
-    "volumeMl": null
+    "volumeMl": 125
   },
   {
     "id": "25",
@@ -81,42 +81,42 @@
     "category": "מגשים שטוחים עם דפנות",
     "description": "מלבני גדול דמוי גילופי אבן",
     "image": "images/molds/29.jpg",
-    "volumeMl": null
+    "volumeMl": 200
   },
   {
     "id": "201",
     "category": "מגשים שטוחים ללא דפנות",
     "description": "מלבן",
     "image": "images/molds/201.jpg",
-    "volumeMl": null
+    "volumeMl": 125
   },
   {
     "id": "202",
     "category": "מגשים שטוחים ללא דפנות",
     "description": "אליפסה",
     "image": "images/molds/202.jpg",
-    "volumeMl": null
+    "volumeMl": 40
   },
   {
     "id": "203",
     "category": "מגשים שטוחים ללא דפנות",
     "description": "עיגול",
     "image": "images/molds/203.jpg",
-    "volumeMl": null
+    "volumeMl": 25
   },
   {
     "id": "204",
     "category": "מגשים שטוחים ללא דפנות",
     "description": "ריבוע קטן",
     "image": "images/molds/204.jpg",
-    "volumeMl": null
+    "volumeMl": 50
   },
   {
     "id": "205",
     "category": "מגשים שטוחים ללא דפנות",
     "description": "ריבוע גדול",
     "image": "images/molds/205.jpg",
-    "volumeMl": null
+    "volumeMl": 150
   },
   {
     "id": "31",
@@ -158,7 +158,7 @@
     "category": "לנרות קטנים",
     "description": "לב",
     "image": "images/molds/42.jpg",
-    "volumeMl": null
+    "volumeMl": 75
   },
   {
     "id": "43",
@@ -459,14 +459,14 @@
     "category": "מגשים שטוחים עם דפנות",
     "description": "אסימטרי בינוני",
     "image": "images/molds/27.png",
-    "volumeMl": null
+    "volumeMl": 140
   },
   {
     "id": "41",
     "category": "לנרות קטנים",
     "description": "לב",
     "image": "images/molds/41.png",
-    "volumeMl": null
+    "volumeMl": 75
   },
   {
     "id": "33",
