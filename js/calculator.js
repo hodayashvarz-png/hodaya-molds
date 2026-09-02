@@ -63,51 +63,63 @@ document.querySelectorAll(".tab-btn").forEach((btn) => {
       </div>`;
   });
 
-  // ---------- טאב 2: שילובים אקראיים לניצול חומר גלם ----------
-  function shuffle(arr) {
-    const a = arr.slice();
-    for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [a[i], a[j]] = [a[j], a[i]];
+  // ---------- טאב 2: שילובים לניצול מיטבי של חומר גלם ----------
+  // בודקים את כל השילובים האפשריים בגודל 1 עד maxSize (לא אקראי), כדי
+  // למצוא את הניצול הכי גבוה של החומר הזמין תוך שימוש בכמה שפחות תבניות:
+  // ממיינים לפי (ניצול יורד, מספר פריטים עולה), כך ששני שילובים עם אותו
+  // ניצול — המצומצם מביניהם עדיף.
+  function categoryCapOk(items, priorityCats) {
+    const counts = {};
+    for (const m of items) {
+      if (!priorityCats.includes(m.category)) continue;
+      counts[m.category] = (counts[m.category] || 0) + 1;
+      if (counts[m.category] > 1) return false;
     }
-    return a;
+    return true;
   }
 
-  function buildRandomCombo(pool, availableMl, priorityCats, maxSize = 3) {
-    const shuffled = shuffle(pool);
-    const combo = [];
-    const usedPriorityCats = new Set();
-    let total = 0;
-    for (const m of shuffled) {
-      if (combo.length >= maxSize) break;
-      if (priorityCats.includes(m.category) && usedPriorityCats.has(m.category)) continue;
-      const need = moldConcreteMl(m);
-      if (total + need <= availableMl) {
-        combo.push(m);
-        total += need;
-        if (priorityCats.includes(m.category)) usedPriorityCats.add(m.category);
+  function enumerateCombos(pool, availableMl, priorityCats, maxSize) {
+    const results = [];
+    const n = pool.length;
+
+    for (let i = 0; i < n; i++) {
+      const totalI = moldConcreteMl(pool[i]);
+      if (totalI <= availableMl) results.push({ combo: [pool[i]], total: totalI });
+      if (maxSize < 2) continue;
+
+      for (let j = i + 1; j < n; j++) {
+        if (!categoryCapOk([pool[i], pool[j]], priorityCats)) continue;
+        const totalIJ = totalI + moldConcreteMl(pool[j]);
+        if (totalIJ <= availableMl) results.push({ combo: [pool[i], pool[j]], total: totalIJ });
+        if (maxSize < 3 || totalIJ > availableMl) continue;
+
+        for (let k = j + 1; k < n; k++) {
+          if (!categoryCapOk([pool[i], pool[j], pool[k]], priorityCats)) continue;
+          const total = totalIJ + moldConcreteMl(pool[k]);
+          if (total <= availableMl) results.push({ combo: [pool[i], pool[j], pool[k]], total });
+        }
       }
     }
-    return { combo, total };
+    return results;
   }
 
-  function generateRandomCombos(pool, availableMl, count, priorityCats = []) {
+  function generateBestCombos(pool, availableMl, count, priorityCats = [], maxSize = 3) {
+    const all = enumerateCombos(pool, availableMl, priorityCats, maxSize);
+    all.sort((a, b) => b.total - a.total || a.combo.length - b.combo.length);
+
     const results = [];
     const seen = new Set();
-    let attempts = 0;
-    while (results.length < count && attempts < 300) {
-      attempts++;
-      const { combo, total } = buildRandomCombo(pool, availableMl, priorityCats);
-      if (combo.length === 0) continue;
-      const signature = combo
+    for (const item of all) {
+      const signature = item.combo
         .map((m) => m.id)
         .sort()
         .join(",");
       if (seen.has(signature)) continue;
       seen.add(signature);
-      results.push({ combo, total });
+      results.push(item);
+      if (results.length >= count) break;
     }
-    return results.sort((a, b) => b.total - a.total);
+    return results;
   }
 
   document.getElementById("r-calc-btn").addEventListener("click", () => {
@@ -134,7 +146,7 @@ document.querySelectorAll(".tab-btn").forEach((btn) => {
       return;
     }
 
-    const combos = generateRandomCombos(pool, available, 3, priorityCats);
+    const combos = generateBestCombos(pool, available, 3, priorityCats);
     if (combos.length === 0) {
       result.innerHTML = `<p class="empty-note">לא נמצאו שילובים מתאימים, נסו כמות אחרת.</p>`;
       return;
