@@ -64,60 +64,75 @@ document.querySelectorAll(".tab-btn").forEach((btn) => {
   });
 
   // ---------- טאב 2: שילובים לניצול מיטבי של חומר גלם ----------
-  // בודקים את כל השילובים האפשריים בגודל 1 עד maxSize (לא אקראי), כדי
-  // למצוא את הניצול הכי גבוה של החומר הזמין תוך שימוש בכמה שפחות תבניות:
-  // ממיינים לפי (ניצול יורד, מספר פריטים עולה), כך ששני שילובים עם אותו
-  // ניצול — המצומצם מביניהם עדיף.
-  function categoryCapOk(items, priorityCats) {
-    const counts = {};
-    for (const m of items) {
-      if (!priorityCats.includes(m.category)) continue;
-      counts[m.category] = (counts[m.category] || 0) + 1;
-      if (counts[m.category] > 1) return false;
-    }
-    return true;
-  }
+  // בעיית "תרמיל" (knapsack) קלאסית: מוצאים את קבוצת-המשנה של התבניות
+  // שמנצלת הכי הרבה מהחומר הזמין (בלי חריגה), ומבין הפתרונות שמנצלים
+  // הכי הרבה — מעדיפים את זה עם הכי מעט תבניות. אין הגבלה על מספר
+  // הפריטים בשילוב; אם צריך 10 תבניות כדי להגיע לניצול המקסימלי, זה בסדר.
+  // תמיכה ב"עדיפות" קטגוריה: לכל קטגוריית עדיפות שנבחרה, מותר לכל היותר
+  // תבנית אחת ממנה בשילוב — זה נשמר כביט נפרד ב-state של ה-DP.
+  function knapsackBestCombo(pool, availableMl, priorityCats) {
+    const capacity = Math.max(0, Math.floor(availableMl));
+    const numMasks = 1 << priorityCats.length;
 
-  function enumerateCombos(pool, availableMl, priorityCats, maxSize) {
-    const results = [];
-    const n = pool.length;
+    const makeEmptyRow = () => {
+      const row = new Array(capacity + 1);
+      for (let c = 0; c <= capacity; c++) row[c] = { total: 0, count: 0, items: null };
+      return row;
+    };
 
-    for (let i = 0; i < n; i++) {
-      const totalI = moldConcreteMl(pool[i]);
-      if (totalI <= availableMl) results.push({ combo: [pool[i]], total: totalI });
-      if (maxSize < 2) continue;
+    let dp = [];
+    for (let mask = 0; mask < numMasks; mask++) dp.push(makeEmptyRow());
 
-      for (let j = i + 1; j < n; j++) {
-        if (!categoryCapOk([pool[i], pool[j]], priorityCats)) continue;
-        const totalIJ = totalI + moldConcreteMl(pool[j]);
-        if (totalIJ <= availableMl) results.push({ combo: [pool[i], pool[j]], total: totalIJ });
-        if (maxSize < 3 || totalIJ > availableMl) continue;
+    for (const m of pool) {
+      const w = moldConcreteMl(m);
+      if (w > capacity) continue;
+      const priIdx = priorityCats.indexOf(m.category);
+      const bit = priIdx >= 0 ? 1 << priIdx : 0;
 
-        for (let k = j + 1; k < n; k++) {
-          if (!categoryCapOk([pool[i], pool[j], pool[k]], priorityCats)) continue;
-          const total = totalIJ + moldConcreteMl(pool[k]);
-          if (total <= availableMl) results.push({ combo: [pool[i], pool[j], pool[k]], total });
+      const dpPrev = dp;
+      const dpNext = dp.map((row) => row.slice());
+
+      for (let mask = 0; mask < numMasks; mask++) {
+        if (bit && mask & bit) continue; // הקטגוריה הזו כבר נוצלה במסלול הזה
+        const targetMask = mask | bit;
+        for (let c = w; c <= capacity; c++) {
+          const prevCell = dpPrev[mask][c - w];
+          const candidateTotal = prevCell.total + w;
+          const candidateCount = prevCell.count + 1;
+          const current = dpNext[targetMask][c];
+          const better =
+            candidateTotal > current.total || (candidateTotal === current.total && candidateCount < current.count);
+          if (better) {
+            dpNext[targetMask][c] = { total: candidateTotal, count: candidateCount, items: { mold: m, prev: prevCell.items } };
+          }
         }
       }
+
+      dp = dpNext;
     }
-    return results;
+
+    let best = { total: 0, count: 0, items: null };
+    for (let mask = 0; mask < numMasks; mask++) {
+      const cell = dp[mask][capacity];
+      if (cell.total > best.total || (cell.total === best.total && cell.count < best.count)) best = cell;
+    }
+
+    const combo = [];
+    for (let node = best.items; node; node = node.prev) combo.push(node.mold);
+    return { combo, total: best.total };
   }
 
-  function generateBestCombos(pool, availableMl, count, priorityCats = [], maxSize = 3) {
-    const all = enumerateCombos(pool, availableMl, priorityCats, maxSize);
-    all.sort((a, b) => b.total - a.total || a.combo.length - b.combo.length);
-
+  // מריצים knapsack, ואז מוציאים את התבניות שנבחרו מהמאגר ומריצים שוב,
+  // כדי לקבל כמה הצעות שונות (כל אחת אופטימלית ביחס למה שנשאר במאגר).
+  function generateBestCombos(pool, availableMl, count, priorityCats = []) {
     const results = [];
-    const seen = new Set();
-    for (const item of all) {
-      const signature = item.combo
-        .map((m) => m.id)
-        .sort()
-        .join(",");
-      if (seen.has(signature)) continue;
-      seen.add(signature);
-      results.push(item);
-      if (results.length >= count) break;
+    let remainingPool = pool;
+    for (let i = 0; i < count; i++) {
+      const { combo, total } = knapsackBestCombo(remainingPool, availableMl, priorityCats);
+      if (combo.length === 0) break;
+      results.push({ combo, total });
+      const usedIds = new Set(combo.map((m) => m.id));
+      remainingPool = remainingPool.filter((m) => !usedIds.has(m.id));
     }
     return results;
   }
