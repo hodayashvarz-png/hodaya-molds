@@ -43,6 +43,13 @@ document.querySelectorAll(".tab-btn").forEach((btn) => {
     return `מס' ${m.id} — ${m.description} (נפח תבנית ${m.volumeMl} מ״ל, צורך ${moldConcreteMl(m)} מ״ל בטון, ${categoryName(categories, m.category)})`;
   }
 
+  function moldListItem(m) {
+    return `<li class="combo-item">
+      <img class="combo-item-img" src="${m.image}" alt="" onerror="moldImgFallback(this, '')" />
+      <span>${moldLine(m)}</span>
+    </li>`;
+  }
+
   // ---------- טאב 1: נפח -> בטון ומים ----------
   document.getElementById("v-calc-btn").addEventListener("click", () => {
     const volume = parseFloat(document.getElementById("v-volume").value);
@@ -226,14 +233,7 @@ document.querySelectorAll(".tab-btn").forEach((btn) => {
         const leftover = Math.round((available - c.total) * 10) / 10;
         return `<div class="result-card">
           <h3>שילוב ${i + 1} — ניצול ${c.total} מ״ל בטון מתוך ${available} מ״ל</h3>
-          <ul class="combo-list">${c.combo
-            .map(
-              (m) => `<li class="combo-item">
-                <img class="combo-item-img" src="${m.image}" alt="" onerror="moldImgFallback(this, '')" />
-                <span>${moldLine(m)}</span>
-              </li>`
-            )
-            .join("")}</ul>
+          <ul class="combo-list">${c.combo.map(moldListItem).join("")}</ul>
           <div class="totals">נותרים: ${leftover} מ״ל</div>
         </div>`;
       })
@@ -285,7 +285,7 @@ document.querySelectorAll(".tab-btn").forEach((btn) => {
     if (chosenMolds.length > 0) {
       html += `<div class="result-card">
         <h3>תבניות שנבחרו — סה״כ ${usedConcrete} מ״ל בטון</h3>
-        <ul>${chosenMolds.map((m) => `<li>${moldLine(m)}</li>`).join("")}</ul>
+        <ul class="combo-list">${chosenMolds.map(moldListItem).join("")}</ul>
       </div>`;
     }
 
@@ -308,7 +308,7 @@ document.querySelectorAll(".tab-btn").forEach((btn) => {
 
     html += `<div class="result-card">
       <h3>שארית לניצול: ${remaining} מ״ל בטון</h3>
-      <ul>${suggestions.map((m) => `<li>${moldLine(m)}</li>`).join("")}</ul>
+      <ul class="combo-list">${suggestions.map(moldListItem).join("")}</ul>
     </div>`;
 
     result.innerHTML = html;
