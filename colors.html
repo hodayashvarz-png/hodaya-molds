@@ -20,7 +20,6 @@
 
 <div class="modal-overlay hidden" id="modal">
   <div class="modal-box">
-    <h2 id="modal-title"></h2>
     <p class="modal-sub">הצעת ערבוב (יחס כללי, לא מדויק)</p>
     <p id="modal-tip" style="font-size:15px; line-height:1.6;"></p>
     <button class="close-btn" data-close-modal>סגירה</button>
@@ -41,7 +40,6 @@
   grid.querySelectorAll(".color-swatch").forEach((el) => {
     el.addEventListener("click", () => {
       const color = COLORS.find((c) => c.id === el.dataset.id);
-      document.getElementById("modal-title").textContent = color.name;
       document.getElementById("modal-tip").textContent = color.mixTip;
       modal.classList.remove("hidden");
     });
