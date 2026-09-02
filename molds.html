@@ -14,16 +14,47 @@
 </header>
 
 <main>
-  <p class="page-lead">בחרו סיווג כדי לראות את כל התבניות שבו.</p>
+  <p class="page-lead">בחרו סיווג כדי לראות את כל התבניות שבו, או חפשו לפי מספר תבנית.</p>
+  <div class="field">
+    <input type="search" id="mold-search" placeholder="חיפוש לפי מספר תבנית (לדוגמה: 101)" />
+  </div>
   <div class="card-grid" id="cat-grid"></div>
+  <div class="item-grid" id="search-grid" style="display:none;"></div>
+  <p class="empty-note" id="search-empty" style="display:none;">לא נמצאה תבנית עם המספר הזה.</p>
   <p class="empty-note" id="loading-note">טוען...</p>
 </main>
+
+<div class="modal-overlay hidden" id="modal">
+  <div class="modal-box">
+    <h2 id="modal-title"></h2>
+    <p class="modal-sub" id="modal-desc"></p>
+    <img class="modal-img" id="modal-img" alt="" />
+    <div class="stat-row">
+      <span class="label">נפח כולל</span>
+      <span class="value" id="modal-volume"></span>
+    </div>
+    <div class="stat-row">
+      <span class="label">בטון נדרש</span>
+      <span class="value" id="modal-concrete"></span>
+    </div>
+    <div class="stat-row">
+      <span class="label">מים נדרשים</span>
+      <span class="value" id="modal-water"></span>
+    </div>
+    <button class="close-btn" data-close-modal>סגירה</button>
+  </div>
+</div>
 
 <script src="js/data.js"></script>
 <script src="js/data-loader.js"></script>
 <script>
+  let allCategories = [];
+  let allMolds = [];
+
   (async () => {
     const { categories, molds } = await loadMoldData();
+    allCategories = categories;
+    allMolds = molds;
     const grid = document.getElementById("cat-grid");
     document.getElementById("loading-note").style.display = "none";
     grid.innerHTML = categories.map((cat) => {
@@ -39,6 +70,65 @@
       </a>`;
     }).join("");
   })();
+
+  const modal = document.getElementById("modal");
+  setupModalClosers(modal);
+
+  function openMoldModal(id) {
+    const mold = allMolds.find((m) => m.id === id);
+    if (!mold) return;
+    const mix = calcMix(mold.volumeMl);
+    document.getElementById("modal-title").textContent = `תבנית מס' ${mold.id}`;
+    document.getElementById("modal-desc").textContent = mold.description;
+    const imgEl = document.getElementById("modal-img");
+    imgEl.onerror = () => moldImgFallback(imgEl, "אין תמונה עדיין");
+    imgEl.src = mold.image;
+    document.getElementById("modal-volume").textContent = mold.volumeMl != null ? `${mold.volumeMl} מ״ל` : "טרם הוזן";
+    document.getElementById("modal-concrete").textContent = mix.concreteMl != null ? `${mix.concreteMl} מ״ל` : "טרם הוזן";
+    document.getElementById("modal-water").textContent = mix.waterMl != null ? `${mix.waterMl} מ״ל` : "טרם הוזן";
+    modal.classList.remove("hidden");
+  }
+
+  const catGrid = document.getElementById("cat-grid");
+  const searchGrid = document.getElementById("search-grid");
+  const searchEmpty = document.getElementById("search-empty");
+
+  document.getElementById("mold-search").addEventListener("input", (e) => {
+    const query = e.target.value.trim();
+
+    if (!query) {
+      catGrid.style.display = "grid";
+      searchGrid.style.display = "none";
+      searchEmpty.style.display = "none";
+      return;
+    }
+
+    catGrid.style.display = "none";
+    const matches = allMolds.filter((m) => m.id.includes(query));
+
+    if (matches.length === 0) {
+      searchGrid.style.display = "none";
+      searchEmpty.style.display = "block";
+      return;
+    }
+
+    searchEmpty.style.display = "none";
+    searchGrid.style.display = "grid";
+    searchGrid.innerHTML = matches
+      .map(
+        (m) => `<div class="item-card">
+          <img class="thumb" src="${m.image}" alt="${m.description}" data-id="${m.id}" onerror="moldImgFallback(this, 'אין תמונה עדיין')" />
+          <div class="meta">
+            <div class="serial">מס' ${m.id}</div>
+            <div class="desc">${m.description} (${categoryName(allCategories, m.category)})</div>
+          </div>
+        </div>`
+      )
+      .join("");
+    searchGrid.querySelectorAll("img.thumb").forEach((img) => {
+      img.addEventListener("click", () => openMoldModal(img.dataset.id));
+    });
+  });
 
   renderBottomNav("molds");
 </script>
