@@ -171,6 +171,12 @@ document.querySelectorAll(".tab-btn").forEach((btn) => {
     return results;
   }
 
+  // לחיצה חוזרת על "הצע 3 שילובים" עם אותה כמות ואותן עדיפויות תציע
+  // שילובים אחרים: זוכרים אילו תבניות כבר הוצעו וממשיכים משם, ומתחילים
+  // מחדש רק כשהכמות/העדיפויות משתנות, או כשנגמרות תבניות חדשות להציע.
+  let excludedMoldIds = new Set();
+  let lastRequestKey = null;
+
   document.getElementById("r-calc-btn").addEventListener("click", () => {
     const available = parseFloat(document.getElementById("r-volume").value);
     const catA = document.getElementById("r-cat-a").value;
@@ -195,7 +201,21 @@ document.querySelectorAll(".tab-btn").forEach((btn) => {
       return;
     }
 
-    const combos = generateBestCombos(pool, available, 3, priorityCats);
+    const requestKey = `${available}|${priorityCats.join(",")}`;
+    if (requestKey !== lastRequestKey) {
+      lastRequestKey = requestKey;
+      excludedMoldIds = new Set();
+    }
+
+    let freshPool = pool.filter((m) => !excludedMoldIds.has(m.id));
+    let combos = generateBestCombos(freshPool, available, 3, priorityCats);
+    if (combos.length === 0) {
+      // עברנו על כל התבניות שאפשר — מתחילים מחדש מההתחלה
+      excludedMoldIds = new Set();
+      combos = generateBestCombos(pool, available, 3, priorityCats);
+    }
+    combos.forEach((c) => c.combo.forEach((m) => excludedMoldIds.add(m.id)));
+
     if (combos.length === 0) {
       result.innerHTML = `<p class="empty-note">לא נמצאו שילובים מתאימים, נסו כמות אחרת.</p>`;
       return;
