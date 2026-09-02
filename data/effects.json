@@ -1,5 +1,86 @@
 {
-  "marble": [],
+  "marble": [
+    {
+      "id": "marble-1788369342296-0",
+      "caption": "",
+      "image": "images/effects/marble/marble-1788369342296-0.jpeg"
+    },
+    {
+      "id": "marble-1788369343948-1",
+      "caption": "",
+      "image": "images/effects/marble/marble-1788369343948-1.jpeg"
+    },
+    {
+      "id": "marble-1788369345536-2",
+      "caption": "",
+      "image": "images/effects/marble/marble-1788369345536-2.jpeg"
+    },
+    {
+      "id": "marble-1788369347175-3",
+      "caption": "",
+      "image": "images/effects/marble/marble-1788369347175-3.jpeg"
+    },
+    {
+      "id": "marble-1788369348813-4",
+      "caption": "",
+      "image": "images/effects/marble/marble-1788369348813-4.jpeg"
+    },
+    {
+      "id": "marble-1788369350346-5",
+      "caption": "",
+      "image": "images/effects/marble/marble-1788369350346-5.jpeg"
+    },
+    {
+      "id": "marble-1788369351577-6",
+      "caption": "",
+      "image": "images/effects/marble/marble-1788369351577-6.jpeg"
+    },
+    {
+      "id": "marble-1788369353934-7",
+      "caption": "",
+      "image": "images/effects/marble/marble-1788369353934-7.jpeg"
+    },
+    {
+      "id": "marble-1788369356043-8",
+      "caption": "",
+      "image": "images/effects/marble/marble-1788369356043-8.jpeg"
+    },
+    {
+      "id": "marble-1788369358333-9",
+      "caption": "",
+      "image": "images/effects/marble/marble-1788369358333-9.jpeg"
+    },
+    {
+      "id": "marble-1788369359667-10",
+      "caption": "",
+      "image": "images/effects/marble/marble-1788369359667-10.jpeg"
+    },
+    {
+      "id": "marble-1788369361202-11",
+      "caption": "",
+      "image": "images/effects/marble/marble-1788369361202-11.jpeg"
+    },
+    {
+      "id": "marble-1788369362945-12",
+      "caption": "",
+      "image": "images/effects/marble/marble-1788369362945-12.jpeg"
+    },
+    {
+      "id": "marble-1788369364689-13",
+      "caption": "",
+      "image": "images/effects/marble/marble-1788369364689-13.jpeg"
+    },
+    {
+      "id": "marble-1788369366637-14",
+      "caption": "",
+      "image": "images/effects/marble/marble-1788369366637-14.jpeg"
+    },
+    {
+      "id": "marble-1788369368336-15",
+      "caption": "",
+      "image": "images/effects/marble/marble-1788369368336-15.jpeg"
+    }
+  ],
   "terrazzo": [
     {
       "id": "terrazzo-1788293827741-0",
