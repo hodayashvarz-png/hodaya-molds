@@ -32,7 +32,7 @@
 <script>
   const grid = document.getElementById("color-grid");
   grid.innerHTML = COLORS.map(
-    (c) => `<div class="color-swatch" style="background:${c.hex};" data-id="${c.id}"></div>`
+    (c) => `<div class="color-swatch" style="background-color:${c.hex}; background-image:url('textures/colors/${c.id}.png');" data-id="${c.id}"></div>`
   ).join("");
 
   const modal = document.getElementById("modal");
