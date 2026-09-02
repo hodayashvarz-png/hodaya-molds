@@ -73,7 +73,7 @@ document.querySelectorAll(".tab-btn").forEach((btn) => {
     return a;
   }
 
-  function buildRandomCombo(pool, availableMl, priorityCats, maxSize = 5) {
+  function buildRandomCombo(pool, availableMl, priorityCats, maxSize = 3) {
     const shuffled = shuffle(pool);
     const combo = [];
     const usedPriorityCats = new Set();
