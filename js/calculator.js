@@ -40,7 +40,7 @@ document.querySelectorAll(".tab-btn").forEach((btn) => {
   }
 
   function moldLine(m) {
-    return `מס' ${m.id} — ${m.description} (נפח תבנית ${m.volumeMl} מ״ל, צורך ${moldConcreteMl(m)} מ״ל בטון, ${categoryName(categories, m.category)})`;
+    return `מס' ${m.id} — ${categoryName(categories, m.category)}, ${m.description} (צורך ${moldConcreteMl(m)} מ״ל בטון)`;
   }
 
   function moldListItem(m) {
