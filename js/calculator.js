@@ -206,7 +206,14 @@ document.querySelectorAll(".tab-btn").forEach((btn) => {
         const leftover = Math.round((available - c.total) * 10) / 10;
         return `<div class="result-card">
           <h3>שילוב ${i + 1} — ניצול ${c.total} מ״ל בטון מתוך ${available} מ״ל</h3>
-          <ul>${c.combo.map((m) => `<li>${moldLine(m)}</li>`).join("")}</ul>
+          <ul class="combo-list">${c.combo
+            .map(
+              (m) => `<li class="combo-item">
+                <img class="combo-item-img" src="${m.image}" alt="" onerror="moldImgFallback(this, '')" />
+                <span>${moldLine(m)}</span>
+              </li>`
+            )
+            .join("")}</ul>
           <div class="totals">נותרים: ${leftover} מ״ל</div>
         </div>`;
       })
