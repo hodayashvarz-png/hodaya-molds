@@ -24,7 +24,8 @@ document.querySelectorAll(".tab-btn").forEach((btn) => {
       selectEl.appendChild(opt);
     });
   }
-  fillCategorySelect(document.getElementById("r-cat"));
+  fillCategorySelect(document.getElementById("r-cat-a"));
+  fillCategorySelect(document.getElementById("r-cat-b"));
   fillCategorySelect(document.getElementById("e-cat"));
 
   // טאבים 2/3 עובדים מול "כמה חומר גלם התבנית צורכת" (מ"ל בטון), לא מול
@@ -72,28 +73,31 @@ document.querySelectorAll(".tab-btn").forEach((btn) => {
     return a;
   }
 
-  function buildRandomCombo(pool, availableMl, maxSize = 5) {
+  function buildRandomCombo(pool, availableMl, priorityCats, maxSize = 5) {
     const shuffled = shuffle(pool);
     const combo = [];
+    const usedPriorityCats = new Set();
     let total = 0;
     for (const m of shuffled) {
       if (combo.length >= maxSize) break;
+      if (priorityCats.includes(m.category) && usedPriorityCats.has(m.category)) continue;
       const need = moldConcreteMl(m);
       if (total + need <= availableMl) {
         combo.push(m);
         total += need;
+        if (priorityCats.includes(m.category)) usedPriorityCats.add(m.category);
       }
     }
     return { combo, total };
   }
 
-  function generateRandomCombos(pool, availableMl, count) {
+  function generateRandomCombos(pool, availableMl, count, priorityCats = []) {
     const results = [];
     const seen = new Set();
     let attempts = 0;
     while (results.length < count && attempts < 300) {
       attempts++;
-      const { combo, total } = buildRandomCombo(pool, availableMl);
+      const { combo, total } = buildRandomCombo(pool, availableMl, priorityCats);
       if (combo.length === 0) continue;
       const signature = combo
         .map((m) => m.id)
@@ -108,7 +112,9 @@ document.querySelectorAll(".tab-btn").forEach((btn) => {
 
   document.getElementById("r-calc-btn").addEventListener("click", () => {
     const available = parseFloat(document.getElementById("r-volume").value);
-    const catId = document.getElementById("r-cat").value;
+    const catA = document.getElementById("r-cat-a").value;
+    const catB = document.getElementById("r-cat-b").value;
+    const priorityCats = [...new Set([catA, catB].filter((c) => c))];
     const result = document.getElementById("r-result");
 
     if (!available || available <= 0) {
@@ -116,19 +122,19 @@ document.querySelectorAll(".tab-btn").forEach((btn) => {
       return;
     }
 
-    const pool = moldsInCategory(catId);
+    const pool = moldsInCategory("all");
     if (pool.length === 0) {
-      result.innerHTML = `<p class="empty-note">אין תבניות בסיווג הזה עם נפח מוזן.</p>`;
+      result.innerHTML = `<p class="empty-note">אין תבניות עם נפח מוזן.</p>`;
       return;
     }
 
     const smallest = Math.min(...pool.map((m) => moldConcreteMl(m)));
     if (smallest > available) {
-      result.innerHTML = `<p class="empty-note">אין תבנית בסיווג הזה שמתאימה לכמות הזו — כל התבניות דורשות יותר חומר.</p>`;
+      result.innerHTML = `<p class="empty-note">אין תבנית שמתאימה לכמות הזו — כל התבניות דורשות יותר חומר.</p>`;
       return;
     }
 
-    const combos = generateRandomCombos(pool, available, 3);
+    const combos = generateRandomCombos(pool, available, 3, priorityCats);
     if (combos.length === 0) {
       result.innerHTML = `<p class="empty-note">לא נמצאו שילובים מתאימים, נסו כמות אחרת.</p>`;
       return;
