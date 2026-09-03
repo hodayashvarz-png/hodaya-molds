@@ -21,13 +21,6 @@
     "volumeMl": 70
   },
   {
-    "id": "23",
-    "category": "מגשים שטוחים עם דפנות",
-    "description": "אובלי- אליפסה",
-    "image": "images/molds/23.jpg",
-    "volumeMl": 150
-  },
-  {
     "id": "24",
     "category": "מגשים שטוחים עם דפנות",
     "description": "ריבוע",
@@ -544,5 +537,12 @@
     "description": "בינוני- בצורת שק",
     "image": "images/molds/111.png",
     "volumeMl": null
+  },
+  {
+    "id": "23",
+    "category": "מגשים שטוחים עם דפנות",
+    "description": "אובלי- אליפסה",
+    "image": "images/molds/23.png",
+    "volumeMl": 150
   }
 ]
