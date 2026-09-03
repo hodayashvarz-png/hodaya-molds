@@ -7,13 +7,6 @@
     "volumeMl": null
   },
   {
-    "id": "25",
-    "category": "מגשים שטוחים עם דפנות",
-    "description": "עיגול",
-    "image": "images/molds/25.jpg",
-    "volumeMl": 25
-  },
-  {
     "id": "26",
     "category": "מגשים שטוחים עם דפנות",
     "description": "אסימטרי קטן",
@@ -544,5 +537,12 @@
     "description": "אובלית קצוות צרים עם פסים",
     "image": "images/molds/38.png",
     "volumeMl": 100
+  },
+  {
+    "id": "25",
+    "category": "מגשים שטוחים עם דפנות",
+    "description": "עיגול",
+    "image": "images/molds/25.png",
+    "volumeMl": 25
   }
 ]
