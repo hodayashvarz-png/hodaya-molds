@@ -21,13 +21,6 @@
     "volumeMl": 200
   },
   {
-    "id": "29",
-    "category": "מגשים שטוחים עם דפנות",
-    "description": "מלבני גדול דמוי גילופי אבן",
-    "image": "images/molds/29.jpg",
-    "volumeMl": 200
-  },
-  {
     "id": "201",
     "category": "מגשים שטוחים ללא דפנות",
     "description": "מלבן",
@@ -544,5 +537,12 @@
     "description": "פסל סוס",
     "image": "images/molds/64.png",
     "volumeMl": null
+  },
+  {
+    "id": "29",
+    "category": "מגשים שטוחים עם דפנות",
+    "description": "מלבני גדול דמוי גילופי אבן",
+    "image": "images/molds/29.png",
+    "volumeMl": 200
   }
 ]
