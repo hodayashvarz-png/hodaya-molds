@@ -144,28 +144,28 @@
     "category": "פסלונים",
     "description": "בודהה א",
     "image": "images/molds/66.jpg",
-    "volumeMl": null
+    "volumeMl": 50
   },
   {
     "id": "67",
     "category": "פסלונים",
     "description": "בודהה ב",
     "image": "images/molds/67.jpg",
-    "volumeMl": null
+    "volumeMl": 50
   },
   {
     "id": "68",
     "category": "פסלונים",
     "description": "בודהה ג",
     "image": "images/molds/68.jpg",
-    "volumeMl": null
+    "volumeMl": 50
   },
   {
     "id": "69",
     "category": "פסלונים",
     "description": "בודהה ד",
     "image": "images/molds/69.jpg",
-    "volumeMl": null
+    "volumeMl": 50
   },
   {
     "id": "610",
