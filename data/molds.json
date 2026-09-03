@@ -193,14 +193,14 @@
     "category": "שונות",
     "description": "כנפיים לתליה",
     "image": "images/molds/71.jpg",
-    "volumeMl": null
+    "volumeMl": 30
   },
   {
     "id": "72",
     "category": "שונות",
     "description": "לב לתליה",
     "image": "images/molds/72.jpg",
-    "volumeMl": null
+    "volumeMl": 20
   },
   {
     "id": "73",
@@ -249,21 +249,21 @@
     "category": "שונות",
     "description": "מיני כוס עגולה",
     "image": "images/molds/710.jpg",
-    "volumeMl": null
+    "volumeMl": 60
   },
   {
     "id": "711",
     "category": "שונות",
     "description": "מיני כוס מרובעת",
     "image": "images/molds/711.jpg",
-    "volumeMl": null
+    "volumeMl": 80
   },
   {
     "id": "712",
     "category": "שונות",
     "description": "מיני כוס משושה",
     "image": "images/molds/712.jpg",
-    "volumeMl": null
+    "volumeMl": 80
   },
   {
     "id": "11",
