@@ -14,13 +14,6 @@
     "volumeMl": 70
   },
   {
-    "id": "22",
-    "category": "מגשים שטוחים עם דפנות",
-    "description": "משושה חדש",
-    "image": "images/molds/22.jpg",
-    "volumeMl": 70
-  },
-  {
     "id": "24",
     "category": "מגשים שטוחים עם דפנות",
     "description": "ריבוע",
@@ -544,5 +537,12 @@
     "description": "פרצוף מחייך (גדול)",
     "image": "images/molds/54.png",
     "volumeMl": 140
+  },
+  {
+    "id": "22",
+    "category": "מגשים שטוחים עם דפנות",
+    "description": "משושה חדש",
+    "image": "images/molds/22.png",
+    "volumeMl": 70
   }
 ]
