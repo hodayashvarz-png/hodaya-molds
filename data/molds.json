@@ -154,13 +154,6 @@
     "volumeMl": null
   },
   {
-    "id": "64",
-    "category": "פסלונים",
-    "description": "פסל סוס",
-    "image": "images/molds/64.jpg",
-    "volumeMl": null
-  },
-  {
     "id": "65",
     "category": "פסלונים",
     "description": "צפרדע",
@@ -544,5 +537,12 @@
     "description": "פרצוף מחייך (גדול)",
     "image": "images/molds/54.png",
     "volumeMl": 140
+  },
+  {
+    "id": "64",
+    "category": "פסלונים",
+    "description": "פסל סוס",
+    "image": "images/molds/64.png",
+    "volumeMl": null
   }
 ]
