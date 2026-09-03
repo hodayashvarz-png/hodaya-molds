@@ -4,7 +4,7 @@
     "category": "ואזות אחרות",
     "description": "הרבה דפנות, רחבה קצרה",
     "image": "images/molds/106.jpg",
-    "volumeMl": null
+    "volumeMl": 200
   },
   {
     "id": "26",
@@ -389,14 +389,14 @@
     "category": "ואזות אחרות",
     "description": "8 דפנות בינונית",
     "image": "images/molds/103.png",
-    "volumeMl": null
+    "volumeMl": 200
   },
   {
     "id": "104",
     "category": "ואזות אחרות",
     "description": "הרבה דפנות, רחבה קצרה",
     "image": "images/molds/104.png",
-    "volumeMl": null
+    "volumeMl": 175
   },
   {
     "id": "105",
@@ -410,21 +410,21 @@
     "category": "ואזות אחרות",
     "description": "עגולה ארוכה",
     "image": "images/molds/107.png",
-    "volumeMl": null
+    "volumeMl": 250
   },
   {
     "id": "102",
     "category": "ואזות אחרות",
     "description": "קטנה ארוכה צרה עם פסים",
     "image": "images/molds/102.png",
-    "volumeMl": null
+    "volumeMl": 130
   },
   {
     "id": "101",
     "category": "ואזות אחרות",
     "description": "קטנה קלאסית",
     "image": "images/molds/101.png",
-    "volumeMl": null
+    "volumeMl": 130
   },
   {
     "id": "207",
@@ -445,28 +445,28 @@
     "category": "ואזות אחרות",
     "description": "עגולה קצרה",
     "image": "images/molds/108.png",
-    "volumeMl": null
+    "volumeMl": 250
   },
   {
     "id": "109",
     "category": "ואזות אחרות",
     "description": "בינוני- בצורת שק",
     "image": "images/molds/109.png",
-    "volumeMl": null
+    "volumeMl": 150
   },
   {
     "id": "110",
     "category": "ואזות אחרות",
     "description": "בינוני- בצורת שק",
     "image": "images/molds/110.png",
-    "volumeMl": null
+    "volumeMl": 150
   },
   {
     "id": "111",
     "category": "ואזות אחרות",
     "description": "בינוני- בצורת שק",
     "image": "images/molds/111.png",
-    "volumeMl": null
+    "volumeMl": 150
   },
   {
     "id": "23",
