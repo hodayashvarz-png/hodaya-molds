@@ -172,21 +172,21 @@
     "category": "פסלונים",
     "description": "גאנש א",
     "image": "images/molds/610.jpg",
-    "volumeMl": null
+    "volumeMl": 50
   },
   {
     "id": "611",
     "category": "פסלונים",
     "description": "גאנש א",
     "image": "images/molds/611.jpg",
-    "volumeMl": null
+    "volumeMl": 50
   },
   {
     "id": "612",
     "category": "פסלונים",
     "description": "גאנש ב",
     "image": "images/molds/612.jpg",
-    "volumeMl": null
+    "volumeMl": 40
   },
   {
     "id": "71",
