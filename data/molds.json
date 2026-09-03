@@ -116,7 +116,7 @@
     "category": "פסלונים",
     "description": "עמוד רומי עגול נמוך",
     "image": "images/molds/61.jpg",
-    "volumeMl": null
+    "volumeMl": 125
   },
   {
     "id": "62",
@@ -522,7 +522,7 @@
     "category": "פסלונים",
     "description": "פסל סוס",
     "image": "images/molds/64.png",
-    "volumeMl": null
+    "volumeMl": 80
   },
   {
     "id": "29",
