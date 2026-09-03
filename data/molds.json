@@ -504,13 +504,6 @@
     "volumeMl": 150
   },
   {
-    "id": "54",
-    "category": "לשתילים קטנים",
-    "description": "פרצוף מחייך (גדול)",
-    "image": "images/molds/54.png",
-    "volumeMl": 140
-  },
-  {
     "id": "22",
     "category": "מגשים שטוחים עם דפנות",
     "description": "משושה חדש",
@@ -544,5 +537,12 @@
     "description": "עיגול",
     "image": "images/molds/25.png",
     "volumeMl": 25
+  },
+  {
+    "id": "54",
+    "category": "לשתילים קטנים",
+    "description": "פרצוף מחייך (גדול)",
+    "image": "images/molds/54.png",
+    "volumeMl": 140
   }
 ]
