@@ -490,13 +490,6 @@
     "volumeMl": null
   },
   {
-    "id": "108",
-    "category": "ואזות אחרות",
-    "description": "עגולה קצרה",
-    "image": "images/molds/108.png",
-    "volumeMl": null
-  },
-  {
     "id": "104",
     "category": "ואזות אחרות",
     "description": "הרבה דפנות, רחבה קצרה",
@@ -544,5 +537,12 @@
     "description": "דג פסים לאורך",
     "image": "images/molds/206.jpeg",
     "volumeMl": 85
+  },
+  {
+    "id": "108",
+    "category": "ואזות אחרות",
+    "description": "עגולה קצרה",
+    "image": "images/molds/108.png",
+    "volumeMl": null
   }
 ]
