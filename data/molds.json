@@ -161,13 +161,6 @@
     "volumeMl": 140
   },
   {
-    "id": "54",
-    "category": "לשתילים קטנים",
-    "description": "פרצוף מחייך (גדול)",
-    "image": "images/molds/54.jpg",
-    "volumeMl": 140
-  },
-  {
     "id": "55",
     "category": "לשתילים קטנים",
     "description": "פרצוף מחייך (קטן)",
@@ -544,5 +537,12 @@
     "description": "אובלי- אליפסה",
     "image": "images/molds/23.png",
     "volumeMl": 150
+  },
+  {
+    "id": "54",
+    "category": "לשתילים קטנים",
+    "description": "פרצוף מחייך (גדול)",
+    "image": "images/molds/54.png",
+    "volumeMl": 140
   }
 ]
