@@ -7,13 +7,6 @@
     "volumeMl": null
   },
   {
-    "id": "21",
-    "category": "מגשים שטוחים עם דפנות",
-    "description": "משושה ישן",
-    "image": "images/molds/21.jpg",
-    "volumeMl": 70
-  },
-  {
     "id": "24",
     "category": "מגשים שטוחים עם דפנות",
     "description": "ריבוע",
@@ -543,6 +536,13 @@
     "category": "מגשים שטוחים עם דפנות",
     "description": "משושה חדש",
     "image": "images/molds/22.png",
+    "volumeMl": 70
+  },
+  {
+    "id": "21",
+    "category": "מגשים שטוחים עם דפנות",
+    "description": "משושה ישן",
+    "image": "images/molds/21.png",
     "volumeMl": 70
   }
 ]
