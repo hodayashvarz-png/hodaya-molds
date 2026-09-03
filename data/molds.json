@@ -7,13 +7,6 @@
     "volumeMl": null
   },
   {
-    "id": "110",
-    "category": "ואזות אחרות",
-    "description": "בינוני- קטן בצורת שק",
-    "image": "images/molds/110.jpg",
-    "volumeMl": null
-  },
-  {
     "id": "111",
     "category": "ואזות אחרות",
     "description": "בינוני- קטן בצורת שק",
@@ -543,6 +536,13 @@
     "category": "ואזות אחרות",
     "description": "בינוני- בצורת שק",
     "image": "images/molds/109.png",
+    "volumeMl": null
+  },
+  {
+    "id": "110",
+    "category": "ואזות אחרות",
+    "description": "בינוני- בצורת שק",
+    "image": "images/molds/110.png",
     "volumeMl": null
   }
 ]
