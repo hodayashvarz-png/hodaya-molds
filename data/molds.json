@@ -91,13 +91,6 @@
     "volumeMl": 75
   },
   {
-    "id": "43",
-    "category": "לנרות קטנים",
-    "description": "עיגול",
-    "image": "images/molds/43.jpg",
-    "volumeMl": 60
-  },
-  {
     "id": "44",
     "category": "לנרות קטנים",
     "description": "עיגול",
@@ -544,5 +537,12 @@
     "description": "מלבני גדול דמוי גילופי אבן",
     "image": "images/molds/29.png",
     "volumeMl": 200
+  },
+  {
+    "id": "43",
+    "category": "לנרות קטנים",
+    "description": "עיגול",
+    "image": "images/molds/43.png",
+    "volumeMl": 60
   }
 ]
