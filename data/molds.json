@@ -91,13 +91,6 @@
     "volumeMl": 75
   },
   {
-    "id": "44",
-    "category": "לנרות קטנים",
-    "description": "עיגול",
-    "image": "images/molds/44.jpg",
-    "volumeMl": 60
-  },
-  {
     "id": "52",
     "category": "לשתילים קטנים",
     "description": "ינשוף",
@@ -543,6 +536,13 @@
     "category": "לנרות קטנים",
     "description": "עיגול",
     "image": "images/molds/43.png",
+    "volumeMl": 60
+  },
+  {
+    "id": "44",
+    "category": "לנרות קטנים",
+    "description": "עיגול",
+    "image": "images/molds/44.png",
     "volumeMl": 60
   }
 ]
