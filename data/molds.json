@@ -203,14 +203,6 @@
     "volumeMl": null
   },
   {
-    "id": "711",
-    "category": "שונות",
-    "description": "מיני כוס מרובעת",
-    "image": "images/molds/711.jpg",
-    "volumeMl": 80,
-    "note": "קשה לחלץ מהתבנית, כנראה לא יפגע בתוצאה."
-  },
-  {
     "id": "11",
     "category": "ואזות חלולות למבחנות",
     "description": "עיגול",
@@ -552,6 +544,14 @@
     "category": "שונות",
     "description": "מיני כוס משושה",
     "image": "images/molds/712.png",
+    "volumeMl": 80,
+    "note": "קשה לחלץ מהתבנית, כנראה לא יפגע בתוצאה."
+  },
+  {
+    "id": "711",
+    "category": "שונות",
+    "description": "מיני כוס מרובעת",
+    "image": "images/molds/711.png",
     "volumeMl": 80,
     "note": "קשה לחלץ מהתבנית, כנראה לא יפגע בתוצאה."
   }
