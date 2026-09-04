@@ -15,13 +15,13 @@
 </header>
 
 <main>
-  <p class="page-lead">בחרו סיווג כדי לראות את כל התבניות שבו, או חפשו לפי מספר תבנית.</p>
+  <p class="page-lead">בחרו סיווג כדי לראות את כל התבניות שבו, או חפשו לפי מספר תבנית או תיאור.</p>
   <div class="field">
-    <input type="search" id="mold-search" placeholder="חיפוש לפי מספר תבנית (לדוגמה: 101)" />
+    <input type="search" id="mold-search" placeholder="חיפוש לפי מספר תבנית או תיאור (לדוגמה: 101 או ואזה)" />
   </div>
   <div class="card-grid" id="cat-grid"></div>
   <div class="item-grid" id="search-grid" style="display:none;"></div>
-  <p class="empty-note" id="search-empty" style="display:none;">לא נמצאה תבנית עם המספר הזה.</p>
+  <p class="empty-note" id="search-empty" style="display:none;">לא נמצאה תבנית תואמת.</p>
   <p class="empty-note" id="loading-note">טוען...</p>
 </main>
 
@@ -113,7 +113,9 @@
     }
 
     catGrid.style.display = "none";
-    const matches = allMolds.filter((m) => m.id.includes(query));
+    const matches = allMolds.filter(
+      (m) => m.id.includes(query) || m.description.includes(query)
+    );
 
     if (matches.length === 0) {
       searchGrid.style.display = "none";
