@@ -140,13 +140,6 @@
     "volumeMl": 50
   },
   {
-    "id": "69",
-    "category": "פסלונים",
-    "description": "בודהה עושה מדיטציה",
-    "image": "images/molds/69.jpg",
-    "volumeMl": 50
-  },
-  {
     "id": "610",
     "category": "פסלונים",
     "description": "גאנש א",
@@ -551,6 +544,14 @@
     "category": "פסלונים",
     "description": "בודהה ידיים על הפה",
     "image": "images/molds/68.png",
+    "volumeMl": 50,
+    "note": null
+  },
+  {
+    "id": "69",
+    "category": "פסלונים",
+    "description": "בודהה עושה מדיטציה",
+    "image": "images/molds/69.png",
     "volumeMl": 50,
     "note": null
   }
