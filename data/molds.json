@@ -49,13 +49,6 @@
     "volumeMl": 150
   },
   {
-    "id": "31",
-    "category": "קערות קטנות ומגשים עם עומק",
-    "description": "אליפסה קטנה",
-    "image": "images/molds/31.jpg",
-    "volumeMl": 90
-  },
-  {
     "id": "36",
     "category": "קערות קטנות ומגשים עם עומק",
     "description": "כנף מלאך ימין",
@@ -554,6 +547,14 @@
     "description": "אסימטרי גדול",
     "image": "images/molds/28.png",
     "volumeMl": 200,
+    "note": null
+  },
+  {
+    "id": "31",
+    "category": "קערות קטנות ומגשים עם עומק",
+    "description": "אליפסה קטנה",
+    "image": "images/molds/31.png",
+    "volumeMl": 90,
     "note": null
   }
 ]
