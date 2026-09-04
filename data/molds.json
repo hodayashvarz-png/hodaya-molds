@@ -14,13 +14,6 @@
     "volumeMl": 100
   },
   {
-    "id": "28",
-    "category": "מגשים שטוחים עם דפנות",
-    "description": "אסימטרי גדול",
-    "image": "images/molds/28.jpg",
-    "volumeMl": 200
-  },
-  {
     "id": "201",
     "category": "מגשים שטוחים ללא דפנות",
     "description": "מלבן",
@@ -554,5 +547,13 @@
     "image": "images/molds/711.png",
     "volumeMl": 80,
     "note": "קשה לחלץ מהתבנית, כנראה לא יפגע בתוצאה."
+  },
+  {
+    "id": "28",
+    "category": "מגשים שטוחים עם דפנות",
+    "description": "אסימטרי גדול",
+    "image": "images/molds/28.png",
+    "volumeMl": 200,
+    "note": null
   }
 ]
