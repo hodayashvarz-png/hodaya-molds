@@ -250,21 +250,24 @@
     "category": "שונות",
     "description": "מיני כוס עגולה",
     "image": "images/molds/710.jpg",
-    "volumeMl": 60
+    "volumeMl": 60,
+    "note": "קשה לחלץ מהתבנית, כנראה לא יפגע בתוצאה."
   },
   {
     "id": "711",
     "category": "שונות",
     "description": "מיני כוס מרובעת",
     "image": "images/molds/711.jpg",
-    "volumeMl": 80
+    "volumeMl": 80,
+    "note": "קשה לחלץ מהתבנית, כנראה לא יפגע בתוצאה."
   },
   {
     "id": "712",
     "category": "שונות",
     "description": "מיני כוס משושה",
     "image": "images/molds/712.jpg",
-    "volumeMl": 80
+    "volumeMl": 80,
+    "note": "קשה לחלץ מהתבנית, כנראה לא יפגע בתוצאה."
   },
   {
     "id": "11",
