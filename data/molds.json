@@ -140,13 +140,6 @@
     "volumeMl": 50
   },
   {
-    "id": "67",
-    "category": "פסלונים",
-    "description": "בודהה ידיים על העיניים",
-    "image": "images/molds/67.jpg",
-    "volumeMl": 50
-  },
-  {
     "id": "68",
     "category": "פסלונים",
     "description": "בודהה ידיים על הפה",
@@ -549,6 +542,14 @@
     "category": "פסלונים",
     "description": "בודהה ידיים על האוזניים",
     "image": "images/molds/66.png",
+    "volumeMl": 50,
+    "note": null
+  },
+  {
+    "id": "67",
+    "category": "פסלונים",
+    "description": "בודהה ידיים על העיניים",
+    "image": "images/molds/67.png",
     "volumeMl": 50,
     "note": null
   }
