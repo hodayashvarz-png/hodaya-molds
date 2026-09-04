@@ -42,6 +42,7 @@
       <span class="label">מים נדרשים</span>
       <span class="value" id="modal-water"></span>
     </div>
+    <p class="modal-warning hidden" id="modal-note"></p>
     <button class="close-btn" data-close-modal>סגירה</button>
   </div>
 </div>
@@ -87,6 +88,13 @@
     document.getElementById("modal-volume").textContent = mold.volumeMl != null ? `${mold.volumeMl} מ״ל` : "טרם הוזן";
     document.getElementById("modal-concrete").textContent = mix.concreteMl != null ? `${mix.concreteMl} מ״ל` : "טרם הוזן";
     document.getElementById("modal-water").textContent = mix.waterMl != null ? `${mix.waterMl} מ״ל` : "טרם הוזן";
+    const noteEl = document.getElementById("modal-note");
+    if (mold.note) {
+      noteEl.textContent = mold.note;
+      noteEl.classList.remove("hidden");
+    } else {
+      noteEl.classList.add("hidden");
+    }
     modal.classList.remove("hidden");
   }
 

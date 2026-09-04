@@ -63,6 +63,11 @@
       <p class="hint">כמות הבטון והמים יחושבו אוטומטית לפי הנפח.</p>
     </div>
     <div class="field">
+      <label for="m-note">הערת אזהרה (לא חובה)</label>
+      <input type="text" id="m-note" placeholder="לדוגמה: היציקה רחבה מדי, ניתן להניח עליה לכל היותר טבעת אחת" />
+      <p class="hint">אם ממלאים כאן משהו, זה יופיע כהערה מודגשת כשלוחצים על התבנית באתר.</p>
+    </div>
+    <div class="field">
       <label for="m-image">תמונת התבנית (לא חובה)</label>
       <input type="file" id="m-image" accept="image/*" />
       <p class="hint" id="m-image-hint">אפשר גם לשמור בלי תמונה עכשיו ולהוסיף אותה מאוחר יותר (פשוט שמרו את התבנית שוב עם אותו מספר סידורי + תמונה).</p>
@@ -277,6 +282,7 @@
   const idField = document.getElementById("m-id");
   const descField = document.getElementById("m-desc");
   const volumeField = document.getElementById("m-volume");
+  const noteField = document.getElementById("m-note");
   const imageHint = document.getElementById("m-image-hint");
   const saveBtn = document.getElementById("save-mold-btn");
 
@@ -285,6 +291,7 @@
     idField.disabled = false;
     descField.value = "";
     volumeField.value = "";
+    noteField.value = "";
     document.getElementById("m-image").value = "";
     imageHint.textContent =
       "אפשר גם לשמור בלי תמונה עכשיו ולהוסיף אותה מאוחר יותר (פשוט שמרו את התבנית שוב עם אותו מספר סידורי + תמונה).";
@@ -302,6 +309,7 @@
     idField.disabled = true; // כדי לא ליצור בטעות תבנית כפולה עם id אחר
     descField.value = mold.description;
     volumeField.value = mold.volumeMl != null ? mold.volumeMl : "";
+    noteField.value = mold.note || "";
     catSelect.value = liveCategories.some((c) => c.id === mold.category) ? mold.category : "__new__";
     newCatField.style.display = catSelect.value === "__new__" ? "block" : "none";
     document.getElementById("m-image").value = "";
@@ -348,6 +356,7 @@
     const id = document.getElementById("m-id").value.trim();
     const desc = document.getElementById("m-desc").value.trim();
     const volume = document.getElementById("m-volume").value.trim();
+    const note = document.getElementById("m-note").value.trim();
     const imageFile = document.getElementById("m-image").files[0];
     const msg = document.getElementById("mold-save-msg");
 
@@ -416,6 +425,7 @@
             description: desc,
             image: imagePath,
             volumeMl: volume ? Number(volume) : null,
+            note: note || null,
           });
           liveMolds = currentMolds;
           return currentMolds;

@@ -344,6 +344,17 @@ main {
 .stat-row .label { color: var(--muted); }
 .stat-row .value { font-weight: 700; color: var(--ink); }
 
+.modal-warning {
+  margin-top: 14px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  background: rgba(180, 90, 40, 0.16);
+  border: 1px solid rgba(180, 90, 40, 0.35);
+  color: var(--ink);
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
 .close-btn {
   display: block;
   margin: 20px auto 0;

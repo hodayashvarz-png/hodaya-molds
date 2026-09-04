@@ -235,7 +235,8 @@
     "category": "שונות",
     "description": "מעמד לטבעות בינוני",
     "image": "images/molds/78.jpg",
-    "volumeMl": 80
+    "volumeMl": 80,
+    "note": "היציקה רחבה מדי — ניתן להניח עליה לכל היותר טבעת אחת."
   },
   {
     "id": "79",
