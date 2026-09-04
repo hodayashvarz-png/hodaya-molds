@@ -291,7 +291,7 @@ main {
   z-index: 100;
 }
 
-.modal-overlay.hidden { display: none; }
+.hidden { display: none !important; }
 
 .modal-box {
   background-color: var(--card-fallback);
