@@ -147,13 +147,6 @@
     "volumeMl": 40
   },
   {
-    "id": "71",
-    "category": "שונות",
-    "description": "כנפיים לתליה",
-    "image": "images/molds/71.jpg",
-    "volumeMl": 30
-  },
-  {
     "id": "72",
     "category": "שונות",
     "description": "לב לתליה",
@@ -556,5 +549,13 @@
     "image": "images/molds/31.png",
     "volumeMl": 90,
     "note": null
+  },
+  {
+    "id": "71",
+    "category": "שונות",
+    "description": "כנפיים לתליה",
+    "image": "images/molds/71.png",
+    "volumeMl": 30,
+    "note": "לחלץ מהתבנית בזהירות"
   }
 ]
