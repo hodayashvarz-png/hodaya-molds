@@ -109,14 +109,14 @@
     "category": "פסלונים",
     "description": "עמוד רומי עגול גבוה",
     "image": "images/molds/62.jpg",
-    "volumeMl": null
+    "volumeMl": 175
   },
   {
     "id": "63",
     "category": "פסלונים",
     "description": "עמוד רומי מרובע גבוה",
     "image": "images/molds/63.jpg",
-    "volumeMl": null
+    "volumeMl": 150
   },
   {
     "id": "65",
@@ -327,7 +327,7 @@
     "category": "ואזות אחרות",
     "description": "רחבה קצרה מרובעת",
     "image": "images/molds/105.png",
-    "volumeMl": null
+    "volumeMl": 200
   },
   {
     "id": "107",
