@@ -105,13 +105,6 @@
     "volumeMl": 125
   },
   {
-    "id": "62",
-    "category": "פסלונים",
-    "description": "עמוד רומי עגול גבוה",
-    "image": "images/molds/62.jpg",
-    "volumeMl": 175
-  },
-  {
     "id": "63",
     "category": "פסלונים",
     "description": "עמוד רומי מרובע גבוה",
@@ -557,5 +550,13 @@
     "image": "images/molds/71.png",
     "volumeMl": 30,
     "note": "לחלץ מהתבנית בזהירות"
+  },
+  {
+    "id": "62",
+    "category": "פסלונים",
+    "description": "עמוד רומי עגול גבוה",
+    "image": "images/molds/62.png",
+    "volumeMl": 175,
+    "note": null
   }
 ]
