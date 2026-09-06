@@ -77,13 +77,6 @@
     "volumeMl": 75
   },
   {
-    "id": "61",
-    "category": "פסלונים",
-    "description": "עמוד רומי עגול נמוך",
-    "image": "images/molds/61.jpg",
-    "volumeMl": 125
-  },
-  {
     "id": "63",
     "category": "פסלונים",
     "description": "עמוד רומי מרובע גבוה",
@@ -560,6 +553,14 @@
     "description": "ריבוע גדול",
     "image": "images/molds/205.png",
     "volumeMl": 150,
+    "note": null
+  },
+  {
+    "id": "61",
+    "category": "פסלונים",
+    "description": "עמוד רומי עגול נמוך",
+    "image": "images/molds/61.png",
+    "volumeMl": 125,
     "note": null
   }
 ]
