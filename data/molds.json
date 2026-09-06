@@ -56,13 +56,6 @@
     "volumeMl": 75
   },
   {
-    "id": "52",
-    "category": "לשתילים קטנים",
-    "description": "ינשוף",
-    "image": "images/molds/52.jpg",
-    "volumeMl": 280
-  },
-  {
     "id": "53",
     "category": "לשתילים קטנים",
     "description": "רובוט",
@@ -561,6 +554,14 @@
     "description": "עמוד רומי עגול נמוך",
     "image": "images/molds/61.png",
     "volumeMl": 125,
+    "note": null
+  },
+  {
+    "id": "52",
+    "category": "לשתילים קטנים",
+    "description": "ינשוף",
+    "image": "images/molds/52.png",
+    "volumeMl": 280,
     "note": null
   }
 ]
