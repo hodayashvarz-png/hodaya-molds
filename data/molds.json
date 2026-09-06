@@ -14,13 +14,6 @@
     "volumeMl": 100
   },
   {
-    "id": "202",
-    "category": "מגשים שטוחים ללא דפנות",
-    "description": "אליפסה",
-    "image": "images/molds/202.jpg",
-    "volumeMl": 40
-  },
-  {
     "id": "203",
     "category": "מגשים שטוחים ללא דפנות",
     "description": "עיגול",
@@ -558,6 +551,14 @@
     "description": "מלבן",
     "image": "images/molds/201.png",
     "volumeMl": 125,
+    "note": null
+  },
+  {
+    "id": "202",
+    "category": "מגשים שטוחים ללא דפנות",
+    "description": "אליפסה",
+    "image": "images/molds/202.png",
+    "volumeMl": 40,
     "note": null
   }
 ]
