@@ -28,13 +28,6 @@
     "volumeMl": 50
   },
   {
-    "id": "205",
-    "category": "מגשים שטוחים ללא דפנות",
-    "description": "ריבוע גדול",
-    "image": "images/molds/205.jpg",
-    "volumeMl": 150
-  },
-  {
     "id": "36",
     "category": "קערות קטנות ומגשים עם עומק",
     "description": "כנף מלאך ימין",
@@ -559,6 +552,14 @@
     "description": "אליפסה",
     "image": "images/molds/202.png",
     "volumeMl": 40,
+    "note": null
+  },
+  {
+    "id": "205",
+    "category": "מגשים שטוחים ללא דפנות",
+    "description": "ריבוע גדול",
+    "image": "images/molds/205.png",
+    "volumeMl": 150,
     "note": null
   }
 ]
