@@ -581,3 +581,68 @@ details.advanced summary {
   font-size: 14px;
   padding: 34px 10px;
 }
+
+/* ---------- שער סיסמה (admin.html) ---------- */
+.password-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: var(--bg-fallback);
+  background-image: var(--bg-tex);
+}
+
+.password-box {
+  width: 100%;
+  max-width: 360px;
+  background-color: var(--card-fallback);
+  background-image: var(--card-tex);
+  background-size: 340px 340px;
+  border-radius: var(--radius-lg);
+  padding: 26px 24px;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+
+.password-box h2 {
+  margin: 0 0 8px;
+  font-size: 19px;
+  color: var(--ink);
+}
+
+.password-box .hint {
+  color: var(--muted);
+  font-size: 13.5px;
+  margin: 0 0 18px;
+  line-height: 1.5;
+}
+
+.password-box input {
+  width: 100%;
+  padding: 11px 13px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  background: var(--bg-fallback);
+  color: var(--ink);
+  font-family: inherit;
+  text-align: center;
+  margin-bottom: 14px;
+}
+
+.password-box input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.password-box .btn {
+  width: 100%;
+}
+
+.password-box #gate-error {
+  margin-top: 14px;
+  margin-bottom: 0;
+}

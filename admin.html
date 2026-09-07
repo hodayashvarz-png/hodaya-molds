@@ -9,6 +9,17 @@
 <script src="js/main.js"></script>
 </head>
 <body>
+<div class="password-gate" id="password-gate">
+  <div class="password-box">
+    <h2>גישה מוגבלת</h2>
+    <p class="hint">יש להזין סיסמה כדי להיכנס לעמוד הוספת התוכן.</p>
+    <input type="password" id="gate-password" placeholder="סיסמה" inputmode="numeric" />
+    <button class="btn" id="gate-submit">כניסה</button>
+    <p class="hint" id="gate-error" style="display:none; color:#ff6b6b;">סיסמה שגויה.</p>
+  </div>
+</div>
+
+<div id="admin-content" class="hidden">
 <header class="top-bar">
   <a class="back-link" href="index.html">חזרה</a>
   <h1>הוספת תוכן</h1>
@@ -200,11 +211,44 @@
     <p class="hint" id="gh-token-status" style="margin-top:14px;"></p>
   </div>
 </main>
+</div>
 
 <script src="js/data.js"></script>
 <script src="js/data-loader.js"></script>
 <script src="js/github-sync.js"></script>
 <script>
+  // ---------- שער סיסמה ----------
+  const ADMIN_PASSWORD = "8866456";
+  const gate = document.getElementById("password-gate");
+  const adminContent = document.getElementById("admin-content");
+  const gatePasswordInput = document.getElementById("gate-password");
+  const gateError = document.getElementById("gate-error");
+
+  function unlockAdmin() {
+    localStorage.setItem("adminUnlocked", "true");
+    gate.classList.add("hidden");
+    adminContent.classList.remove("hidden");
+  }
+
+  function tryUnlock() {
+    if (gatePasswordInput.value === ADMIN_PASSWORD) {
+      unlockAdmin();
+    } else {
+      gateError.style.display = "block";
+      gatePasswordInput.value = "";
+      gatePasswordInput.focus();
+    }
+  }
+
+  if (localStorage.getItem("adminUnlocked") === "true") {
+    unlockAdmin();
+  }
+
+  document.getElementById("gate-submit").addEventListener("click", tryUnlock);
+  gatePasswordInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") tryUnlock();
+  });
+
   // ---------- טאבים ----------
   document.querySelectorAll(".tab-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
