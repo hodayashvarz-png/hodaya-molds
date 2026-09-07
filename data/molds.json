@@ -84,13 +84,6 @@
     "volumeMl": 50
   },
   {
-    "id": "612",
-    "category": "פסלונים",
-    "description": "גאנש ב",
-    "image": "images/molds/612.jpg",
-    "volumeMl": 40
-  },
-  {
     "id": "72",
     "category": "שונות",
     "description": "לב לתליה",
@@ -573,6 +566,14 @@
     "description": "4 תליונים קטנים ברווז",
     "image": "images/molds/73.png",
     "volumeMl": null,
+    "note": null
+  },
+  {
+    "id": "612",
+    "category": "פסלונים",
+    "description": "גאנש ב",
+    "image": "images/molds/612.png",
+    "volumeMl": 40,
     "note": null
   }
 ]
