@@ -28,13 +28,6 @@
     "volumeMl": 75
   },
   {
-    "id": "55",
-    "category": "עציצים קטנים או כוסות",
-    "description": "פרצוף מחייך (קטן)",
-    "image": "images/molds/55.jpg",
-    "volumeMl": 75
-  },
-  {
     "id": "65",
     "category": "פסלונים",
     "description": "צפרדע",
@@ -579,6 +572,14 @@
     "description": "עמוד רומי מרובע גבוה",
     "image": "images/molds/63.png",
     "volumeMl": 150,
+    "note": null
+  },
+  {
+    "id": "55",
+    "category": "עציצים קטנים או כוסות",
+    "description": "פרצוף מחייך (קטן)",
+    "image": "images/molds/55.png",
+    "volumeMl": 75,
     "note": null
   }
 ]
