@@ -28,13 +28,6 @@
     "volumeMl": 50
   },
   {
-    "id": "36",
-    "category": "קערות קטנות ומגשים עם עומק",
-    "description": "כנף מלאך ימין",
-    "image": "images/molds/36.jpg",
-    "volumeMl": 60
-  },
-  {
     "id": "37",
     "category": "קערות קטנות ומגשים עם עומק",
     "description": "כנף מלאך שמאל",
@@ -570,5 +563,13 @@
     "description": "מלבני צר",
     "image": "images/molds/210.jpg",
     "volumeMl": null
+  },
+  {
+    "id": "36",
+    "category": "קערות קטנות ומגשים עם עומק",
+    "description": "כנף מלאך ימין",
+    "image": "images/molds/36.png",
+    "volumeMl": 60,
+    "note": null
   }
 ]
