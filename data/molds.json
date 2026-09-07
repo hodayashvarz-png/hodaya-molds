@@ -14,13 +14,6 @@
     "volumeMl": 100
   },
   {
-    "id": "203",
-    "category": "מגשים שטוחים ללא דפנות",
-    "description": "עיגול",
-    "image": "images/molds/203.jpg",
-    "volumeMl": 25
-  },
-  {
     "id": "204",
     "category": "מגשים שטוחים ללא דפנות",
     "description": "ריבוע קטן",
@@ -574,6 +567,14 @@
     "description": "גאנש ב",
     "image": "images/molds/612.png",
     "volumeMl": 40,
+    "note": null
+  },
+  {
+    "id": "203",
+    "category": "מגשים שטוחים ללא דפנות",
+    "description": "עיגול",
+    "image": "images/molds/203.png",
+    "volumeMl": 25,
     "note": null
   }
 ]
