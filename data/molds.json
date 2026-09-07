@@ -35,13 +35,6 @@
     "volumeMl": 75
   },
   {
-    "id": "63",
-    "category": "פסלונים",
-    "description": "עמוד רומי מרובע גבוה",
-    "image": "images/molds/63.jpg",
-    "volumeMl": 150
-  },
-  {
     "id": "65",
     "category": "פסלונים",
     "description": "צפרדע",
@@ -577,6 +570,14 @@
     "category": "קערות קטנות ומגשים עם עומק",
     "description": "קערה עגולה גדולה",
     "image": "images/molds/310.png",
+    "volumeMl": 150,
+    "note": null
+  },
+  {
+    "id": "63",
+    "category": "פסלונים",
+    "description": "עמוד רומי מרובע גבוה",
+    "image": "images/molds/63.png",
     "volumeMl": 150,
     "note": null
   }
