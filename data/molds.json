@@ -98,13 +98,6 @@
     "volumeMl": 20
   },
   {
-    "id": "73",
-    "category": "שונות",
-    "description": "4 תליונים קטנים ברווז",
-    "image": "images/molds/73.jpg",
-    "volumeMl": null
-  },
-  {
     "id": "74",
     "category": "שונות",
     "description": "פרצופים קטנים מרובעים",
@@ -572,6 +565,14 @@
     "description": "גאנש א",
     "image": "images/molds/610.png",
     "volumeMl": 50,
+    "note": null
+  },
+  {
+    "id": "73",
+    "category": "שונות",
+    "description": "4 תליונים קטנים ברווז",
+    "image": "images/molds/73.png",
+    "volumeMl": null,
     "note": null
   }
 ]
