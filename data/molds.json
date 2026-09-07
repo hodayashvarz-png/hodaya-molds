@@ -77,13 +77,6 @@
     "volumeMl": 50
   },
   {
-    "id": "610",
-    "category": "פסלונים",
-    "description": "גאנש א",
-    "image": "images/molds/610.jpg",
-    "volumeMl": 50
-  },
-  {
     "id": "611",
     "category": "פסלונים",
     "description": "גאנש א",
@@ -571,6 +564,14 @@
     "description": "מלבני צר",
     "image": "images/molds/210.png",
     "volumeMl": null,
+    "note": null
+  },
+  {
+    "id": "610",
+    "category": "פסלונים",
+    "description": "גאנש א",
+    "image": "images/molds/610.png",
+    "volumeMl": 50,
     "note": null
   }
 ]
