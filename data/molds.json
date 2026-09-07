@@ -35,13 +35,6 @@
     "volumeMl": 75
   },
   {
-    "id": "53",
-    "category": "עציצים קטנים או כוסות",
-    "description": "רובוט",
-    "image": "images/molds/53.jpg",
-    "volumeMl": 140
-  },
-  {
     "id": "55",
     "category": "עציצים קטנים או כוסות",
     "description": "פרצוף מחייך (קטן)",
@@ -576,6 +569,14 @@
     "description": "כנף מלאך שמאל",
     "image": "images/molds/37.png",
     "volumeMl": 60,
+    "note": null
+  },
+  {
+    "id": "53",
+    "category": "עציצים קטנים או כוסות",
+    "description": "רובוט",
+    "image": "images/molds/53.png",
+    "volumeMl": 140,
     "note": null
   }
 ]
