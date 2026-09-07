@@ -35,13 +35,6 @@
     "volumeMl": 50
   },
   {
-    "id": "72",
-    "category": "שונות",
-    "description": "לב לתליה",
-    "image": "images/molds/72.jpg",
-    "volumeMl": 20
-  },
-  {
     "id": "75",
     "category": "שונות",
     "description": "פרצופים קטנים עגולים",
@@ -582,6 +575,14 @@
     "description": "צפרדע",
     "image": "images/molds/65.png",
     "volumeMl": 50,
+    "note": null
+  },
+  {
+    "id": "72",
+    "category": "שונות",
+    "description": "לב לתליה",
+    "image": "images/molds/72.png",
+    "volumeMl": 20,
     "note": null
   }
 ]
