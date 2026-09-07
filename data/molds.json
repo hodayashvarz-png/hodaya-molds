@@ -49,13 +49,6 @@
     "volumeMl": 20
   },
   {
-    "id": "74",
-    "category": "שונות",
-    "description": "פרצופים קטנים מרובעים",
-    "image": "images/molds/74.jpg",
-    "volumeMl": null
-  },
-  {
     "id": "75",
     "category": "שונות",
     "description": "פרצופים קטנים עגולים",
@@ -580,6 +573,14 @@
     "description": "פרצוף מחייך (קטן)",
     "image": "images/molds/55.png",
     "volumeMl": 75,
+    "note": null
+  },
+  {
+    "id": "74",
+    "category": "שונות",
+    "description": "פרצופים קטנים מרובעים",
+    "image": "images/molds/74.jpg",
+    "volumeMl": null,
     "note": null
   }
 ]
