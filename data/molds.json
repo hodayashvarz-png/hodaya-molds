@@ -28,13 +28,6 @@
     "volumeMl": 75
   },
   {
-    "id": "65",
-    "category": "פסלונים",
-    "description": "צפרדע",
-    "image": "images/molds/65.jpg",
-    "volumeMl": 50
-  },
-  {
     "id": "611",
     "category": "פסלונים",
     "description": "גאנש א",
@@ -581,6 +574,14 @@
     "description": "פרצופים קטנים מרובעים",
     "image": "images/molds/74.jpg",
     "volumeMl": null,
+    "note": null
+  },
+  {
+    "id": "65",
+    "category": "פסלונים",
+    "description": "צפרדע",
+    "image": "images/molds/65.png",
+    "volumeMl": 50,
     "note": null
   }
 ]
