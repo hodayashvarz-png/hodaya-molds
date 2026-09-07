@@ -21,13 +21,6 @@
     "volumeMl": 50
   },
   {
-    "id": "310",
-    "category": "קערות קטנות ומגשים עם עומק",
-    "description": "קערה עגולה גדולה",
-    "image": "images/molds/310.jpg",
-    "volumeMl": 150
-  },
-  {
     "id": "42",
     "category": "לנרות קטנים",
     "description": "לב",
@@ -577,6 +570,14 @@
     "description": "רובוט",
     "image": "images/molds/53.png",
     "volumeMl": 140,
+    "note": null
+  },
+  {
+    "id": "310",
+    "category": "קערות קטנות ומגשים עם עומק",
+    "description": "קערה עגולה גדולה",
+    "image": "images/molds/310.png",
+    "volumeMl": 150,
     "note": null
   }
 ]
