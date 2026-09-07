@@ -21,13 +21,6 @@
     "volumeMl": 50
   },
   {
-    "id": "37",
-    "category": "קערות קטנות ומגשים עם עומק",
-    "description": "כנף מלאך שמאל",
-    "image": "images/molds/37.jpg",
-    "volumeMl": 60
-  },
-  {
     "id": "310",
     "category": "קערות קטנות ומגשים עם עומק",
     "description": "קערה עגולה גדולה",
@@ -575,6 +568,14 @@
     "description": "עיגול",
     "image": "images/molds/203.png",
     "volumeMl": 25,
+    "note": null
+  },
+  {
+    "id": "37",
+    "category": "קערות קטנות ומגשים עם עומק",
+    "description": "כנף מלאך שמאל",
+    "image": "images/molds/37.png",
+    "volumeMl": 60,
     "note": null
   }
 ]
