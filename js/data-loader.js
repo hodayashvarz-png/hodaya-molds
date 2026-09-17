@@ -13,13 +13,15 @@ async function loadMoldData() {
 }
 
 async function loadGalleryData() {
-  const [combosRes, effectsRes, patternsRes] = await Promise.all([
+  const [combosRes, effectsRes, patternsRes, workshopsRes] = await Promise.all([
     fetch("data/combos.json", { cache: "no-store" }),
     fetch("data/effects.json", { cache: "no-store" }),
     fetch("data/patterns.json", { cache: "no-store" }),
+    fetch("data/workshops.json", { cache: "no-store" }),
   ]);
   const combos = await combosRes.json();
   const effects = await effectsRes.json();
   const patterns = await patternsRes.json();
-  return { combos, effects, patterns };
+  const workshops = await workshopsRes.json();
+  return { combos, effects, patterns, workshops };
 }

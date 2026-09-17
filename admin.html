@@ -132,6 +132,7 @@
         <option value="combos">לוחות השראה — דוגמאות שלי</option>
         <option value="effects">לוחות השראה — אפקטים</option>
         <option value="patterns">לוחות השראה — דוגמאות שונות</option>
+        <option value="workshops">לוחות השראה — תוצרים מהסדנאות</option>
       </select>
     </div>
     <div class="field">
@@ -149,8 +150,9 @@
   <!-- טאב 2: תמונות השראה (גלריה) — קטע קוד להעתקה -->
   <div class="tab-panel" id="panel-gallery">
     <p class="page-lead">
-      מעלים תמונה ללוחות ההשראה (שילובי צבעים / אפקטים / דוגמאות). השמירה
-      נכתבת ישירות לאתר החי, אותו דבר כמו בטאבים האחרים.
+      מעלים תמונה ללוחות ההשראה (דוגמאות שלי / אפקטים / דוגמאות שונות /
+      תוצרים מהסדנאות). השמירה נכתבת ישירות לאתר החי, אותו דבר כמו
+      בטאבים האחרים.
     </p>
     <p class="hint" id="gallery-token-warning" style="display:none; color:#ff6b6b; margin-bottom:14px;">
       עדיין לא חיברת טוקן גיטהאב — עברי לטאב "חיבור לגיטהאב" והגדירי אותו לפני השמירה.
@@ -162,6 +164,7 @@
         <option value="marble">אפקט שיש</option>
         <option value="terrazzo">אפקט טרצו</option>
         <option value="pattern">דוגמאות שונות</option>
+        <option value="workshop">תוצרים מהסדנאות</option>
       </select>
     </div>
     <div class="field">
@@ -608,6 +611,7 @@
     marble: { jsonPath: "data/effects.json", folder: "images/effects/marble", nestedIn: "marble" },
     terrazzo: { jsonPath: "data/effects.json", folder: "images/effects/terrazzo", nestedIn: "terrazzo" },
     pattern: { jsonPath: "data/patterns.json", folder: "images/patterns", nestedIn: null },
+    workshop: { jsonPath: "data/workshops.json", folder: "images/workshops", nestedIn: null },
   };
 
   document.getElementById("save-gallery-btn").addEventListener("click", async () => {
