@@ -554,14 +554,6 @@
     "note": null
   },
   {
-    "id": "55",
-    "category": "עציצים קטנים או כוסות",
-    "description": "כוס עם לבבות + מכסה",
-    "image": "images/molds/55.png",
-    "volumeMl": 200,
-    "note": null
-  },
-  {
     "id": "74",
     "category": "שונות",
     "description": "פרצופים קטנים מרובעים",
@@ -664,5 +656,13 @@
     "image": "images/molds/47.png",
     "volumeMl": 160,
     "note": "ניתן להכין יציקה נמוכה יותר, על הקו המסומן בתבנית, בנפח כולל 100 מ\"ל (צריך 133 מ\"ל בטון ו-42 מ\"ל מים)."
+  },
+  {
+    "id": "55",
+    "category": "עציצים קטנים או כוסות",
+    "description": "כוס עם לבבות + מכסה",
+    "image": "images/molds/55.png",
+    "volumeMl": 200,
+    "note": null
   }
 ]
