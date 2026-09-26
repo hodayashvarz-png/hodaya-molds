@@ -618,14 +618,6 @@
     "note": null
   },
   {
-    "id": "57",
-    "category": "עציצים קטנים או כוסות",
-    "description": "כוס פסים גדולה",
-    "image": "images/molds/57.jpg",
-    "volumeMl": 210,
-    "note": null
-  },
-  {
     "id": "45",
     "category": "לנרות קטנים",
     "description": "מעמד לנר אליפסה",
@@ -663,6 +655,14 @@
     "description": "כוס חלקה",
     "image": "images/molds/56.png",
     "volumeMl": 125,
+    "note": null
+  },
+  {
+    "id": "57",
+    "category": "עציצים קטנים או כוסות",
+    "description": "כוס פסים גדולה",
+    "image": "images/molds/57.png",
+    "volumeMl": 210,
     "note": null
   }
 ]
