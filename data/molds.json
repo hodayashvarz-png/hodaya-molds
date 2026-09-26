@@ -556,9 +556,9 @@
   {
     "id": "55",
     "category": "עציצים קטנים או כוסות",
-    "description": "פרצוף מחייך (קטן)",
+    "description": "כוס עם לבבות + מכסה",
     "image": "images/molds/55.png",
-    "volumeMl": 75,
+    "volumeMl": 200,
     "note": null
   },
   {
@@ -583,6 +583,86 @@
     "description": "לב לתליה",
     "image": "images/molds/72.png",
     "volumeMl": 20,
+    "note": null
+  },
+  {
+    "id": "45",
+    "category": "לנרות קטנים",
+    "description": "מעמד לנר אליפסה",
+    "image": "images/molds/45.jpg",
+    "volumeMl": 230,
+    "note": null
+  },
+  {
+    "id": "46",
+    "category": "לנרות קטנים",
+    "description": "מעמד גדול לנר לב",
+    "image": "images/molds/46.jpg",
+    "volumeMl": 230,
+    "note": null
+  },
+  {
+    "id": "47",
+    "category": "לנרות קטנים",
+    "description": "פמוט מרובע",
+    "image": "images/molds/47.jpg",
+    "volumeMl": 160,
+    "note": null
+  },
+  {
+    "id": "48",
+    "category": "לנרות קטנים",
+    "description": "פמוט מרובע",
+    "image": "images/molds/48.jpg",
+    "volumeMl": 160,
+    "note": null
+  },
+  {
+    "id": "613",
+    "category": "פסלונים",
+    "description": "זוג פילים",
+    "image": "images/molds/613.jpg",
+    "volumeMl": 200,
+    "note": null
+  },
+  {
+    "id": "614",
+    "category": "פסלונים",
+    "description": "צפרדע עושה לב",
+    "image": "images/molds/614.jpg",
+    "volumeMl": 80,
+    "note": null
+  },
+  {
+    "id": "615",
+    "category": "פסלונים",
+    "description": "צב עושה לב",
+    "image": "images/molds/615.jpg",
+    "volumeMl": 100,
+    "note": null
+  },
+  {
+    "id": "616",
+    "category": "פסלונים",
+    "description": "כלב עושה לב",
+    "image": "images/molds/616.jpg",
+    "volumeMl": 85,
+    "note": null
+  },
+  {
+    "id": "56",
+    "category": "עציצים קטנים או כוסות",
+    "description": "כוס חלקה",
+    "image": "images/molds/56.jpg",
+    "volumeMl": 125,
+    "note": null
+  },
+  {
+    "id": "57",
+    "category": "עציצים קטנים או כוסות",
+    "description": "כוס פסים גדולה",
+    "image": "images/molds/57.jpg",
+    "volumeMl": 210,
     "note": null
   }
 ]
