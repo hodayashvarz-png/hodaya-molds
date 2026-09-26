@@ -586,14 +586,6 @@
     "note": "ניתן להכין יציקה נמוכה יותר, על הקו המסומן בתבנית, בנפח כולל 100 מ\"ל (צריך 133 מ\"ל בטון ו-42 מ\"ל מים)."
   },
   {
-    "id": "616",
-    "category": "פסלונים",
-    "description": "כלב עושה לב",
-    "image": "images/molds/616.jpg",
-    "volumeMl": 85,
-    "note": null
-  },
-  {
     "id": "45",
     "category": "לנרות קטנים",
     "description": "מעמד לנר אליפסה",
@@ -663,6 +655,14 @@
     "description": "צב עושה לב",
     "image": "images/molds/615.png",
     "volumeMl": 100,
+    "note": null
+  },
+  {
+    "id": "616",
+    "category": "פסלונים",
+    "description": "כלב עושה לב",
+    "image": "images/molds/616.png",
+    "volumeMl": 85,
     "note": null
   }
 ]
