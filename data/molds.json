@@ -135,7 +135,7 @@
   },
   {
     "id": "39",
-    "category": "קערות קטנות ומגשים עם עומק",
+    "category": "מגשים שטוחים עם דפנות",
     "description": "חמסה קטנה",
     "image": "images/molds/39.png",
     "volumeMl": 25
@@ -475,7 +475,7 @@
   },
   {
     "id": "36",
-    "category": "קערות קטנות ומגשים עם עומק",
+    "category": "מגשים שטוחים עם דפנות",
     "description": "כנף מלאך ימין",
     "image": "images/molds/36.png",
     "volumeMl": 60,
@@ -523,7 +523,7 @@
   },
   {
     "id": "37",
-    "category": "קערות קטנות ומגשים עם עומק",
+    "category": "מגשים שטוחים עם דפנות",
     "description": "כנף מלאך שמאל",
     "image": "images/molds/37.png",
     "volumeMl": 60,
