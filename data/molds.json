@@ -618,14 +618,6 @@
     "note": null
   },
   {
-    "id": "56",
-    "category": "עציצים קטנים או כוסות",
-    "description": "כוס חלקה",
-    "image": "images/molds/56.jpg",
-    "volumeMl": 125,
-    "note": null
-  },
-  {
     "id": "57",
     "category": "עציצים קטנים או כוסות",
     "description": "כוס פסים גדולה",
@@ -663,6 +655,14 @@
     "description": "כוס עם לבבות + מכסה",
     "image": "images/molds/55.png",
     "volumeMl": 200,
+    "note": null
+  },
+  {
+    "id": "56",
+    "category": "עציצים קטנים או כוסות",
+    "description": "כוס חלקה",
+    "image": "images/molds/56.png",
+    "volumeMl": 125,
     "note": null
   }
 ]
