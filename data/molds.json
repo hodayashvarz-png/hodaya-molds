@@ -586,14 +586,6 @@
     "note": "ניתן להכין יציקה נמוכה יותר, על הקו המסומן בתבנית, בנפח כולל 100 מ\"ל (צריך 133 מ\"ל בטון ו-42 מ\"ל מים)."
   },
   {
-    "id": "614",
-    "category": "פסלונים",
-    "description": "צפרדע עושה לב",
-    "image": "images/molds/614.jpg",
-    "volumeMl": 80,
-    "note": null
-  },
-  {
     "id": "615",
     "category": "פסלונים",
     "description": "צב עושה לב",
@@ -663,6 +655,14 @@
     "description": "זוג פילים",
     "image": "images/molds/613.png",
     "volumeMl": 200,
+    "note": null
+  },
+  {
+    "id": "614",
+    "category": "פסלונים",
+    "description": "צפרדע עושה לב",
+    "image": "images/molds/614.png",
+    "volumeMl": 80,
     "note": null
   }
 ]
