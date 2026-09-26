@@ -664,5 +664,29 @@
     "image": "images/molds/616.png",
     "volumeMl": 85,
     "note": null
+  },
+  {
+    "id": "311",
+    "category": "קערות קטנות ומגשים עם עומק",
+    "description": "קערה קטנה עגולה פרחים לב",
+    "image": "images/molds/311.jpg",
+    "volumeMl": 60,
+    "note": null
+  },
+  {
+    "id": "312",
+    "category": "קערות קטנות ומגשים עם עומק",
+    "description": "קערה קטנה לב",
+    "image": "images/molds/312.jpg",
+    "volumeMl": 50,
+    "note": null
+  },
+  {
+    "id": "313",
+    "category": "קערות קטנות ומגשים עם עומק",
+    "description": "קערה קטנה לב",
+    "image": "images/molds/313.jpg",
+    "volumeMl": 50,
+    "note": null
   }
 ]
